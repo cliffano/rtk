@@ -1,0 +1,52 @@
+{
+  "name": "rtk",
+  "description": "A tech stack agnostic software release and versioning tool, Zeus-style",
+  "keywords": [
+    "release",
+    "versioning",
+    "git",
+    "zeus",
+    "kraken"
+  ],
+  "version": "0.3.0-pre.0",
+  "homepage": "http://github.com/cliffano/rtk",
+  "author": "Cliffano Subagio <blah@cliffano.com> (http://blog.cliffano.com)",
+  "contributors": [
+    "All contributors (https://github.com/cliffano/rtk/graphs/contributors)"
+  ],
+  "main": "./lib/rtk",
+  "bin": {
+    "rtk": "./bin/rtk"
+  },
+  "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/cliffano/rtk.git"
+  },
+  "bugs": {
+    "url": "http://github.com/cliffano/rtk/issues"
+  },
+  "directories": {
+    "bin": "./bin",
+    "lib": "./lib",
+    "test": "./test"
+  },
+  "dependencies": {
+    "bagofcli": "^1.0.0",
+    "chalk": "^2.4.2",
+    "dot-prop": "^4.2.0",
+    "keep-a-changelog": "^0.7.0",
+    "lodash": "^4.17.5",
+    "simple-git": "^1.107.0"
+  },
+  "devDependencies": {
+    "buster-node": "^0.7.1",
+    "proxyquire": "^1.8.0",
+    "referee": "^1.2.0"
+  },
+  "scripts": {},
+  "engines": {
+    "node": ">= 8.0.0"
+  },
+  "license": "MIT"
+}
