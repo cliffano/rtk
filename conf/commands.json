@@ -1,0 +1,18 @@
+{
+  "options": [
+    { "arg": "-d, --dry-run", "desc": "Log version numbers without modifying any file or any SCM repo" },
+    { "arg": "-c, --config-file <configFile>", "desc": "Configuration file" }
+  ],
+  "commands": {
+    "release": {
+      "desc": "Release the project",
+      "args": [
+      ],
+      "options": [
+      ],
+      "examples": [
+        "rtk release"
+      ]
+    }
+  }
+}
