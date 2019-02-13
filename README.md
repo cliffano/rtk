@@ -12,7 +12,9 @@ RTK
 
 RTK is a tech stack agnostic software release and versioning tool, Zeus-style!
 
-This is handy when you need to execute several steps as part of your release process. RTK comes with a default set of steps, but is also open for extension by implementing custom release scheme.
+![Release the Kraken](https://raw.github.com/cliffano/rtk/master/release-the-kraken.jpg "Release the Kraken!")
+
+This is handy when you need to execute several steps as part of your release process. RTK comes with a default set of steps, but it's also open for extension by implementing custom release scheme.
 
 The default release scheme involves the following steps:
 
@@ -21,8 +23,6 @@ The default release scheme involves the following steps:
 * Add release tag using its version value
 * Replace release version on resource paths with the next pre-release version
 * Commit the next pre-release version changes to SCM
-
-![Release the Kraken](https://raw.github.com/cliffano/rtk/master/release-the-kraken.jpg "Release the Kraken!")
 
 Installation
 ------------
