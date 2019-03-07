@@ -24,6 +24,8 @@ The default release scheme involves the following steps:
 * Replace release version on resource paths with the next pre-release version
 * Commit the next pre-release version changes to SCM
 
+![RTK console screenshot](https://raw.github.com/cliffano/rtk/master/screenshots/console.jpg "RTK console screenshot")
+
 Installation
 ------------
 
