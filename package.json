@@ -36,7 +36,7 @@
     "bagofcli": "^1.0.0",
     "chalk": "^2.4.2",
     "dot-prop": "^4.2.0",
-    "keep-a-changelog": "^0.7.0",
+    "keep-a-changelog": "^0.8.0",
     "lodash": "^4.17.5",
     "simple-git": "^1.107.0"
   },

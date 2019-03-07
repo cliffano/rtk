@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fix release steps execution sequence
+- Fix changelog links removal following a release
 
 ## 0.0.1 - 2019-02-13
 ### Added
