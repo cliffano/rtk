@@ -4,6 +4,7 @@ const resourceType = require('../../lib/resourcetypes/json');
 const sinon = require('sinon');
 
 describe('json', function() {
+
   beforeEach(function (done) {
     this.mockFs = sinon.mock(fs);
     done();
@@ -13,7 +14,8 @@ describe('json', function() {
     sinon.restore();
     done();
   });
-  describe('setReleaseVersion', function() {
+
+  describe('setVersion', function() {
     it('should only set version but not modify json file when dry run is enabled', function(done) {
       let resource = {
         path: 'somepackage.json',
@@ -39,7 +41,7 @@ describe('json', function() {
         }
       };
       this.mockFs.expects('readFileSync').once().withExactArgs('somepackage.json', 'UTF-8').returns('{ "version": "0.0.0" }');
-      this.mockFs.expects('writeFile').once().withArgs('somepackage.json', '{\n  "version": "1.2.3"\n}', sinon.match.func).callsArgWith(2, null);
+      this.mockFs.expects('writeFile').once().withExactArgs('somepackage.json', '{\n  "version": "1.2.3"\n}', sinon.match.func).callsArgWith(2, null);
       function cb(err, result) {
         assert.equal(err, null);
         done();
@@ -47,4 +49,24 @@ describe('json', function() {
       resourceType.setReleaseVersion('1.2.3', resource, { dryRun: false }, cb);
     });
   });
+
+  describe('getVersion', function() {
+    it('should get version from resource property', function(done) {
+      let resource = {
+        path: 'somepackage.json',
+        type: 'json',
+        params: {
+          property: 'version'
+        }
+      };
+      this.mockFs.expects('readFile').once().withExactArgs('somepackage.json', 'UTF-8', sinon.match.func).callsArgWith(2, null, '{ "version": "0.0.0" }');
+      function cb(err, result) {
+        assert.equal(err, null);
+        assert.equal(result, '0.0.0');
+        done();
+      }
+      resourceType.getVersion(resource, cb);
+    });
+  });
+
 });
