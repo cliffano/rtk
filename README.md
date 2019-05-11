@@ -61,6 +61,20 @@ Example `json` resource configuration:
       ]
     }
 
+Example `yaml` resource configuration:
+
+    {
+      "resources": [
+        {
+          "path": "playbook.yaml",
+          "type": "yaml",
+          "params": {
+            "property": "version"
+          }
+        }
+      ]
+    }
+
 Example `keep-a-changelog` resource configuration:
 
     {
