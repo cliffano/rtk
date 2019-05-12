@@ -86,6 +86,20 @@ Example `keep-a-changelog` resource configuration:
       ]
     }
 
+Example `makefile` resource configuration:
+
+    {
+      "resources": [
+        {
+          "path": "Makefile",
+          "type": "makefile",
+          "params": {
+            "variable": "version"
+          }
+        }
+      ]
+    }
+
 Colophon
 --------
 

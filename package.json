@@ -39,6 +39,7 @@
     "js-yaml": "^3.13.1",
     "keep-a-changelog": "^0.8.0",
     "lodash": "^4.17.5",
+    "@kba/makefile-parser": "^0.0.3",
     "simple-git": "^1.107.0"
   },
   "devDependencies": {
