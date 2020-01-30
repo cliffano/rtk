@@ -14,7 +14,7 @@
       ],
       "examples": [
         "rtk release",
-        "rtk release --release-increment-type major"
+        "rtk release --release-increment-type major",
         "rtk release --release-increment-type major --post-release-increment-type minor"
       ]
     }
