@@ -100,6 +100,23 @@ Example `makefile` resource configuration:
       ]
     }
 
+It is also possible to force the release and post-release values instead of using the version scheme generated value:
+Note: because release and post-release values are specified at resource level, the SCM tag will still use the version scheme generated value
+
+{
+  "resources": [
+    {
+      "path": "package.json",
+      "type": "json",
+      "params": {
+        "property": "version",
+        "release_value": "1.2.3",
+        "post_release_value": "master"
+      }
+    }
+  ]
+}
+
 Colophon
 --------
 
