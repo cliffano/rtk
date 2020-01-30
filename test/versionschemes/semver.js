@@ -93,4 +93,18 @@ describe('semver', function() {
     });
   });
 
+  describe('patch release increment type and patch post release increment type', function() {
+    beforeEach(function (done) {
+      this.versionScheme = new versionScheme('1.2.0-pre.0', 'patch', 'patch');
+      done();
+    });
+    it('should increment minor version for release version', function(done) {
+      assert.equal(this.versionScheme.getReleaseVersion(), '1.2.0');
+      done();
+    });
+    it('should increment patch version for post release version', function(done) {
+      assert.equal(this.versionScheme.getPostReleaseVersion(), '1.2.1-pre.0');
+      done();
+    });
+  });
 });
