@@ -9,9 +9,13 @@
       "args": [
       ],
       "options": [
+        { "arg": "-r, --release-increment-type <releaseIncrementType>", "desc": "Release increment type, can be major, minor, or patch, default: minor" },
+        { "arg": "-p, --post-release-increment-type <postReleaseIncrementType>", "desc": "Post release increment type, can be major, minor, or patch, default: patch" }
       ],
       "examples": [
-        "rtk release"
+        "rtk release",
+        "rtk release --release-increment-type major"
+        "rtk release --release-increment-type major --post-release-increment-type minor"
       ]
     }
   }

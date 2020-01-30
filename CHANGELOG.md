@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Add new config properties `resources.params.release_value` and `resources.params.post_release_value`
+- Add support for custom release and post-release increment types
 
 ### Changed
 - Change default post release version to use patch increment (minor increment was previously used)

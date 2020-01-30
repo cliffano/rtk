@@ -42,6 +42,10 @@ Do a release dry run without modifying resource files and making any SCM changes
 
     rtk release --dry-run
 
+Cut off a release with major release and minor post-release increment types:
+
+    rtk release --release-increment-type major --post-release-increment-type minor
+
 Configuration
 -------------
 
