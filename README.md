@@ -38,6 +38,16 @@ Cut off a release using default Rtk release scheme:
 
     rtk release
 
+By default, the release version will increment minor value, and the next pre-release version will increment patch value.
+
+This default is based on the idea that most release involves additions and changes (which often mean minor value increment), more than removals (which could mean backward incompatible major value increment) and fixes (which often mean patch value increment).
+
+However, in order to honour the possibility of fixes, the next pre-release version will increment patch value.
+
+The increment types can be customised, e.g. to cut off a release with major release and minor post-release increment types:
+
+    rtk release --release-increment-type major --post-release-increment-type minor
+
 Do a release dry run without modifying resource files and making any SCM changes:
 
     rtk release --dry-run
