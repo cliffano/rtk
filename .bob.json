@@ -10,13 +10,13 @@
     "type": "mocha"
   },
   "coverage": {
-    "type": "buster-istanbul"
+    "type": "c8"
   },
   "test-integration": {
     "type": "cmdt"
   },
   "doc": {
-    "type": "dox-foundation"
+    "type": "jsdoc"
   },
   "site": {
     "type": "buildbranch"
