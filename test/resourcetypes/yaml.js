@@ -1,7 +1,8 @@
-const assert = require('assert');
-const fs = require('fs');
-const resourceType = require('../../lib/resourcetypes/yaml');
-const sinon = require('sinon');
+"use strict"
+import assert from 'assert';
+import fs from 'fs';
+import resourceType from '../../lib/resourcetypes/yaml.js';
+import sinon from 'sinon';
 
 describe('yaml', function() {
 

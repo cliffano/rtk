@@ -1,7 +1,8 @@
-const assert = require('assert');
-const fs = require('fs');
-const resourceType = require('../../lib/resourcetypes/makefile');
-const sinon = require('sinon');
+"use strict"
+import assert from 'assert';
+import fs from 'fs';
+import resourceType from '../../lib/resourcetypes/makefile.js';
+import sinon from 'sinon';
 
 describe('makefile', function() {
 

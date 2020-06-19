@@ -1,5 +1,6 @@
 {
   "name": "rtk",
+  "type": "module",
   "description": "A tech stack agnostic software release and versioning tool, Zeus-style",
   "keywords": [
     "release",
@@ -16,7 +17,7 @@
   ],
   "main": "./lib/rtk",
   "bin": {
-    "rtk": "./bin/rtk"
+    "rtk": "./bin/rtk.js"
   },
   "preferGlobal": true,
   "repository": {

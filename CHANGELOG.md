@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Changed
+- Change module type to ESM
 - Set min node engine to >= 13.0.0
 
 ## 1.1.0 - 2020-06-19

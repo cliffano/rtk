@@ -1,5 +1,6 @@
-const assert = require('assert');
-const versionScheme = require('../../lib/versionschemes/semver');
+"use strict"
+import assert from 'assert';
+import versionScheme from '../../lib/versionschemes/semver.js';
 
 describe('semver', function() {
 
