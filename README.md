@@ -131,6 +131,15 @@ Note: because release and post-release values are specified at resource level, t
   ]
 }
 
+If you want to format the tag instead of using the version number as the tag, you can configure `tagFormat` property:
+
+    {
+      "tagFormat": "v{version}",
+      "resources": [...]
+    }
+
+The above example will set the tag `v1.2.3` for version `1.2.3` .
+
 Colophon
 --------
 

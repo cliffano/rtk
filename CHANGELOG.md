@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add tag format support
+
 ## 1.0.0 - 2020-01-30
 ### Added
 - Add new config properties `resources.params.release_value` and `resources.params.post_release_value`
