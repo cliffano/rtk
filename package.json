@@ -33,23 +33,19 @@
     "test": "./test"
   },
   "dependencies": {
-    "async": "^2.6.2",
-    "bagofcli": "^1.0.0",
-    "chalk": "^2.4.2",
-    "dot-prop": "^4.2.0",
-    "js-yaml": "^3.13.1",
-    "keep-a-changelog": "^0.8.0",
+    "async": "^3.2.0",
+    "bagofcli": "^2.0.2",
+    "chalk": "^4.1.0",
+    "dot-prop": "^5.2.0",
+    "js-yaml": "^3.14.0",
+    "keep-a-changelog": "^0.10.1",
     "lodash": "^4.17.5",
     "@kba/makefile-parser": "^0.0.3",
-    "simple-git": "^1.107.0",
+    "simple-git": "^2.8.0",
     "string-format": "^2.0.0"
   },
   "devDependencies": {
-    "coveralls": "^3.0.2",
-    "istanbul": "^0.4.5",
-    "jshint": "^2.9.7",
-    "mocha": "^5.2.0",
-    "sinon": "^7.2.2"
+    "sinon": "^9.0.2"
   },
   "scripts": {},
   "engines": {
