@@ -1,6 +1,7 @@
 <img align="right" src="https://raw.github.com/cliffano/rtk/master/avatar.jpg" alt="Avatar"/>
 
-[![Build Status](https://img.shields.io/travis/cliffano/rtk.svg)](http://travis-ci.org/cliffano/rtk)
+[![Build Status](https://github.com/cliffano/rtk/workflows/CI/badge.svg)](https://github.com/cliffano/rtk/actions?query=workflow%3ACI)
+[![Vulnerabilities Status](https://snyk.io/test/github/cliffano/rtk/badge.svg)](https://snyk.io/test/github/cliffano/rtk)
 [![Dependencies Status](https://img.shields.io/david/cliffano/rtk.svg)](http://david-dm.org/cliffano/rtk)
 [![Coverage Status](https://img.shields.io/coveralls/cliffano/rtk.svg)](https://coveralls.io/r/cliffano/rtk?branch=master)
 [![Published Version](https://img.shields.io/npm/v/rtk.svg)](http://www.npmjs.com/package/rtk)
