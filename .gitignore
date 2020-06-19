@@ -4,4 +4,3 @@ node_modules
 npm-debug.log
 *.iml
 .idea
-package-lock.json
