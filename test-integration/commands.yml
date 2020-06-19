@@ -1,0 +1,7 @@
+- params:
+    rtk: ../../../../../bin/rtk.js
+
+- description: Command help should display help information
+  command: '{rtk} --help'
+  exitcode: 0
+  output: 'Usage: rtk'
