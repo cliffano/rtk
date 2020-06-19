@@ -1,4 +1,5 @@
 "use strict"
+/* eslint no-unused-vars: 0 */
 import assert from 'assert';
 import fs from 'fs';
 import resourceType from '../../lib/resourcetypes/yaml.js';
