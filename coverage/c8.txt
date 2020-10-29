@@ -1,0 +1,65 @@
+(node:72557) ExperimentalWarning: Conditional exports is an experimental feature. This feature could change at any time
+(node:72562) ExperimentalWarning: The ESM module loader is experimental.
+[36mtest[39m | /Users/cliffano/dev/workspace-studio/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
+(node:72564) ExperimentalWarning: The ESM module loader is experimental.
+
+[0m[0m
+[0m  json[0m
+[0m    setVersion[0m
+    [32m  ✓[0m[90m should only set version but not modify json file when dry run is enabled[0m
+    [32m  ✓[0m[90m should set version and modify json file when dry run is disabled[0m
+[0m    getVersion[0m
+    [32m  ✓[0m[90m should get version from resource property[0m
+
+[0m  makefile[0m
+[0m    setVersion[0m
+    [32m  ✓[0m[90m should only set version but not modify makefile when dry run is enabled[0m
+    [32m  ✓[0m[90m should set version and modify makefile when dry run is disabled[0m
+[0m    getVersion[0m
+    [32m  ✓[0m[90m should get version from resource variable[0m
+
+[0m  yaml[0m
+[0m    setVersion[0m
+    [32m  ✓[0m[90m should only set version but not modify yaml file when dry run is enabled[0m
+    [32m  ✓[0m[90m should set version and modify yaml file when dry run is disabled[0m
+[0m    getVersion[0m
+    [32m  ✓[0m[90m should get version from resource property[0m
+
+[0m  semver[0m
+[0m    default release increment type and default post release increment type[0m
+    [32m  ✓[0m[90m should increment minor version for release version[0m
+    [32m  ✓[0m[90m should increment patch version for post release version[0m
+[0m    minor release increment type and patch post release increment type[0m
+    [32m  ✓[0m[90m should increment minor version for release version[0m
+    [32m  ✓[0m[90m should increment patch version for post release version[0m
+[0m    major release increment type and patch post release increment type[0m
+    [32m  ✓[0m[90m should increment major version for release version[0m
+    [32m  ✓[0m[90m should increment patch version for post release version[0m
+[0m    major release increment type and minor post release increment type[0m
+    [32m  ✓[0m[90m should increment major version for release version[0m
+    [32m  ✓[0m[90m should increment minor version for post release version[0m
+[0m    minor release increment type and patch post release increment type[0m
+    [32m  ✓[0m[90m should increment minor version for release version[0m
+    [32m  ✓[0m[90m should increment patch version for post release version[0m
+[0m    minor release increment type and minor post release increment type[0m
+    [32m  ✓[0m[90m should increment minor version for release version[0m
+    [32m  ✓[0m[90m should increment minor version for post release version[0m
+[0m    patch release increment type and patch post release increment type[0m
+    [32m  ✓[0m[90m should increment minor version for release version[0m
+    [32m  ✓[0m[90m should increment patch version for post release version[0m
+
+
+[92m [0m[32m 23 passing[0m[90m (53ms)[0m
+
+[32mSUCCESS[39m | exit code 0
+----------------|---------|----------|---------|---------|-------------------
+File            | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+----------------|---------|----------|---------|---------|-------------------
+All files       |     100 |    96.15 |     100 |     100 |                   
+ resourcetypes  |     100 |      100 |     100 |     100 |                   
+  json.js       |     100 |      100 |     100 |     100 |                   
+  makefile.js   |     100 |      100 |     100 |     100 |                   
+  yaml.js       |     100 |      100 |     100 |     100 |                   
+ versionschemes |     100 |    88.89 |     100 |     100 |                   
+  semver.js     |     100 |    88.89 |     100 |     100 | 16                
+----------------|---------|----------|---------|---------|-------------------

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>rtk.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="RTK.html">RTK</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="RTK.html#release">release</a></span></li><li class="nav-heading"><a href="global.html">Globals</a></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#exec">exec</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#logStepHeading">logStepHeading</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="global.html#logStepItem">logStepItem</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">rtk.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict"
+import async from 'async';
+import rtkReleaseScheme from './releaseschemes/rtk.js';
+import jsonResourceType from './resourcetypes/json.js';
+import keepAChangelogResourceType from './resourcetypes/keep-a-changelog.js';
+import makefileResourceType from './resourcetypes/makefile.js';
+import yamlResourceType from './resourcetypes/yaml.js';
+
+/**
+ * RTK is the enchilada, Release The Kraken!
+ */
+class RTK {
+
+  /**
+   * Construct RTK object which will manage a set of resources.
+   *
+   * @param {Array} resources: an array of resources which contain version value
+   * @param {Object} opts: optional settings
+   *   - dryRun: when true, changelog file won't be modified
+   */
+  constructor(resources, opts) {
+    this.resources = resources || {};
+    this.opts = opts || {};
+    this.releaseSchemes = {
+      rtk: rtkReleaseScheme
+    };
+    this.resourceTypes = {
+      json: jsonResourceType,
+      makefile: makefileResourceType,
+      yaml: yamlResourceType
+    };
+    this.resourceTypes['keep-a-changelog'] = keepAChangelogResourceType;
+  }
+
+  /**
+   * Execute release steps for the specified release scheme.
+   *
+   * @param {String} releaseSchemeName: release scheme name that defines the steps involved in a release step
+   * @param {String} versionSchemeName: version scheme name that defines the release and pre-release version value
+   * @param {String} scmSchemeName: name of SCM used by the repository to be released
+   * @param {Function} cb: standard cb(err, result) callback
+   */
+  release(releaseSchemeName, versionSchemeName, scmSchemeName, cb) {
+    const self = this;
+
+    releaseSchemeName = releaseSchemeName || 'rtk';
+    versionSchemeName = versionSchemeName || 'semver';
+    scmSchemeName = scmSchemeName || 'git';
+
+    let releaseScheme;
+
+    function versionTask(cb) {
+      // uses first resource as the source of truth and the correct pre-release version
+      const preReleaseResource = self.resources[0];
+
+      function versionCb(err, result) {
+        if (!err) {
+          const ReleaseSchemeClass = self.releaseSchemes[releaseSchemeName];
+          releaseScheme = new ReleaseSchemeClass(versionSchemeName, scmSchemeName, result, self.opts);
+        }
+        cb(err, result);
+      }
+      const resourceType = self.resourceTypes[preReleaseResource.type];
+      resourceType.getVersion(preReleaseResource, versionCb);
+    }
+    function preTask(cb) {
+      releaseScheme.pre(self.resources, self.opts, cb);
+    }
+    function releaseTask(cb) {
+      releaseScheme.release(self.resources, self.opts, cb);
+    }
+    function postTask(cb) {
+      releaseScheme.post(self.resources, self.opts, cb);
+    }
+
+    async.series([versionTask, preTask, releaseTask, postTask], cb);
+  }
+
+}
+
+export {
+  RTK as default
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Thu Oct 29 2020 23:02:43 GMT+1100 (Australian Eastern Daylight Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
