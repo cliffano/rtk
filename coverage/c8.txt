@@ -1,7 +1,4 @@
-(node:72557) ExperimentalWarning: Conditional exports is an experimental feature. This feature could change at any time
-(node:72562) ExperimentalWarning: The ESM module loader is experimental.
-[36mtest[39m | /Users/cliffano/dev/workspace-studio/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
-(node:72564) ExperimentalWarning: The ESM module loader is experimental.
+test | /opt/hostedtoolcache/node/13.14.0/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
 
 [0m[0m
 [0m  json[0m
@@ -49,9 +46,9 @@
     [32m  ✓[0m[90m should increment patch version for post release version[0m
 
 
-[92m [0m[32m 23 passing[0m[90m (53ms)[0m
+[92m [0m[32m 23 passing[0m[90m (137ms)[0m
 
-[32mSUCCESS[39m | exit code 0
+SUCCESS | exit code 0
 ----------------|---------|----------|---------|---------|-------------------
 File            | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
 ----------------|---------|----------|---------|---------|-------------------
