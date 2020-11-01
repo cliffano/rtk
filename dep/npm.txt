@@ -1,4 +1,4 @@
-added 145 packages from 461 contributors and audited 147 packages in 3.538s
+added 145 packages from 461 contributors and audited 147 packages in 2.939s
 
 9 packages are looking for funding
   run `npm fund` for details
