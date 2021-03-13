@@ -15,11 +15,9 @@ RTK is a tech stack agnostic software release and versioning tool, Zeus-style!
 
 Have you ever felt tired of having to do the same repetitive steps over and over again every time you cut off a release version of your source code?
 
-This usually involves updating the version number on various manifest files, updating the version number and datestamp on a changelog file, tagging the code with the release version name, updating the manifest files again with the next pre-release version, and then updating the changelog file again with the unreleased version.
+This usually involves updating the version number on various manifest files, updating the version number and datestamp on a changelog file, tagging the code with the release version name, updating the manifest files again with the next pre-release version, and then updating the changelog file again with the unreleased version. And you have to do this for various technologies, e.g. with a Node.js project you need to update the package.json file, with a Maven project you need to update pom.xml file, so on so forth with other tech stacks.
 
-And you have to do the above for various technologies, e.g. with a node.js project you need to update the package.json file, with a Maven project you need to update pom.xml file, so on so forth with other tech stacks.
-
-Enter RTK, which allows you to configure the manifest and changelog files that you have to manage in an `.rtk.json` file, and it will take care of the updating of the version numbers, the committing of the changes with the relevant message, and the tagging of the code, all via a CLI command `rtk release` .
+Enter RTK, which allows you to configure the manifest and changelog files in a `.rtk.json` file, and it will take care of the updating of the version numbers, the committing of the changes with relevant message, and the tagging of the code with the version name, all via a convenient CLI command `rtk release` .
 
 ![Release the Kraken](https://raw.github.com/cliffano/rtk/master/release-the-kraken.jpg "Release the Kraken!")
 
