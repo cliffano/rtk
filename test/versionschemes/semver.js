@@ -108,4 +108,19 @@ describe('semver', function() {
       done();
     });
   });
+
+  describe('default release increment type and default post release increment type with non-prerelease version', function() {
+    beforeEach(function (done) {
+      this.versionScheme = new versionScheme('1.2.0');
+      done();
+    });
+    it('should increment minor version for release version', function(done) {
+      assert.equal(this.versionScheme.getReleaseVersion(), '1.3.0');
+      done();
+    });
+    it('should increment patch version for post release version', function(done) {
+      assert.equal(this.versionScheme.getPostReleaseVersion(), '1.3.1-pre.0');
+      done();
+    });
+  });
 });
