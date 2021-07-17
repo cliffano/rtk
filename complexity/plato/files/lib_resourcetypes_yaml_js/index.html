@@ -105,10 +105,10 @@ import jsYaml from &#039;js-yaml&#039;;
  */
 function setVersion(version, resource, opts, cb) {
   const property = resource.params.property;
-  let data = jsYaml.safeLoad(fs.readFileSync(resource.path, &#039;UTF-8&#039;));
+  let data = jsYaml.load(fs.readFileSync(resource.path, &#039;UTF-8&#039;));
   dotProp.set(data, property, version);
   if (!opts.dryRun) {
-    fs.writeFile(resource.path, jsYaml.safeDump(data, { indent: 2 }), cb);
+    fs.writeFile(resource.path, jsYaml.dump(data, { indent: 2 }), cb);
   } else {
     cb();
   }
@@ -126,7 +126,7 @@ function getVersion(resource, cb) {
   function readCb(err, result) {
     let version;
     if (!err) {
-      const data = jsYaml.safeLoad(result);
+      const data = jsYaml.load(result);
       version = dotProp.get(data, property);
     }
     cb(err, version);

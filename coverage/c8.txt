@@ -1,12 +1,14 @@
-test | /opt/hostedtoolcache/node/14.16.0/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
+test | /opt/hostedtoolcache/node/13.14.0/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
 
 [0m[0m
 [0m  json[0m
 [0m    setVersion[0m
     [32m  ✓[0m[90m should only set version but not modify json file when dry run is enabled[0m
     [32m  ✓[0m[90m should set version and modify json file when dry run is disabled[0m
+    [32m  ✓[0m[90m should set property under array sub-property[0m
 [0m    getVersion[0m
     [32m  ✓[0m[90m should get version from resource property[0m
+    [32m  ✓[0m[90m should get property under an array array sub-property[0m
 
 [0m  makefile[0m
 [0m    setVersion[0m
@@ -19,8 +21,10 @@ test | /opt/hostedtoolcache/node/14.16.0/x64/lib/node_modules/bob/node_modules/.
 [0m    setVersion[0m
     [32m  ✓[0m[90m should only set version but not modify yaml file when dry run is enabled[0m
     [32m  ✓[0m[90m should set version and modify yaml file when dry run is disabled[0m
+    [32m  ✓[0m[90m should set property under array sub-property[0m
 [0m    getVersion[0m
     [32m  ✓[0m[90m should get version from resource property[0m
+    [32m  ✓[0m[90m should get property under an array array sub-property[0m
 
 [0m  semver[0m
 [0m    default release increment type and default post release increment type[0m
@@ -44,19 +48,22 @@ test | /opt/hostedtoolcache/node/14.16.0/x64/lib/node_modules/bob/node_modules/.
 [0m    patch release increment type and patch post release increment type[0m
     [32m  ✓[0m[90m should increment minor version for release version[0m
     [32m  ✓[0m[90m should increment patch version for post release version[0m
+[0m    default release increment type and default post release increment type with non-prerelease version[0m
+    [32m  ✓[0m[90m should increment minor version for release version[0m
+    [32m  ✓[0m[90m should increment patch version for post release version[0m
 
 
-[92m [0m[32m 23 passing[0m[90m (38ms)[0m
+[92m [0m[32m 29 passing[0m[90m (109ms)[0m
 
 SUCCESS | exit code 0
 ----------------|---------|----------|---------|---------|-------------------
 File            | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
 ----------------|---------|----------|---------|---------|-------------------
-All files       |     100 |    96.15 |     100 |     100 |                   
+All files       |     100 |      100 |     100 |     100 |                   
  resourcetypes  |     100 |      100 |     100 |     100 |                   
   json.js       |     100 |      100 |     100 |     100 |                   
   makefile.js   |     100 |      100 |     100 |     100 |                   
   yaml.js       |     100 |      100 |     100 |     100 |                   
- versionschemes |     100 |    88.89 |     100 |     100 |                   
-  semver.js     |     100 |    88.89 |     100 |     100 | 16                
+ versionschemes |     100 |      100 |     100 |     100 |                   
+  semver.js     |     100 |      100 |     100 |     100 |                   
 ----------------|---------|----------|---------|---------|-------------------
