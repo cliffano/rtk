@@ -82,6 +82,20 @@ Example `json` resource configuration:
       ]
     }
 
+Example `json` resource configuration with an array sub-property:
+
+    {
+      "resources": [
+        {
+          "path": "package.json",
+          "type": "json",
+          "params": {
+            "property": "versions.1.minor"
+          }
+        }
+      ]
+    }
+
 Example `yaml` resource configuration:
 
     {
@@ -91,6 +105,20 @@ Example `yaml` resource configuration:
           "type": "yaml",
           "params": {
             "property": "version"
+          }
+        }
+      ]
+    }
+
+Example `yaml` resource configuration with an array sub-property:
+
+    {
+      "resources": [
+        {
+          "path": "playbook.yaml",
+          "type": "yaml",
+          "params": {
+            "property": "versions.1.minor"
           }
         }
       ]

@@ -50,6 +50,22 @@ describe('yaml', function() {
       }
       resourceType.setReleaseVersion('1.2.3', resource, { dryRun: false }, cb);
     });
+    it('should set property under array sub-property', function(done) {
+      let resource = {
+        path: 'someplaybook.yaml',
+        type: 'yaml',
+        params: {
+          property: 'versions.1.minor'
+        }
+      };
+      this.mockFs.expects('readFileSync').once().withExactArgs('someplaybook.yaml', 'UTF-8').returns('{ "versions": [{ "major": 1, "minor": 2, "patch": 3 }, { "major": 8, "minor": 9, "patch": 0 }] }');
+      this.mockFs.expects('writeFile').once().withExactArgs('someplaybook.yaml', 'versions:\n  - major: 1\n    minor: 2\n    patch: 3\n  - major: 8\n    minor: 9\n    patch: 0\n', sinon.match.func).callsArgWith(2, null);
+      function cb(err, result) {
+        assert.equal(err, null);
+        done();
+      }
+      resourceType.setReleaseVersion(9, resource, { dryRun: false }, cb);
+    });
   });
 
   describe('getVersion', function() {
@@ -65,6 +81,22 @@ describe('yaml', function() {
       function cb(err, result) {
         assert.equal(err, null);
         assert.equal(result, '0.0.0');
+        done();
+      }
+      resourceType.getVersion(resource, cb);
+    });
+    it('should get property under an array array sub-property', function(done) {
+      let resource = {
+        path: 'someplaybook.yaml',
+        type: 'yaml',
+        params: {
+          property: 'versions.1.minor'
+        }
+      };
+      this.mockFs.expects('readFile').once().withExactArgs('someplaybook.yaml', 'UTF-8', sinon.match.func).callsArgWith(2, null, '{ "versions": [{ "major": 1, "minor": 2, "patch": 3 }, { "major": 8, "minor": 9, "patch": 0 }] }');
+      function cb(err, result) {
+        assert.equal(err, null);
+        assert.equal(result, 9);
         done();
       }
       resourceType.getVersion(resource, cb);

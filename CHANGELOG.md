@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add array property support for yaml and json resource types
+
 ## 2.0.0 - 2020-07-08
 ### Changed
 - Change module type to ESM
