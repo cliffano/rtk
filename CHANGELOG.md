@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add node 15 and 16 to CI workflow
 - Add upgrade-deps workflow
 - Add release-major, release-minor, release-patch workflows
+- Add publish workflow
 
 ## 2.1.0 - 2021-07-17
 ### Added
