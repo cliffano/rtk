@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add node 15 and 16 to CI workflow
+
 ## 2.1.0 - 2021-07-17
 ### Added
 - Add array property support for yaml and json resource types
