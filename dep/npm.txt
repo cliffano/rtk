@@ -1,8 +1,7 @@
-npm WARN read-shrinkwrap This version of npm is compatible with lockfileVersion@1, but package-lock.json was generated for lockfileVersion@2. I'll try to do my best with it!
-added 87 packages from 450 contributors and audited 89 packages in 2.103s
+
+added 87 packages, and audited 88 packages in 2s
 
 9 packages are looking for funding
   run `npm fund` for details
 
 found 0 vulnerabilities
-
