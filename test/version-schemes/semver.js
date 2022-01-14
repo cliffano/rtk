@@ -1,6 +1,6 @@
 "use strict"
 import assert from 'assert';
-import versionScheme from '../../lib/versionschemes/semver.js';
+import versionScheme from '../../lib/version-schemes/semver.js';
 
 describe('semver', function() {
 

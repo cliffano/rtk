@@ -2,7 +2,7 @@
 /* eslint no-unused-vars: 0 */
 import assert from 'assert';
 import fs from 'fs';
-import resourceType from '../../lib/resourcetypes/makefile.js';
+import resourceType from '../../lib/resource-types/makefile.js';
 import sinon from 'sinon';
 
 describe('makefile', function() {
