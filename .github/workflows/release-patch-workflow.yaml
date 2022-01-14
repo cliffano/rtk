@@ -6,6 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.STUDIO_GITHUB_TOKEN }}
       - uses: actions/setup-node@v1
         with:
           node-version: '16'
@@ -16,5 +18,5 @@ jobs:
       - uses: ad-m/github-push-action@master
         with:
           tags: true
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.STUDIO_GITHUB_TOKEN }}
           branch: ${{ github.ref }}
