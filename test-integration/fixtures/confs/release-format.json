@@ -1,0 +1,12 @@
+{
+    "resources": [
+      {
+        "path": "../../../../../test-integration/fixtures/data/data.json",
+        "type": "json",
+        "params": {
+          "property": "app_version",
+          "release_format": "version-{version}"
+        }
+      }
+    ]
+  }

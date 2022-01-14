@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- Add resource-level version formatting #6
 - Add node 15 and 16 to CI workflow
 - Add upgrade-deps workflow
 - Add release-major, release-minor, release-patch workflows

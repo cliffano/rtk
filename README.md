@@ -175,6 +175,21 @@ If you want to format the tag instead of using the version number as the tag, yo
 
 The above example will set the tag `v1.2.3` for version `1.2.3` .
 
+If you want to format the resource's release value, you can configure `format` property:
+
+    {
+      "resources": [
+        {
+          "path": "Makefile",
+          "type": "makefile",
+          "params": {
+            "variable": "version",
+            "release_format": "v{version}"
+          }
+        }
+      ]
+    }
+
 Colophon
 --------
 
