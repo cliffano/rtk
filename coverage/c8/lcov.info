@@ -1,5 +1,5 @@
 TN:
-SF:lib/resourcetypes/json.js
+SF:lib/resource-types/json.js
 FN:14,setVersion
 FN:31,getVersion
 FN:34,readCb
@@ -73,7 +73,7 @@ BRF:6
 BRH:6
 end_of_record
 TN:
-SF:lib/resourcetypes/makefile.js
+SF:lib/resource-types/makefile.js
 FN:14,setVersion
 FN:40,getVersion
 FN:43,readCb
@@ -161,7 +161,7 @@ BRF:7
 BRH:7
 end_of_record
 TN:
-SF:lib/resourcetypes/yaml.js
+SF:lib/resource-types/yaml.js
 FN:15,setVersion
 FN:32,getVersion
 FN:35,readCb
@@ -236,7 +236,7 @@ BRF:6
 BRH:6
 end_of_record
 TN:
-SF:lib/versionschemes/semver.js
+SF:lib/version-schemes/semver.js
 FN:10,Semver
 FN:33,getReleaseVersion
 FN:37,getPostReleaseVersion
