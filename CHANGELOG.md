@@ -5,10 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
-
+## 2.2.0 - 2022-01-17
 ### Added
-- Add resource-level version formatting #6
+- Add resource-level version formatting [#6]
 - Add node 15 and 16 to CI workflow
 - Add upgrade-deps workflow
 - Add release-major, release-minor, release-patch workflows
