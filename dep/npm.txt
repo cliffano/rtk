@@ -1,18 +1,7 @@
-npm WARN old lockfile 
-npm WARN old lockfile The package-lock.json file was created with an old version of npm,
-npm WARN old lockfile so supplemental metadata must be fetched from the registry.
-npm WARN old lockfile 
-npm WARN old lockfile This is a one-time fix-up, please be patient...
-npm WARN old lockfile 
-
-added 87 packages, and audited 88 packages in 5s
+added 87 packages from 450 contributors and audited 89 packages in 2.219s
 
 9 packages are looking for funding
   run `npm fund` for details
 
-1 moderate severity vulnerability
-
-To address all issues, run:
-  npm audit fix
-
-Run `npm audit` for details.
+found 5 moderate severity vulnerabilities
+  run `npm audit fix` to fix them, or `npm audit` for details
