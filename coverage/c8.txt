@@ -1,4 +1,4 @@
-test | /opt/hostedtoolcache/node/14.18.3/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
+test | /opt/hostedtoolcache/node/15.14.0/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
 
 [0m[0m
 [0m  json[0m
@@ -53,7 +53,7 @@ test | /opt/hostedtoolcache/node/14.18.3/x64/lib/node_modules/bob/node_modules/.
     [32m  ✓[0m[90m should increment patch version for post release version[0m
 
 
-[92m [0m[32m 29 passing[0m[90m (50ms)[0m
+[92m [0m[32m 29 passing[0m[90m (65ms)[0m
 
 SUCCESS | exit code 0
 -----------------|---------|----------|---------|---------|-------------------
