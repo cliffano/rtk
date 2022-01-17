@@ -1,10 +1,14 @@
 {
   "name": "rtk",
   "type": "module",
-  "description": "A tech stack agnostic software release and versioning tool, Zeus-style",
+  "description": "Automate version number updates across multiple JSON, YAML, Makefile, Changelog files, along with the git commits",
   "keywords": [
     "release",
     "versioning",
+    "json",
+    "yaml",
+    "makefile",
+    "changelog",
     "git",
     "zeus",
     "kraken"
