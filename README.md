@@ -6,7 +6,6 @@
 [![Coverage Status](https://img.shields.io/coveralls/cliffano/rtk.svg)](https://coveralls.io/r/cliffano/rtk?branch=master)
 [![Published Version](https://img.shields.io/npm/v/rtk.svg)](http://www.npmjs.com/package/rtk)
 <br/>
-[![npm Badge](https://nodei.co/npm/rtk.png)](http://npmjs.org/package/rtk)
 
 RTK
 ---
