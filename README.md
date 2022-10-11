@@ -192,12 +192,12 @@ If you want to format the resource's release value, you can configure `format` p
 Colophon
 --------
 
-[Developer's Guide](http://cliffano.github.io/developers_guide.html#nodejs)
+[Developer's Guide](https://cliffano.github.io/developers_guide.html#nodejs)
 
 Build reports:
 
-* [Code complexity report](http://cliffano.github.io/rtk/complexity/plato/index.html)
-* [Unit tests report](http://cliffano.github.io/rtk/test/mocha.txt)
-* [Test coverage report](http://cliffano.github.io/rtk/coverage/c8/index.html)
-* [Integration tests report](http://cliffano.github.io/rtk/test-integration/cmdt.txt)
-* [API Documentation](http://cliffano.github.io/rtk/doc/jsdoc/index.html)
+* [Code complexity report](https://cliffano.github.io/rtk/complexity/plato/index.html)
+* [Unit tests report](https://cliffano.github.io/rtk/test/mocha.txt)
+* [Test coverage report](https://cliffano.github.io/rtk/coverage/c8/index.html)
+* [Integration tests report](https://cliffano.github.io/rtk/test-integration/cmdt.txt)
+* [API Documentation](https://cliffano.github.io/rtk/doc/jsdoc/index.html)
