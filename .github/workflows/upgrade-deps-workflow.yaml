@@ -5,10 +5,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           token: ${{ secrets.STUDIO_GITHUB_TOKEN }}
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
           node-version: '18'
       - run: git config --global user.email "blah+pakkun@cliffano.com"
@@ -16,7 +16,7 @@ jobs:
       - run: npm install -g bob
       - run: bob updep build
       - run: git commit -am "Upgrade dependencies to latest"
-      - uses: ad-m/github-push-action@master
+      - uses: ad-m/github-push-action@v0
         with:
           tags: true
           github_token: ${{ secrets.STUDIO_GITHUB_TOKEN }}
