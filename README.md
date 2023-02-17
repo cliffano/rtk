@@ -148,6 +148,20 @@ Example `makefile` resource configuration:
       ]
     }
 
+Example `text` resource configuration:
+
+    {
+      "resources": [
+        {
+          "path": "somefile.txt",
+          "type": "text",
+          "params": {
+            "regex": "(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?"
+          }
+        }
+      ]
+    }
+
 It is also possible to force the release and post-release values instead of using the version scheme generated value:
 Note: because release and post-release values are specified at resource level, the SCM tag will still use the version scheme generated value
 

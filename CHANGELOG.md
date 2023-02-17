@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add text resource type
+
 ### Changed
 - Set min node engine to >= 16.0.0
 - Move logger to bagofcli
