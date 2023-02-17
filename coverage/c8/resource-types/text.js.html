@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for resource-types/json.js</title>
+    <title>Code coverage report for resource-types/text.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">resource-types</a> json.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">resource-types</a> text.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -128,7 +128,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -146,19 +145,20 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -170,43 +170,43 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict"
-import dotProp from 'dot-prop';
 import fs from 'fs';
 &nbsp;
 /**
- * Set version value in the JSON resource's property (defined in dot-notation).
+ * Set version value in the text resource where there are matches to the regex.
  *
  * @param {String} version: version value to set
  * @param {Object} resource: resource configuration which contains type, path, and params
  * @param {Object} opts: optional settings
- *   - dryRun: when true, JSON file won't be modified
+ *   - dryRun: when true, text file won't be modified
  * @param {Function} cb: standard cb(err, result) callback
  */
 function setVersion(version, resource, opts, cb) {
-  const property = resource.params.property;
-  let data = JSON.parse(fs.readFileSync(resource.path, 'UTF-8'));
-  dotProp.set(data, property, version);
+  const regex = resource.params.regex;
+  let data = fs.readFileSync(resource.path, 'UTF-8');
+  data = data.replaceAll(new RegExp(regex, 'g'), version);
   if (!opts.dryRun) {
-    fs.writeFile(resource.path, JSON.stringify(data, null, 2), cb);
+    fs.writeFile(resource.path, data, cb);
   } else {
     cb();
   }
 }
 &nbsp;
 /**
- * Get version value from the JSON resource's property (defined in dot-notation).
+ * Get version value from the text resource based on regex matches.
+ * 
  *
  * @param {Object} resource: resource configuration which contains type, path, and params
  * @param {Function} cb: standard cb(err, result) callback
  */
 function getVersion(resource, cb) {
-  const property = resource.params.property;
+  const regex = resource.params.regex;
 &nbsp;
   function readCb(err, result) {
     let version;
     if (!err) {
-      const data = JSON.parse(result);
-      version = dotProp.get(data, property);
+      const data = result.match(new RegExp(regex));
+      version = data[0];
     }
     cb(err, version);
   }
