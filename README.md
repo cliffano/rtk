@@ -1,7 +1,7 @@
 <img align="right" src="https://raw.github.com/cliffano/rtk/master/avatar.jpg" alt="Avatar"/>
 
 [![Build Status](https://github.com/cliffano/rtk/workflows/CI/badge.svg)](https://github.com/cliffano/rtk/actions?query=workflow%3ACI)
-[![Vulnerabilities Status](https://snyk.io/test/github/cliffano/rtk/badge.svg)](https://snyk.io/test/github/cliffano/rtk)
+[![Security Status](https://snyk.io/test/github/cliffano/rtk/badge.svg)](https://snyk.io/test/github/cliffano/rtk)
 [![Dependencies Status](https://img.shields.io/david/cliffano/rtk.svg)](http://david-dm.org/cliffano/rtk)
 [![Coverage Status](https://img.shields.io/coveralls/cliffano/rtk.svg)](https://coveralls.io/r/cliffano/rtk?branch=master)
 [![Published Version](https://img.shields.io/npm/v/rtk.svg)](http://www.npmjs.com/package/rtk)
@@ -12,11 +12,9 @@ RTK
 
 RTK is an agnostic software release tool for managing versions on changelog, multi-format files, and also for tagging source code.
 
-This involves updating the version number on various manifest files, updating the version number and datestamp on a changelog file, tagging the code with the release version name, updating the manifest files again with the next pre-release version, and then updating the changelog file again with the unreleased version. And you have to do this for various technologies, e.g. with a Node.js project you need to update the package.json file, with a Maven project you need to update pom.xml file, so on so forth with other tech stacks.
+This involves updating the version number on various manifest files, updating the version number and datestamp on a changelog file, tagging the code with the release version name, updating the manifest files again with the next pre-release version, and then updating the changelog file again with the unreleased version. And you have to do this for various technologies, e.g. with a node.js project you need to update the package.json file, with an Ansible project you need to update YAML metadata file, and so on so forth with other tech stacks.
 
 Enter RTK, which allows you to configure the manifest and changelog files in a `.rtk.json` file, and it will take care of the updating of the version numbers, the committing of the changes with relevant message, and the tagging of the code with the version name, all via a convenient CLI command `rtk release` .
-
-![Release the Kraken](https://raw.github.com/cliffano/rtk/master/release-the-kraken.jpg "Release the Kraken!")
 
 RTK comes with a default set of steps, but it's also open for extension by implementing custom release scheme.
 
@@ -213,3 +211,5 @@ Build reports:
 * [Test coverage report](https://cliffano.github.io/rtk/coverage/c8/index.html)
 * [Integration tests report](https://cliffano.github.io/rtk/test-integration/cmdt.txt)
 * [API Documentation](https://cliffano.github.io/rtk/doc/jsdoc/index.html)
+
+![Release the Kraken](https://raw.github.com/cliffano/rtk/master/release-the-kraken.jpg "Release the Kraken!")
