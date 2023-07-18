@@ -1,5 +1,5 @@
 
-added 103 packages, and audited 104 packages in 2s
+added 105 packages, and audited 106 packages in 2s
 
 19 packages are looking for funding
   run `npm fund` for details
