@@ -55,7 +55,7 @@ describe('yaml', function() {
         path: 'someplaybook.yaml',
         type: 'yaml',
         params: {
-          property: 'versions.1.minor'
+          property: 'versions[1].minor'
         }
       };
       this.mockFs.expects('readFileSync').once().withExactArgs('someplaybook.yaml', 'UTF-8').returns('{ "versions": [{ "major": 1, "minor": 2, "patch": 3 }, { "major": 8, "minor": 9, "patch": 0 }] }');
@@ -90,7 +90,7 @@ describe('yaml', function() {
         path: 'someplaybook.yaml',
         type: 'yaml',
         params: {
-          property: 'versions.1.minor'
+          property: 'versions[1].minor'
         }
       };
       this.mockFs.expects('readFile').once().withExactArgs('someplaybook.yaml', 'UTF-8', sinon.match.func).callsArgWith(2, null, '{ "versions": [{ "major": 1, "minor": 2, "patch": 3 }, { "major": 8, "minor": 9, "patch": 0 }] }');

@@ -85,7 +85,7 @@ Example `json` resource configuration with an array sub-property:
           "path": "package.json",
           "type": "json",
           "params": {
-            "property": "versions.1.minor"
+            "property": "versions[1].minor"
           }
         }
       ]
@@ -113,7 +113,7 @@ Example `yaml` resource configuration with an array sub-property:
           "path": "playbook.yaml",
           "type": "yaml",
           "params": {
-            "property": "versions.1.minor"
+            "property": "versions[1].minor"
           }
         }
       ]
@@ -198,6 +198,17 @@ If you want to format the resource's release value, you can configure `format` p
         }
       ]
     }
+
+Upgrade
+-------
+
+From 0.x, 1.x, 2.x to 3.x:
+
+Modify configuration which uses array sub-property to use square brackets, e.g.:
+
+* from `versions.1.minor` to `versions[1].minor`
+* from `a.b.0.d.e` to `a.b[0].d.e`
+* from `jobs.build.steps.0.with.ref` to `jobs.build.steps[0].with.ref`
 
 Colophon
 --------
