@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add label to log messages when dry-run is enabled
+
 ### Changed
 - Modify syntax for array sub-property following dot-prop 8.x upgrade
 
