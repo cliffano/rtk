@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">68.52</p>
+      <p class="stat">67.76</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">137</p>
+      <p class="stat">142</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">34.10</p>
+      <p class="stat">35.66</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">1.24</p>
+      <p class="stat">1.34</p>
     </div>
   </div>
 </div>
@@ -127,13 +127,18 @@ class Rtk {
     const VersionSchemeClass = this.versionSchemes[versionSchemeName];
     this.versionScheme = new VersionSchemeClass(preReleaseVersion, opts.releaseIncrementType, opts.postReleaseIncrementType);
     this.scmScheme = this.scmSchemes[scmSchemeName];
+
+    this.logOpts = {}
+    if (opts.dryRun) {
+      this.logOpts[&#039;labels&#039;] = [&#039;dry run&#039;];
+    }
   }
 
   pre(resources, opts, cb) {
 
     const self = this;
 
-    bag.logStepHeading(&#039;Executing pre step of rtk release scheme...&#039;);
+    bag.logStepHeading(&#039;Executing pre step of rtk release scheme...&#039;, self.logOpts);
 
     let tasks = [];
     let paths = [];
@@ -144,7 +149,7 @@ class Rtk {
           releaseVersion = stringFormat(resource.params.release_format, { version: releaseVersion });
         }
         const message = util.format(&#039;Setting release version %s on %s resource located at %s&#039;, releaseVersion, resource.type, resource.path);
-        bag.logStepItemSuccess(message);
+        bag.logStepItemSuccess(message, self.logOpts);
         self.resourceTypes[resource.type].setReleaseVersion(releaseVersion, resource, opts, cb);
       }
       tasks.push(resourceTask);
@@ -153,7 +158,7 @@ class Rtk {
 
     function scmTask(cb) {
       const message = util.format(&#039;Committing release version changes made to %s...&#039;, paths.join(&#039;, &#039;));
-      bag.logStepItemSuccess(message);
+      bag.logStepItemSuccess(message, self.logOpts);
       self.scmScheme.saveChanges(util.format(&#039;Release version %s&#039;, self.versionScheme.getReleaseVersion()), paths, cb);
     }
 
@@ -169,13 +174,13 @@ class Rtk {
 
     const self = this;
 
-    bag.logStepHeading(&#039;Executing release step of rtk release scheme...&#039;);
+    bag.logStepHeading(&#039;Executing release step of rtk release scheme...&#039;, self.logOpts);
 
     function scmTask(cb) {
       // Use tagFormat option to format the version to be used as SCM tag
       const formattedVersion = stringFormat(opts.tagFormat, { version: self.versionScheme.getReleaseVersion() });
       const message = util.format(&#039;Adding release version tag %s ...&#039;, formattedVersion);
-      bag.logStepItemSuccess(message);
+      bag.logStepItemSuccess(message, self.logOpts);
       self.scmScheme.addVersion(formattedVersion, cb);
     }
 
@@ -192,7 +197,7 @@ class Rtk {
 
     const self = this;
 
-    bag.logStepHeading(&#039;Executing post step of rtk release scheme...&#039;);
+    bag.logStepHeading(&#039;Executing post step of rtk release scheme...&#039;, self.logOpts);
 
     let tasks = [];
     let paths = [];
@@ -200,7 +205,7 @@ class Rtk {
       function resourceTask(cb) {
         const postReleaseVersion = resource.params &amp;&amp; resource.params.post_release_value ? resource.params.post_release_value : self.versionScheme.getPostReleaseVersion();
         const message = util.format(&#039;Setting next pre-release version %s on %s resource located at %s&#039;, postReleaseVersion, resource.type, resource.path);
-        bag.logStepItemSuccess(message);
+        bag.logStepItemSuccess(message, self.logOpts);
         self.resourceTypes[resource.type].setPostReleaseVersion(postReleaseVersion, resource, opts, cb);
       }
       tasks.push(resourceTask);
@@ -209,7 +214,7 @@ class Rtk {
 
     function scmTask(cb) {
       const message = util.format(&#039;Committing next pre-release version changes made to %s...&#039;, paths.join(&#039;, &#039;));
-      bag.logStepItemSuccess(message);
+      bag.logStepItemSuccess(message, self.logOpts);
       self.scmScheme.saveChanges(util.format(&#039;Bump up to next pre-release version %s&#039;, self.versionScheme.getPostReleaseVersion()), paths), cb;
     }
 
