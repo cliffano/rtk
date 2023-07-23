@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Modify syntax for array sub-property following dot-prop 8.x upgrade
 
+### Fixed
+- Fix missing commit and tag messages in dry-run log output
+
 ## 2.3.0 - 2023-02-18
 ### Added
 - Add text resource type
