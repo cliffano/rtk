@@ -204,11 +204,20 @@ Upgrade
 
 From 0.x, 1.x, 2.x to 3.x:
 
-Modify configuration which uses array sub-property to use square brackets, e.g.:
+Modify configuration which uses array sub-property syntax to use square brackets, e.g.:
 
 * from `versions.1.minor` to `versions[1].minor`
 * from `a.b.0.d.e` to `a.b[0].d.e`
 * from `jobs.build.steps.0.with.ref` to `jobs.build.steps[0].with.ref`
+
+Failing to update the syntax will result in the following error:
+
+    file:///path/to/lib/node_modules/rtk/node_modules/dot-prop/index.js:176
+        throw new Error('Cannot use string index');
+        ^
+
+    Error: Cannot use string index
+        at assertNotStringIndex (file:///path/to/lib/node_modules/rtk/node_modules/dot-prop/index.js:176:9)
 
 Colophon
 --------
