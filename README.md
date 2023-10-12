@@ -130,6 +130,20 @@ Example `keep-a-changelog` resource configuration:
       ]
     }
 
+Example `toml` resource configuration:
+
+    {
+      "resources": [
+        {
+          "path": "pyproject.toml",
+          "type": "toml",
+          "params": {
+            "property": "version"
+          }
+        }
+      ]
+    }
+
 Example `makefile` resource configuration:
 
     {

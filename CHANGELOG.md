@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add toml resource type #13
+
 ## 3.0.0 - 2023-07-23
 ### Added
 - Add label to log messages when dry-run is enabled
