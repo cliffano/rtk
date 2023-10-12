@@ -1,4 +1,4 @@
-test | /opt/hostedtoolcache/node/18.18.0/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
+test | /opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
 
 [0m[0m
 [0m  cli - exec[0m
@@ -32,6 +32,15 @@ test | /opt/hostedtoolcache/node/18.18.0/x64/lib/node_modules/bob/node_modules/.
     [32m  [32m✔[39m[0m[90m should get version from text resource[0m
     [32m  [32m✔[39m[0m[90m should get first regex match as version from text resource when there are multiple matches[0m
     [32m  [32m✔[39m[0m[90m should get version from text resource when the version includes a pre release[0m
+
+[0m  toml[0m
+[0m    setVersion[0m
+    [32m  [32m✔[39m[0m[90m should only set version but not modify toml file when dry run is enabled[0m
+    [32m  [32m✔[39m[0m[90m should set version and modify toml file when dry run is disabled[0m
+    [32m  [32m✔[39m[0m[90m should set array property under a section[0m
+[0m    getVersion[0m
+    [32m  [32m✔[39m[0m[90m should get version from resource property[0m
+    [32m  [32m✔[39m[0m[90m should get array property under a section[0m
 
 [0m  yaml[0m
 [0m    setVersion[0m
@@ -69,23 +78,24 @@ test | /opt/hostedtoolcache/node/18.18.0/x64/lib/node_modules/bob/node_modules/.
     [32m  [32m✔[39m[0m[90m should increment patch version for post release version[0m
 
 
-[92m [0m[32m 37 passing[0m[90m (100ms)[0m
+[92m [0m[32m 42 passing[0m[90m (62ms)[0m
 
 SUCCESS | exit code 0
 ----------------------|---------|----------|---------|---------|----------------------------
 File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s          
 ----------------------|---------|----------|---------|---------|----------------------------
-All files             |   69.27 |    89.58 |   64.28 |   69.27 |                            
+All files             |   71.58 |    90.74 |   67.74 |   71.58 |                            
  lib                  |   73.43 |       50 |      75 |   73.43 |                            
   cli.js              |     100 |    42.85 |     100 |     100 | 12-18                      
   rtk.js              |   59.03 |    66.66 |      50 |   59.03 | 44-77                      
  lib/release-schemes  |   20.97 |      100 |       0 |   20.97 |                            
   rtk.js              |   20.97 |      100 |       0 |   20.97 | 19-44,47-80,83-104,107-137 
- lib/resource-types   |   84.49 |      100 |      80 |   84.49 |                            
+ lib/resource-types   |   86.68 |      100 |   83.33 |   86.68 |                            
   json.js             |     100 |      100 |     100 |     100 |                            
   keep-a-changelog.js |   50.48 |      100 |       0 |   50.48 | 18-33,45-59,74-93          
   makefile.js         |     100 |      100 |     100 |     100 |                            
   text.js             |     100 |      100 |     100 |     100 |                            
+  toml.js             |     100 |      100 |     100 |     100 |                            
   yaml.js             |     100 |      100 |     100 |     100 |                            
  lib/scm-schemes      |   68.42 |      100 |       0 |   68.42 |                            
   git.js              |   68.42 |      100 |       0 |   68.42 | 5-7,9-11                   
