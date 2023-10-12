@@ -45,11 +45,11 @@
     "keep-a-changelog": "^0.10.4",
     "lodash": "^4.17.21",
     "@kba/makefile-parser": "^0.0.6",
-    "simple-git": "^3.19.1",
+    "simple-git": "^3.20.0",
     "string-format": "^2.0.0"
   },
   "devDependencies": {
-    "sinon": "^15.2.0",
+    "sinon": "^16.1.0",
     "@sinonjs/referee": "^10.0.1"
   },
   "scripts": {},
