@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 2.3.0 - 2023-02-18
 ### Added
-- Add text resource type
+- Add text resource type #7
 
 ### Changed
 - Set min node engine to >= 16.0.0
@@ -48,7 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 1.1.0 - 2020-06-19
 ### Added
-- Add tag format support
+- Add tag format support #6
 
 ## 1.0.0 - 2020-01-30
 ### Added
