@@ -7,7 +7,18 @@
   exitcode: 0
   output: 'Usage: rtk'
 
-- description: Command release dry run config should format release value
+- description: Command release dry run config should format release value on a JSON data file
   command: '{rtk} release --dry-run --config-file {base}/test-integration/fixtures/confs/rtk-json.json'
   exitcode: 0
   output: 'Setting release version version-1.3.0 on json resource located at ../../../../../test-integration/fixtures/data/data.json'
+
+- description: Command release dry run config should format release value on a Makefile data file
+  command: '{rtk} release --dry-run --config-file {base}/test-integration/fixtures/confs/rtk-makefile.json'
+  exitcode: 0
+  output: 'Setting release version version-1.3.0 on makefile resource located at ../../../../../test-integration/fixtures/data/data-Makefile'
+
+- description: Command release dry run config should format release value on a YAML data file
+  command: '{rtk} release --dry-run --config-file {base}/test-integration/fixtures/confs/rtk-yaml.json'
+  exitcode: 0
+  output: 'Setting release version version-1.3.0 on yaml resource located at ../../../../../test-integration/fixtures/data/data.yaml'
+  
