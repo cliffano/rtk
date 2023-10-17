@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Fixed
+- Fix broken text resource type support
+
 ## 3.1.0 - 2023-10-12
 ### Added
 - Add toml resource type [#13]

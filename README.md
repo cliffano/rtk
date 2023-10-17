@@ -166,7 +166,7 @@ Example `text` resource configuration:
           "path": "somefile.txt",
           "type": "text",
           "params": {
-            "regex": "(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?"
+            "regex": "(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?"
           }
         }
       ]
