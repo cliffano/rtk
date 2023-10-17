@@ -22,6 +22,11 @@
   exitcode: 0
   output: 'Setting release version version-1.3.0 on text resource located at ../../../../../test-integration/fixtures/data/data.txt'
   
+- description: Command release dry run config should format release value on a toml data file
+  command: '{rtk} release --dry-run --config-file {base}/test-integration/fixtures/confs/rtk-toml.json'
+  exitcode: 0
+  output: 'Setting release version version-1.3.0 on toml resource located at ../../../../../test-integration/fixtures/data/data.toml'
+  
 - description: Command release dry run config should format release value on a YAML data file
   command: '{rtk} release --dry-run --config-file {base}/test-integration/fixtures/confs/rtk-yaml.json'
   exitcode: 0
