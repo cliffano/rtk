@@ -7,7 +7,7 @@
   exitcode: 0
   output: 'Usage: rtk'
 
-- description: release_format config should format release value
-  command: '{rtk} release --dry-run --config-file {base}/test-integration/fixtures/confs/release-format.json'
+- description: Command release dry run config should format release value
+  command: '{rtk} release --dry-run --config-file {base}/test-integration/fixtures/confs/rtk-json.json'
   exitcode: 0
   output: 'Setting release version version-1.3.0 on json resource located at ../../../../../test-integration/fixtures/data/data.json'
