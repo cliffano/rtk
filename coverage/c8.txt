@@ -1,4 +1,4 @@
-test | /opt/hostedtoolcache/node/18.18.0/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
+test | /opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
 
 [0m[0m
 [0m  cli - exec[0m
@@ -78,18 +78,18 @@ test | /opt/hostedtoolcache/node/18.18.0/x64/lib/node_modules/bob/node_modules/.
     [32m  [32m✔[39m[0m[90m should increment patch version for post release version[0m
 
 
-[92m [0m[32m 42 passing[0m[90m (169ms)[0m
+[92m [0m[32m 42 passing[0m[90m (68ms)[0m
 
 SUCCESS | exit code 0
 ----------------------|---------|----------|---------|---------|----------------------------
 File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s          
 ----------------------|---------|----------|---------|---------|----------------------------
-All files             |   71.58 |    90.74 |   67.74 |   71.58 |                            
- lib                  |   73.43 |       50 |      75 |   73.43 |                            
+All files             |    71.6 |    90.74 |   67.74 |    71.6 |                            
+ lib                  |   73.84 |       50 |      75 |   73.84 |                            
   cli.js              |     100 |    42.85 |     100 |     100 | 12-18                      
-  rtk.js              |   59.03 |    66.66 |      50 |   59.03 | 44-77                      
- lib/release-schemes  |   20.97 |      100 |       0 |   20.97 |                            
-  rtk.js              |   20.97 |      100 |       0 |   20.97 | 19-44,47-80,83-104,107-137 
+  rtk.js              |      60 |    66.66 |      50 |      60 | 46-79                      
+ lib/release-schemes  |   21.37 |      100 |       0 |   21.37 |                            
+  rtk.js              |   21.37 |      100 |       0 |   21.37 | 20-46,49-82,85-106,109-139 
  lib/resource-types   |   86.68 |      100 |   83.33 |   86.68 |                            
   json.js             |     100 |      100 |     100 |     100 |                            
   keep-a-changelog.js |   50.48 |      100 |       0 |   50.48 | 18-33,45-59,74-93          
