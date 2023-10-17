@@ -10,7 +10,7 @@
 RTK
 ---
 
-RTK is an agnostic software release tool for managing versions on changelog, multi-format files, and also for tagging source code.
+RTK is an agnostic software release tool for managing versions on changelog (keep-a-changelog), multi-format files (JSON, Makefile, text, TOML, YAML), and also for tagging source code of a Git repo.
 
 This involves updating the version number on various manifest files, updating the version number and datestamp on a changelog file, tagging the code with the release version name, updating the manifest files again with the next pre-release version, and then updating the changelog file again with the unreleased version. And you have to do this for various technologies, e.g. with a node.js project you need to update the package.json file, with an Ansible project you need to update YAML metadata file, and so on so forth with other tech stacks.
 

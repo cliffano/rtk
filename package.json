@@ -1,14 +1,17 @@
 {
   "name": "rtk",
   "type": "module",
-  "description": "Automate version number updates across multiple JSON, YAML, Makefile, Changelog files, along with the git commits",
+  "description": "Agnostic software release tool for managing versions on changelog (keep-a-changelog), multi-format files (JSON, Makefile, text, TOML, YAML), and also for tagging source code of a Git repo",
   "keywords": [
     "release",
     "versioning",
     "json",
-    "yaml",
     "makefile",
+    "text",
+    "toml",
+    "yaml",
     "changelog",
+    "keep-a-changelog",
     "git",
     "zeus",
     "kraken"
