@@ -4,7 +4,7 @@ npm WARN EBADENGINE   required: { node: '^14.17.0 || ^16.13.0 || >=18.0.0' },
 npm WARN EBADENGINE   current: { node: 'v17.9.1', npm: '8.11.0' }
 npm WARN EBADENGINE }
 
-added 135 packages, and audited 136 packages in 3s
+added 135 packages, and audited 136 packages in 4s
 
 35 packages are looking for funding
   run `npm fund` for details

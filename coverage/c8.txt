@@ -78,18 +78,18 @@ test | /opt/hostedtoolcache/node/17.9.1/x64/lib/node_modules/bob/node_modules/.b
     [32m  [32m✔[39m[0m[90m should increment patch version for post release version[0m
 
 
-[92m [0m[32m 42 passing[0m[90m (55ms)[0m
+[92m [0m[32m 42 passing[0m[90m (83ms)[0m
 
 SUCCESS | exit code 0
 ----------------------|---------|----------|---------|---------|----------------------------
 File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s          
 ----------------------|---------|----------|---------|---------|----------------------------
-All files             |    71.6 |    90.74 |   67.74 |    71.6 |                            
- lib                  |   73.84 |       50 |      75 |   73.84 |                            
+All files             |   71.62 |    90.74 |   67.74 |   71.62 |                            
+ lib                  |   74.24 |       50 |      75 |   74.24 |                            
   cli.js              |     100 |    42.85 |     100 |     100 | 12-18                      
-  rtk.js              |      60 |    66.66 |      50 |      60 | 46-79                      
- lib/release-schemes  |   21.37 |      100 |       0 |   21.37 |                            
-  rtk.js              |   21.37 |      100 |       0 |   21.37 | 20-46,49-82,85-106,109-139 
+  rtk.js              |   60.91 |    66.66 |      50 |   60.91 | 48-81                      
+ lib/release-schemes  |   21.76 |      100 |       0 |   21.76 |                            
+  rtk.js              |   21.76 |      100 |       0 |   21.76 | 21-48,51-84,87-108,111-141 
  lib/resource-types   |   86.68 |      100 |   83.33 |   86.68 |                            
   json.js             |     100 |      100 |     100 |     100 |                            
   keep-a-changelog.js |   50.48 |      100 |       0 |   50.48 | 18-33,45-59,74-93          
