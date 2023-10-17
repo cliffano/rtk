@@ -1,0 +1,12 @@
+{
+  "resources": [
+    {
+      "path": "../../../../../test-integration/fixtures/data/data.txt",
+      "type": "text",
+      "params": {
+        "regex": "(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?",
+        "release_format": "version-{version}"
+      }
+    }
+  ]
+}
