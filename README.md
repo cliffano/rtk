@@ -61,7 +61,9 @@ Cut off a release with major release and minor post-release increment types:
 Configuration
 -------------
 
-Resources can be configured in .rtk.json file.
+Resources can be configured in .rtk.json file. This configuration file defines which other files to manage when cutting off a release.
+
+### Managing version on JSON file
 
 Example `json` resource configuration:
 
@@ -91,6 +93,8 @@ Example `json` resource configuration with an array sub-property:
       ]
     }
 
+### Managing version on YAML file
+
 Example `yaml` resource configuration:
 
     {
@@ -119,6 +123,8 @@ Example `yaml` resource configuration with an array sub-property:
       ]
     }
 
+### Managing version on Keep a Changelog file
+
 Example `keep-a-changelog` resource configuration:
 
     {
@@ -129,6 +135,8 @@ Example `keep-a-changelog` resource configuration:
         }
       ]
     }
+
+### Managing version on TOML file
 
 Example `toml` resource configuration:
 
@@ -144,6 +152,8 @@ Example `toml` resource configuration:
       ]
     }
 
+### Managing version on Makefile file
+
 Example `makefile` resource configuration:
 
     {
@@ -158,6 +168,8 @@ Example `makefile` resource configuration:
       ]
     }
 
+### Managing version on Text file
+
 Example `text` resource configuration:
 
     {
@@ -171,6 +183,8 @@ Example `text` resource configuration:
         }
       ]
     }
+
+### Overriding version value
 
 It is also possible to force the release and post-release values instead of using the version scheme generated value:
 Note: because release and post-release values are specified at resource level, the SCM tag will still use the version scheme generated value
@@ -188,6 +202,8 @@ Note: because release and post-release values are specified at resource level, t
         }
       ]
     }
+
+### Custom version format
 
 If you want to format the tag instead of using the version number as the tag, you can configure `tagFormat` property:
 
