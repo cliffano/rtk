@@ -1,4 +1,4 @@
-test | /opt/hostedtoolcache/node/20.12.2/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
+test | /opt/hostedtoolcache/node/16.20.2/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
 
 [0m[0m
 [0m  cli - exec[0m
@@ -6,6 +6,17 @@ test | /opt/hostedtoolcache/node/20.12.2/x64/lib/node_modules/bob/node_modules/.
 
 [0m  cli - release[0m
   [32m  [32m✔[39m[0m[90m should contain release command and delegate to rtk release when exec is called[0m
+
+[0m  rtk[0m
+[0m    default rtk release scheme[0m
+    [32m  [32m✔[39m[0m[90m should initialise version schemes[0m
+    [32m  [32m✔[39m[0m[90m should initialise scm schemes[0m
+    [32m  [32m✔[39m[0m[90m should initialise resource types[0m
+    [32m  [32m✔[39m[0m[90m should initialise version scheme[0m
+    [32m  [32m✔[39m[0m[90m should initialise scm scheme[0m
+    [32m  [32m✔[39m[0m[90m should not have label[0m
+[0m    default rtk release scheme[0m
+    [32m  [32m✔[39m[0m[90m should not have label[0m
 
 [0m  json[0m
 [0m    setVersion[0m
@@ -78,27 +89,27 @@ test | /opt/hostedtoolcache/node/20.12.2/x64/lib/node_modules/bob/node_modules/.
     [32m  [32m✔[39m[0m[90m should increment patch version for post release version[0m
 
 
-[92m [0m[32m 42 passing[0m[90m (57ms)[0m
+[92m [0m[32m 49 passing[0m[90m (52ms)[0m
 
 SUCCESS | exit code 0
-----------------------|---------|----------|---------|---------|----------------------------
-File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s          
-----------------------|---------|----------|---------|---------|----------------------------
-All files             |   71.62 |    90.74 |   67.74 |   71.62 |                            
- lib                  |   74.24 |       50 |      75 |   74.24 |                            
-  cli.js              |     100 |    42.85 |     100 |     100 | 12-18                      
-  rtk.js              |   60.91 |    66.66 |      50 |   60.91 | 48-81                      
- lib/release-schemes  |   21.76 |      100 |       0 |   21.76 |                            
-  rtk.js              |   21.76 |      100 |       0 |   21.76 | 21-48,51-84,87-108,111-141 
- lib/resource-types   |   86.68 |      100 |   83.33 |   86.68 |                            
-  json.js             |     100 |      100 |     100 |     100 |                            
-  keep-a-changelog.js |   50.48 |      100 |       0 |   50.48 | 18-33,45-59,74-93          
-  makefile.js         |     100 |      100 |     100 |     100 |                            
-  text.js             |     100 |      100 |     100 |     100 |                            
-  toml.js             |     100 |      100 |     100 |     100 |                            
-  yaml.js             |     100 |      100 |     100 |     100 |                            
- lib/scm-schemes      |   68.42 |      100 |       0 |   68.42 |                            
-  git.js              |   68.42 |      100 |       0 |   68.42 | 5-7,9-11                   
- lib/version-schemes  |     100 |      100 |     100 |     100 |                            
-  semver.js           |     100 |      100 |     100 |     100 |                            
-----------------------|---------|----------|---------|---------|----------------------------
+----------------------|---------|----------|---------|---------|----------------------
+File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s    
+----------------------|---------|----------|---------|---------|----------------------
+All files             |   75.48 |    87.93 |   70.96 |   75.48 |                      
+ lib                  |   74.24 |       50 |      75 |   74.24 |                      
+  cli.js              |     100 |    42.85 |     100 |     100 | 12-18                
+  rtk.js              |   60.91 |    66.66 |      50 |   60.91 | 48-81                
+ lib/release-schemes  |   40.81 |       60 |      25 |   40.81 |                      
+  rtk.js              |   40.81 |       60 |      25 |   40.81 | 51-84,87-108,111-141 
+ lib/resource-types   |   86.68 |      100 |   83.33 |   86.68 |                      
+  json.js             |     100 |      100 |     100 |     100 |                      
+  keep-a-changelog.js |   50.48 |      100 |       0 |   50.48 | 18-33,45-59,74-93    
+  makefile.js         |     100 |      100 |     100 |     100 |                      
+  text.js             |     100 |      100 |     100 |     100 |                      
+  toml.js             |     100 |      100 |     100 |     100 |                      
+  yaml.js             |     100 |      100 |     100 |     100 |                      
+ lib/scm-schemes      |   68.42 |      100 |       0 |   68.42 |                      
+  git.js              |   68.42 |      100 |       0 |   68.42 | 5-7,9-11             
+ lib/version-schemes  |     100 |      100 |     100 |     100 |                      
+  semver.js           |     100 |      100 |     100 |     100 |                      
+----------------------|---------|----------|---------|---------|----------------------

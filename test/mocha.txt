@@ -6,6 +6,17 @@
 [0m  cli - release[0m
   [32m  [32m✔[39m[0m[90m should contain release command and delegate to rtk release when exec is called[0m
 
+[0m  rtk[0m
+[0m    default rtk release scheme[0m
+    [32m  [32m✔[39m[0m[90m should initialise version schemes[0m
+    [32m  [32m✔[39m[0m[90m should initialise scm schemes[0m
+    [32m  [32m✔[39m[0m[90m should initialise resource types[0m
+    [32m  [32m✔[39m[0m[90m should initialise version scheme[0m
+    [32m  [32m✔[39m[0m[90m should initialise scm scheme[0m
+    [32m  [32m✔[39m[0m[90m should not have label[0m
+[0m    default rtk release scheme[0m
+    [32m  [32m✔[39m[0m[90m should not have label[0m
+
 [0m  json[0m
 [0m    setVersion[0m
     [32m  [32m✔[39m[0m[90m should only set version but not modify json file when dry run is enabled[0m
@@ -77,5 +88,5 @@
     [32m  [32m✔[39m[0m[90m should increment patch version for post release version[0m
 
 
-[92m [0m[32m 42 passing[0m[90m (57ms)[0m
+[92m [0m[32m 49 passing[0m[90m (52ms)[0m
 
