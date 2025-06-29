@@ -5,14 +5,14 @@ name: Publish
       - '*'
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
-          ref: master
-      - uses: actions/setup-node@v2
+          ref: main
+      - uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
           registry-url: https://registry.npmjs.org
       - run: npm install -g bob
       - run: npm install
