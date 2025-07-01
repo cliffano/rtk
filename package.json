@@ -17,7 +17,7 @@
     "kraken"
   ],
   "version": "3.1.2-pre.0",
-  "homepage": "http://github.com/cliffano/rtk",
+  "homepage": "https://github.com/cliffano/rtk",
   "author": "Cliffano Subagio <blah@cliffano.com> (http://blog.cliffano.com)",
   "contributors": [
     "All contributors (https://github.com/cliffano/rtk/graphs/contributors)"
@@ -29,10 +29,10 @@
   "preferGlobal": true,
   "repository": {
     "type": "git",
-    "url": "http://github.com/cliffano/rtk.git"
+    "url": "https://github.com/cliffano/rtk.git"
   },
   "bugs": {
-    "url": "http://github.com/cliffano/rtk/issues"
+    "url": "https://github.com/cliffano/rtk/issues"
   },
   "directories": {
     "bin": "./bin",
