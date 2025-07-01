@@ -89,7 +89,7 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">&quot;use strict&quot;
+    <textarea id="file-source" class="col-md-12">&quot;use strict&quot;;
 import fs from &#039;fs&#039;;
 import makefileParser from &#039;@kba/makefile-parser&#039;;
 
@@ -105,7 +105,7 @@ import makefileParser from &#039;@kba/makefile-parser&#039;;
 function setVersion(version, resource, opts, cb) {
   const variable = resource.params.variable;
   let content = fs.readFileSync(resource.path, &#039;UTF-8&#039;);
-  let data = makefileParser(content);
+  const data = makefileParser(content);
 
   data.ast.forEach((elem) =&gt; {
     if (elem.variable &amp;&amp; elem.variable === variable) {

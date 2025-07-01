@@ -44,7 +44,7 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">66.64</p>
+      <p class="stat">66.68</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
@@ -89,7 +89,7 @@
 
 <div class="container">
   <div class="row">
-    <textarea id="file-source" class="col-md-12">&quot;use strict&quot;
+    <textarea id="file-source" class="col-md-12">&quot;use strict&quot;;
 import async from &#039;async&#039;;
 import bag from &#039;bagofcli&#039;;
 import stringFormat from &#039;string-format&#039;;
@@ -132,7 +132,7 @@ class Rtk {
     this.versionScheme = new VersionSchemeClass(preReleaseVersion, opts.releaseIncrementType, opts.postReleaseIncrementType);
     this.scmScheme = this.scmSchemes[scmSchemeName];
 
-    this.logOpts = {}
+    this.logOpts = {};
     if (opts.dryRun) {
       this.logOpts[&#039;labels&#039;] = [&#039;dry run&#039;];
     }
@@ -144,8 +144,8 @@ class Rtk {
 
     bag.logStepHeading(&#039;Executing pre step of rtk release scheme...&#039;, self.logOpts);
 
-    let tasks = [];
-    let paths = [];
+    const tasks = [];
+    const paths = [];
     resources.forEach((resource) =&gt; {
       function resourceTask(cb) {
         let releaseVersion = resource.params &amp;&amp; resource.params.release_value ? resource.params.release_value : self.versionScheme.getReleaseVersion();
@@ -180,7 +180,7 @@ class Rtk {
 
     bag.logStepHeading(&#039;Executing release step of rtk release scheme...&#039;, self.logOpts);
 
-    let tasks = [];
+    const tasks = [];
 
     function scmTask(cb) {
       // Use tagFormat option to format the version to be used as SCM tag
@@ -204,8 +204,8 @@ class Rtk {
 
     bag.logStepHeading(&#039;Executing post step of rtk release scheme...&#039;, self.logOpts);
 
-    let tasks = [];
-    let paths = [];
+    const tasks = [];
+    const paths = [];
     resources.forEach((resource) =&gt; {
       function resourceTask(cb) {
         const postReleaseVersion = resource.params &amp;&amp; resource.params.post_release_value ? resource.params.post_release_value : self.versionScheme.getPostReleaseVersion();
