@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 /* eslint no-unused-vars: 0 */
 import RTK from '../lib/rtk.js';
 import bag from 'bagofcli';

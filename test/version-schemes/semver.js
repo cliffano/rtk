@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 import assert from 'assert';
 import versionScheme from '../../lib/version-schemes/semver.js';
 

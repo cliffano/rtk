@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 /* eslint no-unused-vars: 0 */
 import RTK from '../../lib/release-schemes/rtk.js';
 import referee from '@sinonjs/referee';

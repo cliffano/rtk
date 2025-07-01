@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 /* eslint no-unused-vars: 0 */
 import assert from 'assert';
 import fs from 'fs';
@@ -19,7 +19,7 @@ describe('json', function() {
 
   describe('setVersion', function() {
     it('should only set version but not modify json file when dry run is enabled', function(done) {
-      let resource = {
+      const resource = {
         path: 'somepackage.json',
         type: 'json',
         params: {
@@ -35,7 +35,7 @@ describe('json', function() {
       resourceType.setReleaseVersion('1.2.3', resource, { dryRun: true }, cb);
     });
     it('should set version and modify json file when dry run is disabled', function(done) {
-      let resource = {
+      const resource = {
         path: 'somepackage.json',
         type: 'json',
         params: {
@@ -51,7 +51,7 @@ describe('json', function() {
       resourceType.setReleaseVersion('1.2.3', resource, { dryRun: false }, cb);
     });
     it('should set property under array sub-property', function(done) {
-      let resource = {
+      const resource = {
         path: 'somepackage.json',
         type: 'json',
         params: {
@@ -70,7 +70,7 @@ describe('json', function() {
 
   describe('getVersion', function() {
     it('should get version from resource property', function(done) {
-      let resource = {
+      const resource = {
         path: 'somepackage.json',
         type: 'json',
         params: {
@@ -86,7 +86,7 @@ describe('json', function() {
       resourceType.getVersion(resource, cb);
     });
     it('should get property under an array array sub-property', function(done) {
-      let resource = {
+      const resource = {
         path: 'somepackage.json',
         type: 'json',
         params: {

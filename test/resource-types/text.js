@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 /* eslint no-unused-vars: 0 */
 /* eslint no-useless-escape: 0 */
 import assert from 'assert';
@@ -20,7 +20,7 @@ describe('text', function() {
 
   describe('setVersion', function() {
     it('should only set version but not modify text file when dry run is enabled', function(done) {
-      let resource = {
+      const resource = {
         path: 'somefile.txt',
         type: 'text',
         params: {
@@ -36,7 +36,7 @@ describe('text', function() {
       resourceType.setReleaseVersion('1.2.3', resource, { dryRun: true }, cb);
     });
     it('should set version and modify text file when dry run is disabled', function(done) {
-      let resource = {
+      const resource = {
         path: 'somefile.txt',
         type: 'text',
         params: {
@@ -52,7 +52,7 @@ describe('text', function() {
       resourceType.setReleaseVersion('1.2.3', resource, { dryRun: false }, cb);
     });
     it('should set version and modify text file when there are multiple matches', function(done) {
-      let resource = {
+      const resource = {
         path: 'somefile.txt',
         type: 'text',
         params: {
@@ -71,7 +71,7 @@ describe('text', function() {
 
   describe('getVersion', function() {
     it('should get version from text resource', function(done) {
-      let resource = {
+      const resource = {
         path: 'somefile.txt',
         type: 'text',
         params: {
@@ -87,7 +87,7 @@ describe('text', function() {
       resourceType.getVersion(resource, cb);
     });
     it('should get first regex match as version from text resource when there are multiple matches', function(done) {
-      let resource = {
+      const resource = {
         path: 'somefile.txt',
         type: 'text',
         params: {
@@ -103,7 +103,7 @@ describe('text', function() {
       resourceType.getVersion(resource, cb);
     });
     it('should get version from text resource when the version includes a pre release', function(done) {
-      let resource = {
+      const resource = {
         path: 'somefile.txt',
         type: 'text',
         params: {
