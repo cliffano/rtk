@@ -10,15 +10,9 @@
 RTK
 ---
 
-RTK is an agnostic software release tool for managing versions on changelog (keep-a-changelog), multi-format files (JSON, Makefile, text, TOML, YAML), and also for tagging source code of a Git repo.
+RTK is a code release tool for managing version number on a variety of file types such as keep-a-changelog, JSON, Makefile, text, TOML, YAML files, and also for tagging Git repo.
 
-This involves updating the version number on various manifest files, updating the version number and datestamp on a changelog file, tagging the code with the release version name, updating the manifest files again with the next pre-release version, and then updating the changelog file again with the unreleased version. And you have to do this for various technologies, e.g. with a node.js project you need to update the package.json file, with an Ansible project you need to update YAML metadata file, and so on so forth with other tech stacks.
-
-Enter RTK, which allows you to configure the manifest and changelog files in a `.rtk.json` file, and it will take care of the updating of the version numbers, the committing of the changes with relevant message, and the tagging of the code with the version name, all via a convenient CLI command `rtk release` .
-
-RTK comes with a default set of steps, but it's also open for extension by implementing custom release scheme.
-
-The default release scheme involves the following steps:
+By using RTK, it automates the following steps:
 
 * Replace pre-release version on resource paths with its release version
 * Commit the release version changes to SCM
@@ -27,6 +21,10 @@ The default release scheme involves the following steps:
 * Commit the next pre-release version changes to SCM
 
 ![RTK console screenshot](https://raw.github.com/cliffano/rtk/master/screenshots/console.jpg "RTK console screenshot")
+
+RTK comes with a default set of steps, but it's also open for extension by implementing custom release scheme.
+
+Other than that, RTK also helps with managing version number (by default, using [semantic versioning](https://semver.org) scheme) across multiple files in a single repo.
 
 Installation
 ------------
@@ -61,7 +59,7 @@ Cut off a release with major release and minor post-release increment types:
 Configuration
 -------------
 
-Resources can be configured in .rtk.json file. This configuration file defines which other files to manage when cutting off a release.
+Resources can be configured in a `.rtk.json` file. This configuration file defines which other files to manage when cutting off a release.
 
 ### Managing version on JSON file
 
@@ -261,5 +259,10 @@ Build reports:
 * [Test coverage report](https://cliffano.github.io/rtk/coverage/c8/index.html)
 * [Integration tests report](https://cliffano.github.io/rtk/test-integration/cmdt.txt)
 * [API Documentation](https://cliffano.github.io/rtk/doc/jsdoc/index.html)
+
+
+Related projects:
+
+* [Packer RTK](https://github.com/cliffano/packer-rtk) - Packer builder of machine image for running RTK code release tool
 
 ![Release the Kraken](https://raw.github.com/cliffano/rtk/master/release-the-kraken.jpg "Release the Kraken!")
