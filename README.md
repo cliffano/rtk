@@ -1,10 +1,11 @@
 <img align="right" src="https://raw.github.com/cliffano/rtk/master/avatar.jpg" alt="Avatar"/>
 
 [![Build Status](https://github.com/cliffano/rtk/workflows/CI/badge.svg)](https://github.com/cliffano/rtk/actions?query=workflow%3ACI)
-[![Security Status](https://snyk.io/test/github/cliffano/rtk/badge.svg)](https://snyk.io/test/github/cliffano/rtk)
 [![Dependencies Status](https://img.shields.io/librariesio/release/npm/rtk)](https://libraries.io/npm/rtk)
+[![Code Scanning Status](https://github.com/cliffano/rtk/workflows/CodeQL/badge.svg)](https://github.com/cliffano/rtk/actions?query=workflow%3ACodeQL)
 [![Coverage Status](https://img.shields.io/coveralls/cliffano/rtk.svg)](https://coveralls.io/r/cliffano/rtk?branch=master)
-[![Published Version](https://img.shields.io/npm/v/rtk.svg)](http://www.npmjs.com/package/rtk)
+[![Security Status](https://snyk.io/test/github/cliffano/rtk/badge.svg)](https://snyk.io/test/github/cliffano/rtk)
+[![Published Version](https://img.shields.io/npm/v/rtk.svg)](https://www.npmjs.com/package/rtk)
 <br/>
 
 RTK
