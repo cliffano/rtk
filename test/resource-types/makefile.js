@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 /* eslint no-unused-vars: 0 */
 import assert from 'assert';
 import fs from 'fs';
@@ -19,7 +19,7 @@ describe('makefile', function() {
 
   describe('setVersion', function() {
     it('should only set version but not modify makefile when dry run is enabled', function(done) {
-      let resource = {
+      const resource = {
         path: 'somemakefile',
         type: 'makefile',
         params: {
@@ -35,7 +35,7 @@ describe('makefile', function() {
       resourceType.setReleaseVersion('1.2.3', resource, { dryRun: true }, cb);
     });
     it('should set version and modify makefile when dry run is disabled', function(done) {
-      let resource = {
+      const resource = {
         path: 'somemakefile',
         type: 'makefile',
         params: {
@@ -54,7 +54,7 @@ describe('makefile', function() {
 
   describe('getVersion', function() {
     it('should get version from resource variable', function(done) {
-      let resource = {
+      const resource = {
         path: 'somemakefile',
         type: 'makefile',
         params: {

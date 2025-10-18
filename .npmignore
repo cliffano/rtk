@@ -1,0 +1,16 @@
+.bob
+.bob.json
+.DS_Store
+.git
+.github
+.gitignore
+.npmignore
+.rtk.json
+avatar.jpg
+core
+eslint.config.js
+node_modules
+*.log
+screenshots
+test
+test-integration

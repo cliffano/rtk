@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 4.0.0 - 2025-07-02
+### Changed
+- Switch release workflow to use release-action
+- Set min node engine to >= 20.0.0
+
 ## 3.1.1 - 2023-10-17
 ### Fixed
 - Fix broken text resource type support
