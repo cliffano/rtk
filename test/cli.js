@@ -28,7 +28,7 @@ describe('cli - release', function() {
 
   afterEach(function () {
     this.mockBag.verify();
-    this.mockBag.restore();
+    sinon.restore();
   });
 
   it('should contain release command and delegate to rtk release when exec is called', function (done) {

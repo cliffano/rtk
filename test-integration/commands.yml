@@ -31,4 +31,8 @@
   command: '{rtk} release --dry-run --config-file {base}/test-integration/fixtures/confs/rtk-yaml.json'
   exitcode: 0
   output: 'Setting release version version-1.3.0 on yaml resource located at ../../../../../test-integration/fixtures/data/data.yaml'
-  
+
+- description: Command release dry run config should format release value on a HCL data file
+  command: '{rtk} release --dry-run --config-file {base}/test-integration/fixtures/confs/rtk-hcl.json'
+  exitcode: 0
+  output: 'Setting release version version-1.3.0 on hcl resource located at ../../../../../test-integration/fixtures/data/data.hcl'
