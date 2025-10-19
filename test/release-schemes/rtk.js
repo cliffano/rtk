@@ -20,7 +20,7 @@ describe('rtk', function() {
       done();
     });
     it('should initialise resource types', function (done) {
-      assert.keys(this.rtk.resourceTypes, ['json', 'makefile', 'text', 'toml', 'yaml', 'keep-a-changelog']);
+      assert.keys(this.rtk.resourceTypes, ['hcl', 'json', 'makefile', 'text', 'toml', 'yaml', 'keep-a-changelog']);
       done();
     });
     it('should initialise version scheme', function (done) {

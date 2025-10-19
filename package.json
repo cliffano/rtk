@@ -44,6 +44,7 @@
     "bagofcli": "^2.4.1",
     "chalk": "^5.4.1",
     "dot-prop": "^9.0.0",
+    "hcl2-parser": "^1.0.3",
     "js-yaml": "^4.1.0",
     "keep-a-changelog": "^0.10.4",
     "lodash": "^4.17.21",

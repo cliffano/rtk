@@ -151,6 +151,22 @@ Example `toml` resource configuration:
       ]
     }
 
+### Managing version on HCL file
+
+Example `hcl` resource configuration:
+
+    {
+      "resources": [
+        {
+          "path": "somefile.hcl",
+          "type": "hcl",
+          "params": {
+            "property": "version"
+          }
+        }
+      ]
+    }
+
 ### Managing version on Makefile file
 
 Example `makefile` resource configuration:

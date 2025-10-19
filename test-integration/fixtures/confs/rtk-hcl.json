@@ -1,0 +1,12 @@
+{
+    "resources": [
+      {
+        "path": "../../../../../test-integration/fixtures/data/data.hcl",
+        "type": "hcl",
+        "params": {
+          "property": "app_version",
+          "release_format": "version-{version}"
+        }
+      }
+    ]
+  }
