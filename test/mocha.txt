@@ -17,6 +17,16 @@
 [0m    default rtk release scheme[0m
     [32m  [32m✔[39m[0m[90m should not have label[0m
 
+[0m  hcl[0m
+[0m    setVersion[0m
+    [32m  [32m✔[39m[0m[90m should only set version but not modify hcl file when dry run is enabled[0m
+    [32m  [32m✔[39m[0m[90m should set call hcledit via execaSync when dry run is disabled[0m
+    [32m  [32m✔[39m[0m[90m should set array property under a section[0m
+[0m    getVersion[0m
+    [32m  [32m✔[39m[0m[90m should get version from resource property[0m
+    [32m  [32m✔[39m[0m[90m should get array property as a subproperty[0m
+    [32m  [32m✔[39m[0m[90m should get array property under a resource[0m
+
 [0m  json[0m
 [0m    setVersion[0m
     [32m  [32m✔[39m[0m[90m should only set version but not modify json file when dry run is enabled[0m
@@ -88,5 +98,5 @@
     [32m  [32m✔[39m[0m[90m should increment patch version for post release version[0m
 
 
-[92m [0m[32m 49 passing[0m[90m (72ms)[0m
+[92m [0m[32m 55 passing[0m[90m (91ms)[0m
 

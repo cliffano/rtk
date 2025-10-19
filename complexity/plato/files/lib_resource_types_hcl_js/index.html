@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Plato - lib/rtk.js</title>
+  <title>Plato - lib/resource-types/hcl.js</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
@@ -36,7 +36,7 @@
 
 <div class="jumbotron">
   <div class="container">
-    <h1>lib/rtk.js</h1>
+    <h1>lib/resource-types/hcl.js</h1>
   </div>
 </div>
 
@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">72.86</p>
+      <p class="stat">75.06</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">89</p>
+      <p class="stat">60</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">20.21</p>
+      <p class="stat">15.00</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.49</p>
+      <p class="stat">0.26</p>
     </div>
   </div>
 </div>
@@ -90,93 +90,64 @@
 <div class="container">
   <div class="row">
     <textarea id="file-source" class="col-md-12">&quot;use strict&quot;;
-import async from &#039;async&#039;;
-import rtkReleaseScheme from &#039;./release-schemes/rtk.js&#039;;
-import hclResourceType from &#039;./resource-types/hcl.js&#039;;
-import jsonResourceType from &#039;./resource-types/json.js&#039;;
-import keepAChangelogResourceType from &#039;./resource-types/keep-a-changelog.js&#039;;
-import makefileResourceType from &#039;./resource-types/makefile.js&#039;;
-import textResourceType from &#039;./resource-types/text.js&#039;;
-import tomlResourceType from &#039;./resource-types/toml.js&#039;;
-import yamlResourceType from &#039;./resource-types/yaml.js&#039;;
+import bag from &#039;bagofcli&#039;;
+import {getProperty} from &#039;dot-prop&#039;;
+import fs from &#039;fs&#039;;
+import hcl from &#039;hcl2-parser&#039;;
 
 /**
- * RTK is the enchilada, Release The Kraken!
+ * Set version value in the HCL resource&#039;s property (defined in dot-notation).
+ * This will use hcledit CLI tool (https://github.com/minamijoyo/hcledit) to
+ * modify the HCL file because there is no node.js library that can write HCL
+ * files in a safe way while preserving original formatting. NOTE: hcledit
+ * must be installed and available in the PATH for this to work.
+ *
+ * @param {String} version: version value to set
+ * @param {Object} resource: resource configuration which contains type, path, and params
+ * @param {Object} opts: optional settings
+ *   - dryRun: when true, HCL file won&#039;t be modified
+ * @param {Function} cb: standard cb(err, result) callback
  */
-class RTK {
-
-  /**
-   * Construct RTK object which will manage a set of resources.
-   *
-   * @param {Array} resources: an array of resources which contain version value
-   * @param {Object} opts: optional settings
-   *   - dryRun: when true, no change will be made
-   */
-  constructor(resources, opts) {
-    this.resources = resources || {};
-    this.opts = opts || {};
-    this.releaseSchemes = {
-      rtk: rtkReleaseScheme
+function setVersion(version, resource, opts, cb) {
+  if (!opts.dryRun) {
+    const property = resource.params.property;
+    function execCb(err, stdOutOuput, stdErrOuput, result) {
+      cb(err);
     };
-    this.resourceTypes = {
-      hcl: hclResourceType,
-      json: jsonResourceType,
-      makefile: makefileResourceType,
-      text: textResourceType,
-      toml: tomlResourceType,
-      yaml: yamlResourceType
-    };
-    this.resourceTypes[&#039;keep-a-changelog&#039;] = keepAChangelogResourceType;
+    bag.exec(`hcledit attribute set ${property} ${version} -f ${resource.path} -u`, false, execCb);
+  } else {
+    cb();
   }
-
-  /**
-   * Execute release steps for the specified release scheme.
-   *
-   * @param {String} releaseSchemeName: release scheme name that defines the steps involved in a release step
-   * @param {String} versionSchemeName: version scheme name that defines the release and pre-release version value
-   * @param {String} scmSchemeName: name of SCM used by the repository to be released
-   * @param {Function} cb: standard cb(err, result) callback
-   */
-  release(releaseSchemeName, versionSchemeName, scmSchemeName, cb) {
-    const self = this;
-
-    releaseSchemeName = releaseSchemeName || &#039;rtk&#039;;
-    versionSchemeName = versionSchemeName || &#039;semver&#039;;
-    scmSchemeName = scmSchemeName || &#039;git&#039;;
-
-    let releaseScheme;
-
-    function versionTask(cb) {
-      // uses first resource as the source of truth and the correct pre-release version
-      const preReleaseResource = self.resources[0];
-
-      function versionCb(err, result) {
-        if (!err) {
-          const ReleaseSchemeClass = self.releaseSchemes[releaseSchemeName];
-          releaseScheme = new ReleaseSchemeClass(versionSchemeName, scmSchemeName, result, self.opts);
-        }
-        cb(err, result);
-      }
-      const resourceType = self.resourceTypes[preReleaseResource.type];
-      resourceType.getVersion(preReleaseResource, versionCb);
-    }
-    function preTask(cb) {
-      releaseScheme.pre(self.resources, self.opts, cb);
-    }
-    function releaseTask(cb) {
-      releaseScheme.release(self.resources, self.opts, cb);
-    }
-    function postTask(cb) {
-      releaseScheme.post(self.resources, self.opts, cb);
-    }
-
-    async.series([versionTask, preTask, releaseTask, postTask], cb);
-  }
-
 }
 
+/**
+ * Get version value from the HCL resource&#039;s property (defined in dot-notation).
+ *
+ * @param {Object} resource: resource configuration which contains type, path, and params
+ * @param {Function} cb: standard cb(err, result) callback
+ */
+function getVersion(resource, cb) {
+  const property = resource.params.property;
+
+  function readCb(err, result) {
+    let version;
+    if (!err) {
+      const data = hcl.parseToObject(result)[0];
+      version = getProperty(data, property);
+    }
+    cb(err, version);
+  }
+  fs.readFile(resource.path, &#039;UTF-8&#039;, readCb);
+}
+
+const exports = {
+  setReleaseVersion: setVersion,
+  setPostReleaseVersion: setVersion,
+  getVersion: getVersion
+};
+
 export {
-  RTK as default
+  exports as default
 };</textarea>
   </div>
 </div>

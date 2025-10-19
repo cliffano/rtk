@@ -1,4 +1,4 @@
-test | /opt/hostedtoolcache/node/24.9.0/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
+test | /opt/hostedtoolcache/node/20.19.5/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
 
 [0m[0m
 [0m  cli - exec[0m
@@ -17,6 +17,16 @@ test | /opt/hostedtoolcache/node/24.9.0/x64/lib/node_modules/bob/node_modules/.b
     [32m  [32m✔[39m[0m[90m should not have label[0m
 [0m    default rtk release scheme[0m
     [32m  [32m✔[39m[0m[90m should not have label[0m
+
+[0m  hcl[0m
+[0m    setVersion[0m
+    [32m  [32m✔[39m[0m[90m should only set version but not modify hcl file when dry run is enabled[0m
+    [32m  [32m✔[39m[0m[90m should set call hcledit via execaSync when dry run is disabled[0m
+    [32m  [32m✔[39m[0m[90m should set array property under a section[0m
+[0m    getVersion[0m
+    [32m  [32m✔[39m[0m[90m should get version from resource property[0m
+    [32m  [32m✔[39m[0m[90m should get array property as a subproperty[0m
+    [32m  [32m✔[39m[0m[90m should get array property under a resource[0m
 
 [0m  json[0m
 [0m    setVersion[0m
@@ -89,19 +99,20 @@ test | /opt/hostedtoolcache/node/24.9.0/x64/lib/node_modules/bob/node_modules/.b
     [32m  [32m✔[39m[0m[90m should increment patch version for post release version[0m
 
 
-[92m [0m[32m 49 passing[0m[90m (72ms)[0m
+[92m [0m[32m 55 passing[0m[90m (91ms)[0m
 
 SUCCESS | exit code 0
 ----------------------|---------|----------|---------|---------|----------------------
 File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s    
 ----------------------|---------|----------|---------|---------|----------------------
-All files             |   75.48 |    87.93 |   70.96 |   75.48 |                      
- lib                  |   74.24 |       50 |      75 |   74.24 |                      
+All files             |   77.46 |    89.23 |   74.28 |   77.46 |                      
+ lib                  |   74.62 |       50 |      75 |   74.62 |                      
   cli.js              |     100 |    42.85 |     100 |     100 | 12-18                
-  rtk.js              |   60.91 |    66.66 |      50 |   60.91 | 48-81                
- lib/release-schemes  |   40.81 |       60 |      25 |   40.81 |                      
-  rtk.js              |   40.81 |       60 |      25 |   40.81 | 51-84,87-108,111-141 
- lib/resource-types   |   86.68 |      100 |   83.33 |   86.68 |                      
+  rtk.js              |   61.79 |    66.66 |      50 |   61.79 | 50-83                
+ lib/release-schemes  |   41.61 |       60 |      25 |   41.61 |                      
+  rtk.js              |   41.61 |       60 |      25 |   41.61 | 53-86,89-110,113-143 
+ lib/resource-types   |   88.48 |      100 |   86.36 |   88.48 |                      
+  hcl.js              |     100 |      100 |     100 |     100 |                      
   json.js             |     100 |      100 |     100 |     100 |                      
   keep-a-changelog.js |   50.48 |      100 |       0 |   50.48 | 18-33,45-59,74-93    
   makefile.js         |     100 |      100 |     100 |     100 |                      
