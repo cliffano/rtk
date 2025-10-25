@@ -167,6 +167,8 @@ Example `hcl` resource configuration:
       ]
     }
 
+NOTE: This requires 
+
 ### Managing version on Makefile file
 
 Example `makefile` resource configuration:

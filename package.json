@@ -5,6 +5,7 @@
   "keywords": [
     "release",
     "versioning",
+    "hcl",
     "json",
     "makefile",
     "text",
@@ -54,6 +55,7 @@
     "@iarna/toml": "^2.2.5"
   },
   "devDependencies": {
+    "esmock": "^2.7.3",
     "@sinonjs/referee": "^11.0.1",
     "sinon": "^21.0.0"
   },
