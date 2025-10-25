@@ -1,4 +1,4 @@
-test | /opt/hostedtoolcache/node/20.19.5/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
+test | /opt/hostedtoolcache/node/22.20.0/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
 
 [0m[0m
 [0m  cli - exec[0m
@@ -75,7 +75,7 @@ test | /opt/hostedtoolcache/node/20.19.5/x64/lib/node_modules/bob/node_modules/.
 
 [0m  git[0m
 [0m    addVersion[0m
-    [32m  [32m✔[39m[0m[90m should call simpleGit addTag[0m[33m (46ms)[0m
+    [32m  [32m✔[39m[0m[90m should call simpleGit addTag[0m[33m (53ms)[0m
 [0m    saveChanges[0m
     [32m  [32m✔[39m[0m[90m should call simpleGit commit[0m
 
@@ -106,7 +106,7 @@ test | /opt/hostedtoolcache/node/20.19.5/x64/lib/node_modules/bob/node_modules/.
     [32m  [32m✔[39m[0m[90m should increment patch version for post release version[0m
 
 
-[92m [0m[32m 58 passing[0m[90m (141ms)[0m
+[92m [0m[32m 58 passing[0m[90m (149ms)[0m
 
 SUCCESS | exit code 0
 ----------------------|---------|----------|---------|---------|----------------------
