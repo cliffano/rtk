@@ -3,7 +3,7 @@
 [![Build Status](https://github.com/cliffano/rtk/workflows/CI/badge.svg)](https://github.com/cliffano/rtk/actions?query=workflow%3ACI)
 [![Dependencies Status](https://img.shields.io/librariesio/release/npm/rtk)](https://libraries.io/npm/rtk)
 [![Code Scanning Status](https://github.com/cliffano/rtk/workflows/CodeQL/badge.svg)](https://github.com/cliffano/rtk/actions?query=workflow%3ACodeQL)
-[![Coverage Status](https://img.shields.io/coveralls/cliffano/rtk.svg)](https://coveralls.io/r/cliffano/rtk?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/cliffano/rtk/badge.svg?branch=main)](https://coveralls.io/r/cliffano/rtk?branch=main)
 [![Security Status](https://snyk.io/test/github/cliffano/rtk/badge.svg)](https://snyk.io/test/github/cliffano/rtk)
 [![Published Version](https://img.shields.io/npm/v/rtk.svg)](https://www.npmjs.com/package/rtk)
 <br/>
