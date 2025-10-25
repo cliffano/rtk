@@ -47,9 +47,10 @@
     "dot-prop": "^10.1.0",
     "hcl2-parser": "^1.0.3",
     "js-yaml": "^4.1.0",
-    "keep-a-changelog": "^0.10.4",
+    "keep-a-changelog": "^2.7.1",
     "lodash": "^4.17.21",
     "@kba/makefile-parser": "^0.0.6",
+    "semver": "^7.7.3",
     "simple-git": "^3.28.0",
     "string-format": "^2.0.0",
     "@iarna/toml": "^2.2.5"
