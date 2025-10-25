@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - YAML writing ensures --- document separator header
 
+### Fixed
+- Fix YAML unit test data incorrectly provided JSON
+
 ## 4.0.0 - 2025-07-02
 ### Changed
 - Switch release workflow to use release-action
