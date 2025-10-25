@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Add HCL resource type support
+
+### Changed
+- YAML writing ensures --- document separator header
+
 ## 4.0.0 - 2025-07-02
 ### Changed
 - Switch release workflow to use release-action

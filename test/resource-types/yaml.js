@@ -43,7 +43,7 @@ describe('yaml', function() {
         }
       };
       this.mockFs.expects('readFileSync').once().withExactArgs('someplaybook.yaml', 'UTF-8').returns('{ "version": "0.0.0" }');
-      this.mockFs.expects('writeFile').once().withExactArgs('someplaybook.yaml', 'version: 1.2.3\n', sinon.match.func).callsArgWith(2, null);
+      this.mockFs.expects('writeFile').once().withExactArgs('someplaybook.yaml', '---\nversion: 1.2.3\n', sinon.match.func).callsArgWith(2, null);
       function cb(err, result) {
         assert.equal(err, null);
         done();
@@ -59,12 +59,28 @@ describe('yaml', function() {
         }
       };
       this.mockFs.expects('readFileSync').once().withExactArgs('someplaybook.yaml', 'UTF-8').returns('{ "versions": [{ "major": 1, "minor": 2, "patch": 3 }, { "major": 8, "minor": 9, "patch": 0 }] }');
-      this.mockFs.expects('writeFile').once().withExactArgs('someplaybook.yaml', 'versions:\n  - major: 1\n    minor: 2\n    patch: 3\n  - major: 8\n    minor: 9\n    patch: 0\n', sinon.match.func).callsArgWith(2, null);
+      this.mockFs.expects('writeFile').once().withExactArgs('someplaybook.yaml', '---\nversions:\n  - major: 1\n    minor: 2\n    patch: 3\n  - major: 8\n    minor: 9\n    patch: 0\n', sinon.match.func).callsArgWith(2, null);
       function cb(err, result) {
         assert.equal(err, null);
         done();
       }
       resourceType.setReleaseVersion(9, resource, { dryRun: false }, cb);
+    });
+    it('should not double up document separator YAML header when it already exists', function(done) {
+      const resource = {
+        path: 'someplaybook.yaml',
+        type: 'yaml',
+        params: {
+          property: 'version'
+        }
+      };
+      this.mockFs.expects('readFileSync').once().withExactArgs('someplaybook.yaml', 'UTF-8').returns('---\nversion: "0.0.0"');
+      this.mockFs.expects('writeFile').once().withExactArgs('someplaybook.yaml', '---\nversion: 1.2.3\n', sinon.match.func).callsArgWith(2, null);
+      function cb(err, result) {
+        assert.equal(err, null);
+        done();
+      }
+      resourceType.setReleaseVersion('1.2.3', resource, { dryRun: false }, cb);
     });
   });
 
