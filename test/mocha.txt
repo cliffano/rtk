@@ -72,6 +72,12 @@
     [32m  [32m✔[39m[0m[90m should get version from resource property[0m
     [32m  [32m✔[39m[0m[90m should get property under an array array sub-property[0m
 
+[0m  git[0m
+[0m    addVersion[0m
+    [32m  [32m✔[39m[0m[90m should call simpleGit addTag[0m[33m (53ms)[0m
+[0m    saveChanges[0m
+    [32m  [32m✔[39m[0m[90m should call simpleGit commit[0m
+
 [0m  semver[0m
 [0m    default release increment type and default post release increment type[0m
     [32m  [32m✔[39m[0m[90m should increment minor version for release version[0m
@@ -99,5 +105,5 @@
     [32m  [32m✔[39m[0m[90m should increment patch version for post release version[0m
 
 
-[92m [0m[32m 56 passing[0m[90m (100ms)[0m
+[92m [0m[32m 58 passing[0m[90m (162ms)[0m
 

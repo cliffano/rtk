@@ -1,4 +1,4 @@
-test | /opt/hostedtoolcache/node/24.10.0/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
+test | /opt/hostedtoolcache/node/20.19.5/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
 
 [0m[0m
 [0m  cli - exec[0m
@@ -73,6 +73,12 @@ test | /opt/hostedtoolcache/node/24.10.0/x64/lib/node_modules/bob/node_modules/.
     [32m  [32m✔[39m[0m[90m should get version from resource property[0m
     [32m  [32m✔[39m[0m[90m should get property under an array array sub-property[0m
 
+[0m  git[0m
+[0m    addVersion[0m
+    [32m  [32m✔[39m[0m[90m should call simpleGit addTag[0m[33m (53ms)[0m
+[0m    saveChanges[0m
+    [32m  [32m✔[39m[0m[90m should call simpleGit commit[0m
+
 [0m  semver[0m
 [0m    default release increment type and default post release increment type[0m
     [32m  [32m✔[39m[0m[90m should increment minor version for release version[0m
@@ -100,13 +106,13 @@ test | /opt/hostedtoolcache/node/24.10.0/x64/lib/node_modules/bob/node_modules/.
     [32m  [32m✔[39m[0m[90m should increment patch version for post release version[0m
 
 
-[92m [0m[32m 56 passing[0m[90m (100ms)[0m
+[92m [0m[32m 58 passing[0m[90m (162ms)[0m
 
 SUCCESS | exit code 0
 ----------------------|---------|----------|---------|---------|----------------------
 File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s    
 ----------------------|---------|----------|---------|---------|----------------------
-All files             |   77.75 |    88.05 |      75 |   77.75 |                      
+All files             |    78.5 |     88.4 |   80.55 |    78.5 |                      
  lib                  |   74.62 |       50 |      75 |   74.62 |                      
   cli.js              |     100 |    42.85 |     100 |     100 | 12-18                
   rtk.js              |   61.79 |    66.66 |      50 |   61.79 | 50-83                
@@ -120,8 +126,8 @@ All files             |   77.75 |    88.05 |      75 |   77.75 |
   text.js             |     100 |      100 |     100 |     100 |                      
   toml.js             |     100 |      100 |     100 |     100 |                      
   yaml.js             |     100 |     87.5 |     100 |     100 | 33                   
- lib/scm-schemes      |   68.42 |      100 |       0 |   68.42 |                      
-  git.js              |   68.42 |      100 |       0 |   68.42 | 5-7,9-11             
+ lib/scm-schemes      |     100 |      100 |     100 |     100 |                      
+  git.js              |     100 |      100 |     100 |     100 |                      
  lib/version-schemes  |     100 |      100 |     100 |     100 |                      
   semver.js           |     100 |      100 |     100 |     100 |                      
 ----------------------|---------|----------|---------|---------|----------------------
