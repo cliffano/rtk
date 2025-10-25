@@ -1,4 +1,4 @@
-test | /opt/hostedtoolcache/node/24.10.0/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
+test | /opt/hostedtoolcache/node/20.19.5/x64/lib/node_modules/bob/node_modules/.bin/mocha --colors --reporter spec --recursive test/
 
 [0m[0m
 [0m  cli - exec[0m
@@ -68,6 +68,7 @@ test | /opt/hostedtoolcache/node/24.10.0/x64/lib/node_modules/bob/node_modules/.
     [32m  [32m✔[39m[0m[90m should only set version but not modify yaml file when dry run is enabled[0m
     [32m  [32m✔[39m[0m[90m should set version and modify yaml file when dry run is disabled[0m
     [32m  [32m✔[39m[0m[90m should set property under array sub-property[0m
+    [32m  [32m✔[39m[0m[90m should not double up document separator YAML header when it already exists[0m
 [0m    getVersion[0m
     [32m  [32m✔[39m[0m[90m should get version from resource property[0m
     [32m  [32m✔[39m[0m[90m should get property under an array array sub-property[0m
@@ -99,26 +100,26 @@ test | /opt/hostedtoolcache/node/24.10.0/x64/lib/node_modules/bob/node_modules/.
     [32m  [32m✔[39m[0m[90m should increment patch version for post release version[0m
 
 
-[92m [0m[32m 55 passing[0m[90m (94ms)[0m
+[92m [0m[32m 56 passing[0m[90m (88ms)[0m
 
 SUCCESS | exit code 0
 ----------------------|---------|----------|---------|---------|----------------------
 File                  | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s    
 ----------------------|---------|----------|---------|---------|----------------------
-All files             |   77.46 |    89.23 |   74.28 |   77.46 |                      
+All files             |   77.75 |    88.05 |      75 |   77.75 |                      
  lib                  |   74.62 |       50 |      75 |   74.62 |                      
   cli.js              |     100 |    42.85 |     100 |     100 | 12-18                
   rtk.js              |   61.79 |    66.66 |      50 |   61.79 | 50-83                
  lib/release-schemes  |   41.61 |       60 |      25 |   41.61 |                      
   rtk.js              |   41.61 |       60 |      25 |   41.61 | 53-86,89-110,113-143 
- lib/resource-types   |   88.48 |      100 |   86.36 |   88.48 |                      
+ lib/resource-types   |   88.74 |    97.56 |   86.95 |   88.74 |                      
   hcl.js              |     100 |      100 |     100 |     100 |                      
   json.js             |     100 |      100 |     100 |     100 |                      
   keep-a-changelog.js |   50.48 |      100 |       0 |   50.48 | 18-33,45-59,74-93    
   makefile.js         |     100 |      100 |     100 |     100 |                      
   text.js             |     100 |      100 |     100 |     100 |                      
   toml.js             |     100 |      100 |     100 |     100 |                      
-  yaml.js             |     100 |      100 |     100 |     100 |                      
+  yaml.js             |     100 |     87.5 |     100 |     100 | 33                   
  lib/scm-schemes      |   68.42 |      100 |       0 |   68.42 |                      
   git.js              |   68.42 |      100 |       0 |   68.42 | 5-7,9-11             
  lib/version-schemes  |     100 |      100 |     100 |     100 |                      

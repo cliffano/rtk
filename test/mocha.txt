@@ -67,6 +67,7 @@
     [32m  [32m✔[39m[0m[90m should only set version but not modify yaml file when dry run is enabled[0m
     [32m  [32m✔[39m[0m[90m should set version and modify yaml file when dry run is disabled[0m
     [32m  [32m✔[39m[0m[90m should set property under array sub-property[0m
+    [32m  [32m✔[39m[0m[90m should not double up document separator YAML header when it already exists[0m
 [0m    getVersion[0m
     [32m  [32m✔[39m[0m[90m should get version from resource property[0m
     [32m  [32m✔[39m[0m[90m should get property under an array array sub-property[0m
@@ -98,5 +99,5 @@
     [32m  [32m✔[39m[0m[90m should increment patch version for post release version[0m
 
 
-[92m [0m[32m 55 passing[0m[90m (94ms)[0m
+[92m [0m[32m 56 passing[0m[90m (88ms)[0m
 
