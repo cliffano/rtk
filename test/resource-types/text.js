@@ -24,7 +24,7 @@ describe('text', function() {
         path: 'somefile.txt',
         type: 'text',
         params: {
-          regex: '(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?'
+          regex: '(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:.[0-9A-Za-z-]+)*))?'
         }
       };
       this.mockFs.expects('readFileSync').once().withExactArgs('somefile.txt', 'UTF-8').returns(' version = "0.0.0" ');
@@ -40,7 +40,7 @@ describe('text', function() {
         path: 'somefile.txt',
         type: 'text',
         params: {
-          regex: '(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?'
+          regex: '(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:.[0-9A-Za-z-]+)*))?'
         }
       };
       this.mockFs.expects('readFileSync').once().withExactArgs('somefile.txt', 'UTF-8').returns(' version = "0.0.0" ');
@@ -56,7 +56,7 @@ describe('text', function() {
         path: 'somefile.txt',
         type: 'text',
         params: {
-          regex: '(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?'
+          regex: '(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:.[0-9A-Za-z-]+)*))?'
         }
       };
       this.mockFs.expects('readFileSync').once().withExactArgs('somefile.txt', 'UTF-8').returns(' version1 = "0.0.0", version2 = "1.1.1-beta" ');
@@ -75,7 +75,7 @@ describe('text', function() {
         path: 'somefile.txt',
         type: 'text',
         params: {
-          regex: '(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?'
+          regex: '(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:.[0-9A-Za-z-]+)*))?'
         }
       };
       this.mockFs.expects('readFile').once().withExactArgs('somefile.txt', 'UTF-8', sinon.match.func).callsArgWith(2, null, ' version = "0.0.0" ');
@@ -91,7 +91,7 @@ describe('text', function() {
         path: 'somefile.txt',
         type: 'text',
         params: {
-          regex: '(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?'
+          regex: '(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:.[0-9A-Za-z-]+)*))?'
         }
       };
       this.mockFs.expects('readFile').once().withExactArgs('somefile.txt', 'UTF-8', sinon.match.func).callsArgWith(2, null, ' version = "9.8.7" \n side_version = "1.2.3" ');
@@ -107,7 +107,7 @@ describe('text', function() {
         path: 'somefile.txt',
         type: 'text',
         params: {
-          regex: '(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?'
+          regex: '(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:.[0-9A-Za-z-]+)*))?'
         }
       };
       this.mockFs.expects('readFile').once().withExactArgs('somefile.txt', 'UTF-8', sinon.match.func).callsArgWith(2, null, ' version = "1.1.1-pre.2" ');
