@@ -167,7 +167,7 @@ Example `hcl` resource configuration:
       ]
     }
 
-NOTE: This requires 
+NOTE: HCL resource type requires [hcledit](https://github.com/minamijoyo/hcledit/) to be installed and available on PATH. This is due to lack of HCL update library written in node.
 
 ### Managing version on Makefile file
 
