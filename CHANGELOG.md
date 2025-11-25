@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add keep-a-changelog validation check when retrieving version #17
 
+### Changed
+- keep-a-changelog no longer appends .0 on previous release version
+
 ## 4.1.0 - 2025-10-25
 ### Added
 - Add HCL resource type support
