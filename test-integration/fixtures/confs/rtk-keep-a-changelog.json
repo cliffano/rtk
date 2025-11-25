@@ -1,0 +1,8 @@
+{
+    "resources": [
+      {
+        "path": "../../../../../test-integration/fixtures/data/data-keep-a-changelog.md",
+        "type": "keep-a-changelog"
+      }
+    ]
+  }

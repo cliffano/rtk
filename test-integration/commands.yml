@@ -36,3 +36,8 @@
   command: '{rtk} release --dry-run --config-file {base}/test-integration/fixtures/confs/rtk-hcl.json'
   exitcode: 0
   output: 'Setting release version version-1.3.0 on hcl resource located at ../../../../../test-integration/fixtures/data/data.hcl'
+
+- description: Command release dry run config should format release value on a keep a changelog data file
+  command: '{rtk} release --dry-run --config-file {base}/test-integration/fixtures/confs/rtk-keep-a-changelog.json'
+  exitcode: 0
+  output: 'Setting release version 1.3.0 on keep-a-changelog resource located at ../../../../../test-integration/fixtures/data/data-keep-a-changelog.md'
