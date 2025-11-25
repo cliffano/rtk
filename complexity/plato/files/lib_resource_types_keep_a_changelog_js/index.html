@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">68.15</p>
+      <p class="stat">68.74</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">101</p>
+      <p class="stat">131</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">28.60</p>
+      <p class="stat">33.48</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.52</p>
+      <p class="stat">0.63</p>
     </div>
   </div>
 </div>
@@ -154,31 +154,61 @@ function setPostReleaseVersion(version, resource, opts, cb) {
  * in order to indicate that it&#039;s the one that&#039;s currently in progress.
  * Hence we need to handle two scenarios here:
  * - when latest release has a version number, then use that as the current version
- * - when latest release is &#039;Unreleased&#039; (version is undefined after parsing), then use the previous release and append a &#039;.0&#039; suffix
+ * - when latest release is &#039;Unreleased&#039; (version is undefined after parsing), then use the previous release
  * - otherwise defaults to &#039;0.0.0&#039;
  *
  * @param {Object} resource: resource configuration which contains type, path, and params
  * @param {Function} cb: standard cb(err, result) callback
  */
 function getVersion(resource, cb) {
-  function readCb(err, result) {
+  function parseCb(err, changelog) {
     let version;
     if (!err) {
-      const changelog = parser(result);
-
       const latestRelease = changelog.releases[0];
       const latestReleaseMinusOne = changelog.releases[1];
-      if (latestRelease.version) {
+      if (latestRelease &amp;&amp; latestRelease.version) {
         version = latestRelease.version;
-      } else if (latestReleaseMinusOne.version) {
-        version = latestReleaseMinusOne.version + &#039;.0&#039;;
+      } else if (latestReleaseMinusOne &amp;&amp; latestReleaseMinusOne.version) {
+        version = latestReleaseMinusOne.version;
       } else {
         version = &#039;0.0.0&#039;;
-      }
+      }          
     }
     cb(err, version);
   }
+  function readCb(err, result) {
+    if (err) {
+      cb(err);
+    } else {
+      _parseWithValidation(result, parseCb);
+    }
+  }
   fs.readFile(resource.path, &#039;UTF-8&#039;, readCb);
+}
+
+/**
+ * Parse changelog content using keep-a-changelog parser.
+ * This function also serves as a validator, where an error will be thrown.
+ * 
+ * Due to the way keep-a-changelog parser works, it throws error directly
+ * instead of passing it to callback, hence we rethrow the error with a more
+ * descriptive message.
+ * 
+ * Even though the current implementation wouldn&#039;t pass an error to callback,
+ * we still keep the cb parameter for consistency and future-proofing.
+ * 
+ * @param {String} content: changelog content
+ * @param {Function} cb: standard cb(err, result) callback
+ */
+function _parseWithValidation(content, cb) {
+  try {
+    const changelog = parser(content);
+    console.dir(changelog);
+    cb(null, changelog);
+  } catch (err) {
+    const message = `Failed to parse changelog. Please fix the changelog following the keep a changelog format https://keepachangelog.com . Error: ${err.message}`;
+    throw (new Error(message));
+  }
 }
 
 const exports = {

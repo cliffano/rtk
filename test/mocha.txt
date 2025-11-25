@@ -36,6 +36,117 @@
     [32m  [32m✔[39m[0m[90m should get version from resource property[0m
     [32m  [32m✔[39m[0m[90m should get property under an array array sub-property[0m
 
+[0m  keep-a-changelog[0m
+[0m    setReleaseVersion[0m
+    [32m  [32m✔[39m[0m[90m should only set version but not modify changelog file when dry run is enabled[0m
+    [32m  [32m✔[39m[0m[90m should set version and modify changelog file when dry run is disabled[0m
+[0m    setPostReleaseVersion[0m
+    [32m  [32m✔[39m[0m[90m should only add new release but not modify changelog file when dry run is enabled[0m
+    [32m  [32m✔[39m[0m[90m should add new release and modify changelog file when dry run is disabled[0m
+[0m    getVersion[0m
+<ref *1> Changelog {
+  flag: '',
+  title: 'Changelog',
+  description: 'All notable changes to this project will be documented in this file.',
+  head: 'HEAD',
+  footer: undefined,
+  url: undefined,
+  releases: [
+    Release {
+      changelog: [Circular *1],
+      parsedVersion: [Object],
+      date: 2023-06-15T00:00:00.000Z,
+      yanked: false,
+      description: '',
+      changes: [Map]
+    },
+    Release {
+      changelog: [Circular *1],
+      parsedVersion: [Object],
+      date: 2023-01-01T00:00:00.000Z,
+      yanked: false,
+      description: '',
+      changes: [Map]
+    }
+  ],
+  tagNameBuilder: undefined,
+  compareLinkBuilder: undefined,
+  tagLinkBuilder: undefined,
+  format: 'compact',
+  bulletStyle: '-',
+  autoSortReleases: true
+}
+    [32m  [32m✔[39m[0m[90m should get version from latest release when it has a version number[0m
+<ref *1> Changelog {
+  flag: '',
+  title: 'Changelog',
+  description: 'All notable changes to this project will be documented in this file.',
+  head: 'HEAD',
+  footer: undefined,
+  url: undefined,
+  releases: [
+    Release {
+      changelog: [Circular *1],
+      parsedVersion: undefined,
+      date: undefined,
+      yanked: false,
+      description: '',
+      changes: [Map]
+    },
+    Release {
+      changelog: [Circular *1],
+      parsedVersion: [Object],
+      date: 2023-06-15T00:00:00.000Z,
+      yanked: false,
+      description: '',
+      changes: [Map]
+    },
+    Release {
+      changelog: [Circular *1],
+      parsedVersion: [Object],
+      date: 2023-01-01T00:00:00.000Z,
+      yanked: false,
+      description: '',
+      changes: [Map]
+    }
+  ],
+  tagNameBuilder: undefined,
+  compareLinkBuilder: undefined,
+  tagLinkBuilder: undefined,
+  format: 'compact',
+  bulletStyle: '-',
+  autoSortReleases: true
+}
+    [32m  [32m✔[39m[0m[90m should get version from previous release suffix when latest release is Unreleased[0m
+<ref *1> Changelog {
+  flag: '',
+  title: 'Changelog',
+  description: 'All notable changes to this project will be documented in this file.',
+  head: 'HEAD',
+  footer: undefined,
+  url: undefined,
+  releases: [
+    Release {
+      changelog: [Circular *1],
+      parsedVersion: undefined,
+      date: undefined,
+      yanked: false,
+      description: '',
+      changes: [Map]
+    }
+  ],
+  tagNameBuilder: undefined,
+  compareLinkBuilder: undefined,
+  tagLinkBuilder: undefined,
+  format: 'compact',
+  bulletStyle: '-',
+  autoSortReleases: true
+}
+    [32m  [32m✔[39m[0m[90m should default to 0.0.0 when no version is found[0m
+'Failed to parse changelog. Please fix the changelog following the keep a changelog format https://keepachangelog.com . Error: Parse error in the line 5: Unexpected content [[5,"h3",["Some Invalid Section"]]]'
+    [32m  [32m✔[39m[0m[90m should handle parse error and throw[0m
+    [32m  [32m✔[39m[0m[90m should handle file read error and pass it to callback[0m
+
 [0m  makefile[0m
 [0m    setVersion[0m
     [32m  [32m✔[39m[0m[90m should only set version but not modify makefile when dry run is enabled[0m
@@ -74,7 +185,7 @@
 
 [0m  git[0m
 [0m    addVersion[0m
-    [32m  [32m✔[39m[0m[90m should call simpleGit addTag[0m[33m (50ms)[0m
+    [32m  [32m✔[39m[0m[90m should call simpleGit addTag[0m[33m (46ms)[0m
 [0m    saveChanges[0m
     [32m  [32m✔[39m[0m[90m should call simpleGit commit[0m
 
@@ -105,5 +216,5 @@
     [32m  [32m✔[39m[0m[90m should increment patch version for post release version[0m
 
 
-[92m [0m[32m 58 passing[0m[90m (152ms)[0m
+[92m [0m[32m 67 passing[0m[90m (157ms)[0m
 
