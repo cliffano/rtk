@@ -3,6 +3,8 @@
 import RTK from '../lib/rtk.js';
 import bag from 'bagofcli';
 import cli from '../lib/cli.js';
+import p from 'path';
+import { fileURLToPath } from 'url';
 import referee from '@sinonjs/referee';
 import sinon from 'sinon';
 const assert = referee.assert;
@@ -12,6 +14,21 @@ describe('cli - exec', function() {
   it('should contain commands with actions', function (done) {
     const mockCommand = function (base, actions) {
       assert.isString(base);
+      assert.isFunction(actions.commands.release.action);
+      done();
+    };
+    sinon.stub(bag, 'command').value(mockCommand);
+    cli.exec();
+  });
+
+  it('should pass a native filesystem base path to bagofcli', function (done) {
+    const expectedBase = p.dirname(fileURLToPath(new URL('../lib/cli.js', import.meta.url)));
+    const mockCommand = function (base, actions) {
+      assert.equals(base, expectedBase);
+      assert.equals(base.startsWith('file:'), false);
+      if (process.platform === 'win32') {
+        assert.equals(/^[/\\][A-Za-z]:/.test(base), false);
+      }
       assert.isFunction(actions.commands.release.action);
       done();
     };
