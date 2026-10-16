@@ -1,15 +1,17 @@
-<img align="right" src="https://raw.github.com/cliffano/rtk/main/avatar.jpg" alt="Avatar"/>
+<!-- BEGIN:AVATAR -->
+![Avatar](avatar.jpg)
+<!-- END:AVATAR -->
 
+<!-- BEGIN:BADGES -->
 [![Build Status](https://github.com/cliffano/rtk/workflows/CI/badge.svg)](https://github.com/cliffano/rtk/actions?query=workflow%3ACI)
 [![Dependencies Status](https://img.shields.io/librariesio/release/npm/rtk)](https://libraries.io/npm/rtk)
 [![Code Scanning Status](https://github.com/cliffano/rtk/workflows/CodeQL/badge.svg)](https://github.com/cliffano/rtk/actions?query=workflow%3ACodeQL)
 [![Coverage Status](https://coveralls.io/repos/github/cliffano/rtk/badge.svg?branch=main)](https://coveralls.io/r/cliffano/rtk?branch=main)
 [![Security Status](https://snyk.io/test/github/cliffano/rtk/badge.svg)](https://snyk.io/test/github/cliffano/rtk)
 [![Published Version](https://img.shields.io/npm/v/rtk.svg)](https://www.npmjs.com/package/rtk)
-<br/>
+<!-- END:BADGES -->
 
-RTK
----
+# RTK
 
 RTK is a code release tool for managing version number on a variety of file types such as keep-a-changelog, JSON, Makefile, text, TOML, YAML files, and also for tagging Git repo.
 
@@ -27,17 +29,19 @@ RTK comes with a default set of steps, but it's also open for extension by imple
 
 Other than that, RTK also helps with managing version number (by default, using [semantic versioning](https://semver.org) scheme) across multiple files in a single repo.
 
-Installation
-------------
+## Installation
 
-    npm install -g rtk
+```shell
+npm install -g rtk
+```
 
-Usage
------
+## Usage
 
 Cut off a release using default RTK release scheme:
 
-    rtk release
+```shell
+rtk release
+```
 
 By default, the release version will increment minor value, and the next pre-release version will increment patch value.
 
@@ -47,18 +51,23 @@ However, in order to honour the possibility of fixes, the next pre-release versi
 
 The increment types can be customised, e.g. to cut off a release with major release and minor post-release increment types:
 
-    rtk release --release-increment-type major --post-release-increment-type minor
+```shell
+rtk release --release-increment-type major --post-release-increment-type minor
+```
 
 Do a release dry run without modifying resource files and making any SCM changes:
 
-    rtk release --dry-run
+```shell
+rtk release --dry-run
+```
 
 Cut off a release with major release and minor post-release increment types:
 
-    rtk release --release-increment-type major --post-release-increment-type minor
+```shell
+rtk release --release-increment-type major --post-release-increment-type minor
+```
 
-Configuration
--------------
+## Configuration
 
 Resources can be configured in a `.rtk.json` file. This configuration file defines which other files to manage when cutting off a release.
 
@@ -66,106 +75,120 @@ Resources can be configured in a `.rtk.json` file. This configuration file defin
 
 Example `json` resource configuration:
 
+```json
+{
+  "resources": [
     {
-      "resources": [
-        {
-          "path": "package.json",
-          "type": "json",
-          "params": {
-            "property": "version"
-          }
-        }
-      ]
+      "path": "package.json",
+      "type": "json",
+      "params": {
+        "property": "version"
+      }
     }
+  ]
+}
+```
 
 Example `json` resource configuration with an array sub-property:
 
+```json
+{
+  "resources": [
     {
-      "resources": [
-        {
-          "path": "package.json",
-          "type": "json",
-          "params": {
-            "property": "versions[1].minor"
-          }
-        }
-      ]
+      "path": "package.json",
+      "type": "json",
+      "params": {
+        "property": "versions[1].minor"
+      }
     }
+  ]
+}
+```
 
 ### Managing version on YAML file
 
 Example `yaml` resource configuration:
 
+```json
+{
+  "resources": [
     {
-      "resources": [
-        {
-          "path": "playbook.yaml",
-          "type": "yaml",
-          "params": {
-            "property": "version"
-          }
-        }
-      ]
+      "path": "playbook.yaml",
+      "type": "yaml",
+      "params": {
+        "property": "version"
+      }
     }
+  ]
+}
+```
 
 Example `yaml` resource configuration with an array sub-property:
 
+```json
+{
+  "resources": [
     {
-      "resources": [
-        {
-          "path": "playbook.yaml",
-          "type": "yaml",
-          "params": {
-            "property": "versions[1].minor"
-          }
-        }
-      ]
+      "path": "playbook.yaml",
+      "type": "yaml",
+      "params": {
+        "property": "versions[1].minor"
+      }
     }
+  ]
+}
+```
 
 ### Managing version on Keep a Changelog file
 
 Example `keep-a-changelog` resource configuration:
 
+```json
+{
+  "resources": [
     {
-      "resources": [
-        {
-          "path": "CHANGELOG.md",
-          "type": "keep-a-changelog"
-        }
-      ]
+      "path": "CHANGELOG.md",
+      "type": "keep-a-changelog"
     }
+  ]
+}
+```
 
 ### Managing version on TOML file
 
 Example `toml` resource configuration:
 
+```json
+{
+  "resources": [
     {
-      "resources": [
-        {
-          "path": "pyproject.toml",
-          "type": "toml",
-          "params": {
-            "property": "version"
-          }
-        }
-      ]
+      "path": "pyproject.toml",
+      "type": "toml",
+      "params": {
+        "property": "version"
+      }
     }
+  ]
+}
+```
 
 ### Managing version on HCL file
 
 Example `hcl` resource configuration:
 
+```json
+{
+  "resources": [
     {
-      "resources": [
-        {
-          "path": "somefile.hcl",
-          "type": "hcl",
-          "params": {
-            "property": "version"
-          }
-        }
-      ]
+      "path": "somefile.hcl",
+      "type": "hcl",
+      "params": {
+        "property": "version"
+      }
     }
+  ]
+}
+```
 
 NOTE: HCL resource type requires [hcledit](https://github.com/minamijoyo/hcledit/) to be installed and available on PATH. This is due to lack of HCL update library written in node.
 
@@ -173,81 +196,90 @@ NOTE: HCL resource type requires [hcledit](https://github.com/minamijoyo/hcledit
 
 Example `makefile` resource configuration:
 
+```json
+{
+  "resources": [
     {
-      "resources": [
-        {
-          "path": "Makefile",
-          "type": "makefile",
-          "params": {
-            "variable": "version"
-          }
-        }
-      ]
+      "path": "Makefile",
+      "type": "makefile",
+      "params": {
+        "variable": "version"
+      }
     }
+  ]
+}
+```
 
 ### Managing version on Text file
 
 Example `text` resource configuration:
 
+```json
+{
+  "resources": [
     {
-      "resources": [
-        {
-          "path": "somefile.txt",
-          "type": "text",
-          "params": {
-            "regex": "(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?"
-          }
-        }
-      ]
+      "path": "somefile.txt",
+      "type": "text",
+      "params": {
+        "regex": "(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?"
+      }
     }
+  ]
+}
+```
 
 ### Overriding version value
 
 It is also possible to force the release and post-release values instead of using the version scheme generated value:
 Note: because release and post-release values are specified at resource level, the SCM tag will still use the version scheme generated value
 
+```json
+{
+  "resources": [
     {
-      "resources": [
-        {
-          "path": "package.json",
-          "type": "json",
-          "params": {
-            "property": "version",
-            "release_value": "1.2.3",
-            "post_release_value": "master"
-          }
-        }
-      ]
+      "path": "package.json",
+      "type": "json",
+      "params": {
+        "property": "version",
+        "release_value": "1.2.3",
+        "post_release_value": "master"
+      }
     }
+  ]
+}
+```
 
 ### Custom version format
 
 If you want to format the tag instead of using the version number as the tag, you can configure `tagFormat` property:
 
-    {
-      "tagFormat": "v{version}",
-      "resources": [...]
-    }
+```json
+{
+  "tagFormat": "v{version}",
+  "resources": [...]
+}
+```
 
 The above example will set the tag `v1.2.3` for version `1.2.3` .
 
 If you want to format the resource's release value, you can configure `format` property:
 
+```json
+{
+  "resources": [
     {
-      "resources": [
-        {
-          "path": "Makefile",
-          "type": "makefile",
-          "params": {
-            "variable": "version",
-            "release_format": "v{version}"
-          }
-        }
-      ]
+      "path": "Makefile",
+      "type": "makefile",
+      "params": {
+        "variable": "version",
+        "release_format": "v{version}"
+      }
     }
+  ]
+}
+```
 
-Upgrade
--------
+## Upgrade
 
 From 0.x, 1.x, 2.x to 3.x:
 
@@ -259,18 +291,22 @@ Modify configuration which uses array sub-property syntax to use square brackets
 
 Failing to update the syntax will result in the following error:
 
-    file:///path/to/lib/node_modules/rtk/node_modules/dot-prop/index.js:176
-        throw new Error('Cannot use string index');
-        ^
+```yaml
+file:///path/to/lib/node_modules/rtk/node_modules/dot-prop/index.js:176
+    throw new Error('Cannot use string index');
+    ^
 
-    Error: Cannot use string index
-        at assertNotStringIndex (file:///path/to/lib/node_modules/rtk/node_modules/dot-prop/index.js:176:9)
+Error: Cannot use string index
+    at assertNotStringIndex (file:///path/to/lib/node_modules/rtk/node_modules/dot-prop/index.js:176:9)
+```
 
-Colophon
---------
+## Colophon
 
-[Developer's Guide](https://cliffano.github.io/developers_guide.html#nodejs)
+<!-- BEGIN:DEVELOPERS_GUIDE -->
+[Developer's Guide](https://cliffano.github.io/developers-guide-nodejs.html)
+<!-- END:DEVELOPERS_GUIDE -->
 
+<!-- BEGIN:BUILD_REPORTS -->
 Build reports:
 
 * [Code complexity report](https://cliffano.github.io/rtk/complexity/plato/index.html)
@@ -279,6 +315,7 @@ Build reports:
 * [Integration tests report](https://cliffano.github.io/rtk/test-integration/cmdt.txt)
 * [API Documentation](https://cliffano.github.io/rtk/doc/jsdoc/index.html)
 
+<!-- END:BUILD_REPORTS -->
 
 Related projects:
 
