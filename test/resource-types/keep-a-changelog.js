@@ -110,6 +110,51 @@ All notable changes to this project will be documented in this file.
         cb,
       );
     });
+
+    it("should format compare link tags using tag format when changelog has compare links", function (done) {
+      const resource = {
+        path: "SOMECHANGELOG.md",
+        type: "keep-a-changelog",
+      };
+      const changelogContent = `# Changelog
+
+## Unreleased
+
+## 1.0.0 - 2023-06-15
+
+## 0.0.0 - 2023-01-01
+
+[Unreleased]: https://github.com/someorg/somerepo/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/someorg/somerepo/compare/v0.0.0...v1.0.0
+[0.0.0]: https://github.com/someorg/somerepo/releases/tag/v0.0.0
+`;
+      this.mockFs
+        .expects("readFileSync")
+        .once()
+        .withExactArgs("SOMECHANGELOG.md", "UTF-8")
+        .returns(changelogContent);
+      this.mockFs
+        .expects("writeFile")
+        .once()
+        .withArgs(
+          "SOMECHANGELOG.md",
+          sinon.match(
+            "[1.2.3]: https://github.com/someorg/somerepo/compare/v1.0.0...v1.2.3",
+          ),
+          sinon.match.func,
+        )
+        .callsArgWith(2, null);
+      function cb(err, result) {
+        assert.equal(err, null);
+        done();
+      }
+      resourceType.setReleaseVersion(
+        "1.2.3",
+        resource,
+        { dryRun: false, tagFormat: "v{version}" },
+        cb,
+      );
+    });
   });
 
   describe("setPostReleaseVersion", function () {
@@ -204,6 +249,48 @@ All notable changes to this project will be documented in this file.
         "Unreleased",
         resource,
         { dryRun: false, tagFormat: "{version}" },
+        cb,
+      );
+    });
+
+    it("should format compare link tags using tag format when changelog has compare links", function (done) {
+      const resource = {
+        path: "SOMECHANGELOG.md",
+        type: "keep-a-changelog",
+      };
+      const changelogContent = `# Changelog
+
+## 1.0.0 - 2023-06-15
+
+## 0.0.0 - 2023-01-01
+
+[1.0.0]: https://github.com/someorg/somerepo/compare/v0.0.0...v1.0.0
+[0.0.0]: https://github.com/someorg/somerepo/releases/tag/v0.0.0
+`;
+      this.mockFs
+        .expects("readFileSync")
+        .once()
+        .withExactArgs("SOMECHANGELOG.md", "UTF-8")
+        .returns(changelogContent);
+      this.mockFs
+        .expects("writeFile")
+        .once()
+        .withArgs(
+          "SOMECHANGELOG.md",
+          sinon.match(
+            "[Unreleased]: https://github.com/someorg/somerepo/compare/v1.0.0...HEAD",
+          ),
+          sinon.match.func,
+        )
+        .callsArgWith(2, null);
+      function cb(err, result) {
+        assert.equal(err, null);
+        done();
+      }
+      resourceType.setPostReleaseVersion(
+        "1.0.1-pre.0",
+        resource,
+        { dryRun: false, tagFormat: "v{version}" },
         cb,
       );
     });

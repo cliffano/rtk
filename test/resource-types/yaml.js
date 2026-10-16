@@ -1,6 +1,7 @@
 "use strict";
 /* eslint no-unused-vars: 0 */
 import assert from "assert";
+import esmock from "esmock";
 import fs from "fs";
 import resourceType from "../../lib/resource-types/yaml.js";
 import sinon from "sinon";
@@ -122,6 +123,48 @@ describe("yaml", function () {
         done();
       }
       resourceType.setReleaseVersion("1.2.3", resource, { dryRun: false }, cb);
+    });
+    it("should not prepend document separator YAML header when dumped YAML already has it", async function () {
+      const resource = {
+        path: "someplaybook.yaml",
+        type: "yaml",
+        params: {
+          property: "version",
+        },
+      };
+      // js-yaml dump doesn't emit a header, so mock it to cover the case
+      // where a YAML library does
+      const mockResourceType = await esmock(
+        "../../lib/resource-types/yaml.js",
+        {
+          "js-yaml": {
+            load: () => ({ version: "0.0.0" }),
+            dump: () => "---\nversion: 1.2.3\n",
+          },
+        },
+      );
+      this.mockFs
+        .expects("readFileSync")
+        .once()
+        .withExactArgs("someplaybook.yaml", "UTF-8")
+        .returns('version: "0.0.0"');
+      this.mockFs
+        .expects("writeFile")
+        .once()
+        .withExactArgs(
+          "someplaybook.yaml",
+          "---\nversion: 1.2.3\n",
+          sinon.match.func,
+        )
+        .callsArgWith(2, null);
+      await new Promise((resolve, reject) => {
+        mockResourceType.setReleaseVersion(
+          "1.2.3",
+          resource,
+          { dryRun: false },
+          (err) => (err ? reject(err) : resolve()),
+        );
+      });
     });
   });
 
