@@ -249,5 +249,5 @@
     [32m  [32m✔[39m[0m[90m should increment patch version for post release version[0m
 
 
-[92m [0m[32m 89 passing[0m[90m (173ms)[0m
+[92m [0m[32m 89 passing[0m[90m (138ms)[0m
 
