@@ -31,7 +31,7 @@ describe("cli - release", function () {
 
   it("should contain release command and delegate to rtk release when exec is called", function (done) {
     sinon.stub(bag, "lookupFile").value(function (configFile, cb) {
-      assert.equals(configFile, ".rtk.json");
+      assert.equals(configFile, "some-rtk.json");
       return '{ "releaseScheme": "rtk", "versionScheme": "semver", "scmScheme": "git", "tagFormat": "v{version}" }';
     });
     sinon.stub(bag, "command").value(function (base, actions) {
@@ -39,11 +39,26 @@ describe("cli - release", function () {
         releaseIncrementType: "minor",
         postReleaseIncrementType: "patch",
         tagFormat: "v{version}",
-        parent: {
-          configFile: ".rtk.json",
-          dryRun: false,
-        },
+        configFile: "some-rtk.json",
+        dryRun: false,
       });
+    });
+    sinon
+      .stub(RTK.prototype, "release")
+      .value(function (releaseScheme, versionScheme, scmScheme, cb) {
+        assert.equals(typeof cb, "function");
+        done();
+      });
+    cli.exec();
+  });
+
+  it("should default to .rtk.json config file when config file option is not specified", function (done) {
+    sinon.stub(bag, "lookupFile").value(function (configFile, cb) {
+      assert.equals(configFile, ".rtk.json");
+      return '{ "releaseScheme": "rtk", "versionScheme": "semver", "scmScheme": "git" }';
+    });
+    sinon.stub(bag, "command").value(function (base, actions) {
+      actions.commands.release.action({});
     });
     sinon
       .stub(RTK.prototype, "release")
