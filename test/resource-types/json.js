@@ -55,7 +55,68 @@ describe("json", function () {
         .once()
         .withExactArgs(
           "somepackage.json",
-          '{\n  "version": "1.2.3"\n}',
+          '{\n  "version": "1.2.3"\n}\n',
+          sinon.match.func,
+        )
+        .callsArgWith(2, null);
+      function cb(err, result) {
+        assert.equal(err, null);
+        done();
+      }
+      resourceType.setReleaseVersion("1.2.3", resource, { dryRun: false }, cb);
+    });
+    it("should write json file with a trailing newline when original file has none", function (done) {
+      const resource = {
+        path: "somepackage.json",
+        type: "json",
+        params: {
+          property: "version",
+        },
+      };
+      this.mockFs
+        .expects("readFileSync")
+        .once()
+        .withExactArgs("somepackage.json", "UTF-8")
+        .returns('{\n  "version": "0.0.0"\n}');
+      this.mockFs
+        .expects("writeFile")
+        .once()
+        .withExactArgs(
+          "somepackage.json",
+          '{\n  "version": "1.2.4-pre.0"\n}\n',
+          sinon.match.func,
+        )
+        .callsArgWith(2, null);
+      function cb(err, result) {
+        assert.equal(err, null);
+        done();
+      }
+      resourceType.setPostReleaseVersion(
+        "1.2.4-pre.0",
+        resource,
+        { dryRun: false },
+        cb,
+      );
+    });
+    it("should write json file with a single trailing newline when original file already has one", function (done) {
+      const resource = {
+        path: "somepackage.json",
+        type: "json",
+        params: {
+          property: "version",
+        },
+      };
+      this.mockFs
+        .expects("readFileSync")
+        .once()
+        .withExactArgs("somepackage.json", "UTF-8")
+        .returns('{\n  "version": "0.0.0"\n}\n');
+      this.mockFs
+        .expects("writeFile")
+        .once()
+        .withExactArgs(
+          "somepackage.json",
+          '{\n  "version": "1.2.3"\n}\n',
           sinon.match.func,
         )
         .callsArgWith(2, null);
@@ -85,7 +146,7 @@ describe("json", function () {
         .once()
         .withExactArgs(
           "somepackage.json",
-          '{\n  "versions": [\n    {\n      "major": 1,\n      "minor": 2,\n      "patch": 3\n    },\n    {\n      "major": 8,\n      "minor": 9,\n      "patch": 0\n    }\n  ]\n}',
+          '{\n  "versions": [\n    {\n      "major": 1,\n      "minor": 2,\n      "patch": 3\n    },\n    {\n      "major": 8,\n      "minor": 9,\n      "patch": 0\n    }\n  ]\n}\n',
           sinon.match.func,
         )
         .callsArgWith(2, null);

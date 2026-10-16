@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fix Windows CLI file URL path handling (@peter7896) #25
+- Fix JSON resource type writing file without a trailing newline
 
 ## 4.2.0 - 2025-11-28
 ### Added
