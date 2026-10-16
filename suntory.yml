@@ -1,0 +1,15 @@
+---
+package_name: rtk
+author: Cliffano Subagio
+generator:
+  component: node-cli
+  inputs:
+    project_id: rtk
+    project_name: RTK
+    project_desc: Code release tool for managing version number on a variety of file types such as keep-a-changelog, JSON, Makefile, text, TOML, YAML files, and also for tagging Git repo.
+    author_name: Cliffano Subagio
+    author_email: cliffano@gmail.com
+    author_url: https://github.com/cliffano
+    github_id: cliffano
+    github_repo: rtk
+    github_token_prefix: STUDIO
