@@ -1,0 +1,15 @@
+{
+  "resources": [
+    {
+      "path": "data/package.json",
+      "type": "json",
+      "params": {
+        "property": "version"
+      }
+    },
+    {
+      "path": "data/CHANGELOG.md",
+      "type": "keep-a-changelog"
+    }
+  ]
+}

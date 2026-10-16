@@ -1,0 +1,46 @@
+{
+  "tagFormat": "v{version}",
+  "resources": [
+    {
+      "path": "data/package.json",
+      "type": "json",
+      "params": {
+        "property": "version"
+      }
+    },
+    {
+      "path": "data/CHANGELOG.md",
+      "type": "keep-a-changelog"
+    },
+    {
+      "path": "data/config.yaml",
+      "type": "yaml",
+      "params": {
+        "property": "app.version"
+      }
+    },
+    {
+      "path": "data/pyproject.toml",
+      "type": "toml",
+      "params": {
+        "property": "project.version"
+      }
+    },
+    {
+      "path": "data/Makefile",
+      "type": "makefile",
+      "params": {
+        "variable": "VERSION"
+      }
+    },
+    {
+      "path": "data/README.txt",
+      "type": "text",
+      "params": {
+        "regex": "(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?",
+        "release_format": "v{version}",
+        "post_release_value": "main"
+      }
+    }
+  ]
+}
