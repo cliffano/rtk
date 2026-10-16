@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>resource-types/keep-a-changelog.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-release-schemes_rtk-Rtk.html">Rtk</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-release-schemes_rtk-Rtk.html#post">post</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-release-schemes_rtk-Rtk.html#pre">pre</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-release-schemes_rtk-Rtk.html#release">release</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-rtk-RTK.html">RTK</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-rtk-RTK.html#release">release</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-version-schemes_semver-Semver.html">Semver</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-version-schemes_semver-Semver.html#getPostReleaseVersion">getPostReleaseVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-version-schemes_semver-Semver.html#getReleaseVersion">getReleaseVersion</a></span></li><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-cli.html">cli</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-cli.html#~exec">exec</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-release-schemes_rtk.html">release-schemes/rtk</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_hcl.html">resource-types/hcl</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_hcl.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_hcl.html#~setVersion">setVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_json.html">resource-types/json</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_json.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_json.html#~setVersion">setVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_keep-a-changelog.html">resource-types/keep-a-changelog</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_keep-a-changelog.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_keep-a-changelog.html#~setPostReleaseVersion">setPostReleaseVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_keep-a-changelog.html#~setReleaseVersion">setReleaseVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_makefile.html">resource-types/makefile</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_makefile.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_makefile.html#~setVersion">setVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_text.html">resource-types/text</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_text.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_text.html#~setVersion">setVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_toml.html">resource-types/toml</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_toml.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_toml.html#~setVersion">setVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_yaml.html">resource-types/yaml</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_yaml.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_yaml.html#~setVersion">setVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-rtk.html">rtk</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-scm-schemes_git.html">scm-schemes/git</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-scm-schemes_git.html#~addVersion">addVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-scm-schemes_git.html#~saveChanges">saveChanges</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-version-schemes_semver.html">version-schemes/semver</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">resource-types/keep-a-changelog.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict";
+/**
+ * Changelog resource following {@link https://keepachangelog.com|Keep a
+ * Changelog} format.
+ *
+ * @module resource-types/keep-a-changelog
+ */
+import { parser, Release } from "keep-a-changelog";
+import fs from "fs";
+import stringFormat from "string-format";
+
+/**
+ * Set release version on the latest release within the changelog, with date
+ * set to current date.
+ *
+ * @param {String} version - version value to set
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the changelog file
+ * @param {Object} opts - optional settings
+ * @param {Boolean} [opts.dryRun] - when true, changelog file won't be
+ *   modified
+ * @param {String} opts.tagFormat - SCM tag format used in release links,
+ *   e.g. v{version}
+ * @param {Function} cb - standard cb(err, result) callback
+ */
+function setReleaseVersion(version, resource, opts, cb) {
+  const changelog = parser(fs.readFileSync(resource.path, "UTF-8"));
+  changelog.tagNameBuilder = function (release) {
+    // Use tagFormat option to format the version to be used as SCM tag
+    const formattedVersion = stringFormat(opts.tagFormat, {
+      version: release.version,
+    });
+    return formattedVersion;
+  };
+  const latestRelease = changelog.releases[0];
+  latestRelease.setVersion(version);
+  latestRelease.setDate(new Date());
+  if (!opts.dryRun) {
+    fs.writeFile(resource.path, changelog.toString(), cb);
+  } else {
+    cb();
+  }
+}
+
+/**
+ * Add a new Unreleased section to the top of the changelog.
+ *
+ * The version value is not written to the changelog, Unreleased section
+ * represents the next pre-release version instead.
+ *
+ * @param {String} version - post-release version value, unused
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the changelog file
+ * @param {Object} opts - optional settings
+ * @param {Boolean} [opts.dryRun] - when true, changelog file won't be
+ *   modified
+ * @param {String} opts.tagFormat - SCM tag format used in release links,
+ *   e.g. v{version}
+ * @param {Function} cb - standard cb(err, result) callback
+ */
+function setPostReleaseVersion(version, resource, opts, cb) {
+  const changelog = parser(fs.readFileSync(resource.path, "UTF-8"));
+  changelog.tagNameBuilder = function (release) {
+    // Use tagFormat option to format the version to be used as SCM tag
+    const formattedVersion = stringFormat(opts.tagFormat, {
+      version: release.version,
+    });
+    return formattedVersion;
+  };
+  const postRelease = new Release();
+  changelog.addRelease(postRelease);
+  if (!opts.dryRun) {
+    fs.writeFile(resource.path, changelog.toString(), cb);
+  } else {
+    cb();
+  }
+}
+
+/**
+ * Get version value from the changelog's latest release.
+ *
+ * It's common for the latest release of a changelog to be 'Unreleased', in
+ * order to indicate that it's the one currently in progress. Hence the
+ * version is resolved in this order:
+ * 1. when latest release has a version number, use that version
+ * 2. when latest release is 'Unreleased' (version is undefined after
+ *    parsing), use the previous release's version
+ * 3. otherwise default to '0.0.0'
+ *
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the changelog file
+ * @param {Function} cb - standard cb(err, result) callback, result is the
+ *   version value
+ */
+function getVersion(resource, cb) {
+  function parseCb(err, changelog) {
+    let version;
+    if (!err) {
+      const latestRelease = changelog.releases[0];
+      const latestReleaseMinusOne = changelog.releases[1];
+      if (latestRelease &amp;&amp; latestRelease.version) {
+        version = latestRelease.version;
+      } else if (latestReleaseMinusOne &amp;&amp; latestReleaseMinusOne.version) {
+        version = latestReleaseMinusOne.version;
+      } else {
+        version = "0.0.0";
+      }
+    }
+    cb(err, version);
+  }
+  function readCb(err, result) {
+    if (err) {
+      cb(err);
+    } else {
+      _parseWithValidation(result, parseCb);
+    }
+  }
+  fs.readFile(resource.path, "UTF-8", readCb);
+}
+
+/**
+ * Parse changelog content using keep-a-changelog parser.
+ * This function also serves as a validator, where an error will be thrown.
+ *
+ * Due to the way keep-a-changelog parser works, it throws error directly
+ * instead of passing it to callback, hence we rethrow the error with a more
+ * descriptive message.
+ *
+ * Even though the current implementation wouldn't pass an error to callback,
+ * we still keep the cb parameter for consistency and future-proofing.
+ *
+ * @private
+ * @param {String} content - changelog content
+ * @param {Function} cb - standard cb(err, result) callback, result is the
+ *   parsed changelog
+ * @throws {Error} when changelog content can't be parsed
+ */
+function _parseWithValidation(content, cb) {
+  try {
+    const changelog = parser(content);
+    console.dir(changelog);
+    cb(null, changelog);
+  } catch (err) {
+    const message = `Failed to parse changelog. Please fix the changelog following the keep a changelog format https://keepachangelog.com . Error: ${err.message}`;
+    throw new Error(message);
+  }
+}
+
+const exports = {
+  setReleaseVersion: setReleaseVersion,
+  setPostReleaseVersion: setPostReleaseVersion,
+  getVersion: getVersion,
+};
+
+export { exports as default };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Fri Oct 16 2026 11:38:59 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

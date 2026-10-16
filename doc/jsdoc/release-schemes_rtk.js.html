@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>release-schemes/rtk.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-release-schemes_rtk-Rtk.html">Rtk</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-release-schemes_rtk-Rtk.html#post">post</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-release-schemes_rtk-Rtk.html#pre">pre</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-release-schemes_rtk-Rtk.html#release">release</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-rtk-RTK.html">RTK</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-rtk-RTK.html#release">release</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-version-schemes_semver-Semver.html">Semver</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-version-schemes_semver-Semver.html#getPostReleaseVersion">getPostReleaseVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-version-schemes_semver-Semver.html#getReleaseVersion">getReleaseVersion</a></span></li><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-cli.html">cli</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-cli.html#~exec">exec</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-release-schemes_rtk.html">release-schemes/rtk</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_hcl.html">resource-types/hcl</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_hcl.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_hcl.html#~setVersion">setVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_json.html">resource-types/json</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_json.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_json.html#~setVersion">setVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_keep-a-changelog.html">resource-types/keep-a-changelog</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_keep-a-changelog.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_keep-a-changelog.html#~setPostReleaseVersion">setPostReleaseVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_keep-a-changelog.html#~setReleaseVersion">setReleaseVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_makefile.html">resource-types/makefile</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_makefile.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_makefile.html#~setVersion">setVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_text.html">resource-types/text</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_text.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_text.html#~setVersion">setVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_toml.html">resource-types/toml</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_toml.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_toml.html#~setVersion">setVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_yaml.html">resource-types/yaml</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_yaml.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_yaml.html#~setVersion">setVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-rtk.html">rtk</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-scm-schemes_git.html">scm-schemes/git</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-scm-schemes_git.html#~addVersion">addVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-scm-schemes_git.html#~saveChanges">saveChanges</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-version-schemes_semver.html">version-schemes/semver</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">release-schemes/rtk.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict";
+/**
+ * @module release-schemes/rtk
+ */
+import async from "async";
+import bag from "bagofcli";
+import stringFormat from "string-format";
+import util from "util";
+import semverVersionScheme from "../version-schemes/semver.js";
+import gitScmScheme from "../scm-schemes/git.js";
+import hclResourceType from "../resource-types/hcl.js";
+import jsonResourceType from "../resource-types/json.js";
+import keepAChangelogResourceType from "../resource-types/keep-a-changelog.js";
+import makefileResourceType from "../resource-types/makefile.js";
+import textResourceType from "../resource-types/text.js";
+import tomlResourceType from "../resource-types/toml.js";
+import yamlResourceType from "../resource-types/yaml.js";
+
+/**
+ * Default release scheme for RTK, consisting of three steps:
+ * pre (set and commit release version), release (tag release version),
+ * and post (set and commit next pre-release version).
+ */
+class Rtk {
+  /**
+   * Construct release scheme with the version and SCM schemes to use.
+   *
+   * @param {String} [versionSchemeName=semver] - version scheme name
+   * @param {String} [scmSchemeName=git] - SCM scheme name
+   * @param {String} preReleaseVersion - current pre-release version
+   * @param {Object} opts - release settings
+   * @param {Boolean} [opts.dryRun] - when true, no change will be made
+   * @param {String} [opts.releaseIncrementType] - major, minor, or patch
+   * @param {String} [opts.postReleaseIncrementType] - major, minor, or patch
+   */
+  constructor(versionSchemeName, scmSchemeName, preReleaseVersion, opts) {
+    versionSchemeName = versionSchemeName || "semver";
+    scmSchemeName = scmSchemeName || "git";
+
+    this.versionSchemes = {
+      semver: semverVersionScheme,
+    };
+    this.scmSchemes = {
+      git: gitScmScheme,
+    };
+    this.resourceTypes = {
+      hcl: hclResourceType,
+      json: jsonResourceType,
+      makefile: makefileResourceType,
+      text: textResourceType,
+      toml: tomlResourceType,
+      yaml: yamlResourceType,
+    };
+    this.resourceTypes["keep-a-changelog"] = keepAChangelogResourceType;
+
+    const VersionSchemeClass = this.versionSchemes[versionSchemeName];
+    this.versionScheme = new VersionSchemeClass(
+      preReleaseVersion,
+      opts.releaseIncrementType,
+      opts.postReleaseIncrementType,
+    );
+    this.scmScheme = this.scmSchemes[scmSchemeName];
+
+    this.logOpts = {};
+    if (opts.dryRun) {
+      this.logOpts["labels"] = ["dry run"];
+    }
+  }
+
+  /**
+   * Pre step: set release version on all resources, then commit the changes.
+   * A resource's params.release_value overrides the release version, and
+   * params.release_format formats it, e.g. v{version}.
+   *
+   * @param {Array&lt;Object>} resources - resources which contain version value
+   * @param {Object} opts - release settings
+   * @param {Boolean} [opts.dryRun] - when true, no change will be made
+   * @param {Function} cb - standard cb(err, result) callback
+   */
+  pre(resources, opts, cb) {
+    const self = this;
+
+    bag.logStepHeading(
+      "Executing pre step of rtk release scheme...",
+      self.logOpts,
+    );
+
+    const tasks = [];
+    const paths = [];
+    resources.forEach((resource) => {
+      function resourceTask(cb) {
+        let releaseVersion =
+          resource.params &amp;&amp; resource.params.release_value
+            ? resource.params.release_value
+            : self.versionScheme.getReleaseVersion();
+        if (resource.params &amp;&amp; resource.params.release_format) {
+          releaseVersion = stringFormat(resource.params.release_format, {
+            version: releaseVersion,
+          });
+        }
+        const message = util.format(
+          "Setting release version %s on %s resource located at %s",
+          releaseVersion,
+          resource.type,
+          resource.path,
+        );
+        bag.logStepItemSuccess(message, self.logOpts);
+        self.resourceTypes[resource.type].setReleaseVersion(
+          releaseVersion,
+          resource,
+          opts,
+          cb,
+        );
+      }
+      tasks.push(resourceTask);
+      paths.push(resource.path);
+    });
+
+    function scmTask(cb) {
+      const message = util.format(
+        "Committing release version changes made to %s...",
+        paths.join(", "),
+      );
+      bag.logStepItemSuccess(message, self.logOpts);
+      if (!opts.dryRun) {
+        self.scmScheme.saveChanges(
+          util.format(
+            "Release version %s",
+            self.versionScheme.getReleaseVersion(),
+          ),
+          paths,
+          cb,
+        );
+      } else {
+        cb();
+      }
+    }
+    tasks.push(scmTask);
+
+    async.series(tasks, cb);
+  }
+
+  /**
+   * Release step: tag the release version.
+   *
+   * @param {Array&lt;Object>} resources - resources which contain version value
+   * @param {Object} opts - release settings
+   * @param {Boolean} [opts.dryRun] - when true, no change will be made
+   * @param {String} opts.tagFormat - SCM tag format, e.g. v{version}
+   * @param {Function} cb - standard cb(err, result) callback
+   */
+  release(resources, opts, cb) {
+    const self = this;
+
+    bag.logStepHeading(
+      "Executing release step of rtk release scheme...",
+      self.logOpts,
+    );
+
+    const tasks = [];
+
+    function scmTask(cb) {
+      // Use tagFormat option to format the version to be used as SCM tag
+      const formattedVersion = stringFormat(opts.tagFormat, {
+        version: self.versionScheme.getReleaseVersion(),
+      });
+      const message = util.format(
+        "Adding release version tag %s ...",
+        formattedVersion,
+      );
+      bag.logStepItemSuccess(message, self.logOpts);
+      if (!opts.dryRun) {
+        self.scmScheme.addVersion(formattedVersion, cb);
+      } else {
+        cb();
+      }
+    }
+    tasks.push(scmTask);
+
+    async.series(tasks, cb);
+  }
+
+  /**
+   * Post step: set next pre-release version on all resources, then commit
+   * the changes. A resource's params.post_release_value overrides the
+   * post-release version.
+   *
+   * @param {Array&lt;Object>} resources - resources which contain version value
+   * @param {Object} opts - release settings
+   * @param {Boolean} [opts.dryRun] - when true, no change will be made
+   * @param {Function} cb - standard cb(err, result) callback
+   */
+  post(resources, opts, cb) {
+    const self = this;
+
+    bag.logStepHeading(
+      "Executing post step of rtk release scheme...",
+      self.logOpts,
+    );
+
+    const tasks = [];
+    const paths = [];
+    resources.forEach((resource) => {
+      function resourceTask(cb) {
+        const postReleaseVersion =
+          resource.params &amp;&amp; resource.params.post_release_value
+            ? resource.params.post_release_value
+            : self.versionScheme.getPostReleaseVersion();
+        const message = util.format(
+          "Setting next pre-release version %s on %s resource located at %s",
+          postReleaseVersion,
+          resource.type,
+          resource.path,
+        );
+        bag.logStepItemSuccess(message, self.logOpts);
+        self.resourceTypes[resource.type].setPostReleaseVersion(
+          postReleaseVersion,
+          resource,
+          opts,
+          cb,
+        );
+      }
+      tasks.push(resourceTask);
+      paths.push(resource.path);
+    });
+
+    function scmTask(cb) {
+      const message = util.format(
+        "Committing next pre-release version changes made to %s...",
+        paths.join(", "),
+      );
+      bag.logStepItemSuccess(message, self.logOpts);
+      if (!opts.dryRun) {
+        self.scmScheme.saveChanges(
+          util.format(
+            "Bump up to next pre-release version %s",
+            self.versionScheme.getPostReleaseVersion(),
+          ),
+          paths,
+          cb,
+        );
+      } else {
+        cb();
+      }
+    }
+    tasks.push(scmTask);
+
+    async.series(tasks, cb);
+  }
+}
+
+export { Rtk as default };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Fri Oct 16 2026 11:38:59 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

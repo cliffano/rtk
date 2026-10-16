@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">54</p>
+      <p class="stat">61</p>
     </div>
   </div>
   <div class="row historical">
@@ -90,22 +90,27 @@
 <div class="container">
   <div class="row">
     <textarea id="file-source" class="col-md-12">&quot;use strict&quot;;
-import {getProperty, setProperty} from &#039;dot-prop&#039;;
-import fs from &#039;fs&#039;;
-import toml from &#039;@iarna/toml&#039;;
+/**
+ * @module resource-types/toml
+ */
+import { getProperty, setProperty } from &quot;dot-prop&quot;;
+import fs from &quot;fs&quot;;
+import toml from &quot;@iarna/toml&quot;;
 
 /**
  * Set version value in the TOML resource&#039;s property (defined in dot-notation).
  *
- * @param {String} version: version value to set
- * @param {Object} resource: resource configuration which contains type, path, and params
- * @param {Object} opts: optional settings
- *   - dryRun: when true, TOML file won&#039;t be modified
- * @param {Function} cb: standard cb(err, result) callback
+ * @param {String} version - version value to set
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the TOML file
+ * @param {String} resource.params.property - property in dot-notation
+ * @param {Object} opts - optional settings
+ * @param {Boolean} [opts.dryRun] - when true, TOML file won&#039;t be modified
+ * @param {Function} cb - standard cb(err, result) callback
  */
 function setVersion(version, resource, opts, cb) {
   const property = resource.params.property;
-  const data = toml.parse(fs.readFileSync(resource.path, &#039;UTF-8&#039;));
+  const data = toml.parse(fs.readFileSync(resource.path, &quot;UTF-8&quot;));
   setProperty(data, property, version);
   if (!opts.dryRun) {
     fs.writeFile(resource.path, toml.stringify(data, null, 2), cb);
@@ -115,10 +120,14 @@ function setVersion(version, resource, opts, cb) {
 }
 
 /**
- * Get version value from the TOML resource&#039;s property (defined in dot-notation).
+ * Get version value from the TOML resource&#039;s property (defined in
+ * dot-notation).
  *
- * @param {Object} resource: resource configuration which contains type, path, and params
- * @param {Function} cb: standard cb(err, result) callback
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the TOML file
+ * @param {String} resource.params.property - property in dot-notation
+ * @param {Function} cb - standard cb(err, result) callback, result is the
+ *   version value
  */
 function getVersion(resource, cb) {
   const property = resource.params.property;
@@ -131,18 +140,16 @@ function getVersion(resource, cb) {
     }
     cb(err, version);
   }
-  fs.readFile(resource.path, &#039;UTF-8&#039;, readCb);
+  fs.readFile(resource.path, &quot;UTF-8&quot;, readCb);
 }
 
 const exports = {
   setReleaseVersion: setVersion,
   setPostReleaseVersion: setVersion,
-  getVersion: getVersion
+  getVersion: getVersion,
 };
 
-export {
-  exports as default
-};</textarea>
+export { exports as default };</textarea>
   </div>
 </div>
 

@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">64</p>
+      <p class="stat">74</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">20.27</p>
+      <p class="stat">21.46</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.31</p>
+      <p class="stat">0.32</p>
     </div>
   </div>
 </div>
@@ -90,22 +90,27 @@
 <div class="container">
   <div class="row">
     <textarea id="file-source" class="col-md-12">&quot;use strict&quot;;
-import {getProperty, setProperty} from &#039;dot-prop&#039;;
-import fs from &#039;fs&#039;;
-import jsYaml from &#039;js-yaml&#039;;
+/**
+ * @module resource-types/yaml
+ */
+import { getProperty, setProperty } from &quot;dot-prop&quot;;
+import fs from &quot;fs&quot;;
+import * as jsYaml from &quot;js-yaml&quot;;
 
 /**
  * Set version value in the YAML resource&#039;s property (defined in dot-notation).
  *
- * @param {String} version: version value to set
- * @param {Object} resource: resource configuration which contains type, path, and params
- * @param {Object} opts: optional settings
- *   - dryRun: when true, YAML file won&#039;t be modified
- * @param {Function} cb: standard cb(err, result) callback
+ * @param {String} version - version value to set
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the YAML file
+ * @param {String} resource.params.property - property in dot-notation
+ * @param {Object} opts - optional settings
+ * @param {Boolean} [opts.dryRun] - when true, YAML file won&#039;t be modified
+ * @param {Function} cb - standard cb(err, result) callback
  */
 function setVersion(version, resource, opts, cb) {
   const property = resource.params.property;
-  const data = jsYaml.load(fs.readFileSync(resource.path, &#039;UTF-8&#039;));
+  const data = jsYaml.load(fs.readFileSync(resource.path, &quot;UTF-8&quot;));
   setProperty(data, property, version);
   if (!opts.dryRun) {
     fs.writeFile(resource.path, _yamlDumpWithHeader(data), cb);
@@ -115,20 +120,27 @@ function setVersion(version, resource, opts, cb) {
 }
 
 /**
- * Prepend YAML header (--- document separator) if missing.
- * @param {String} data: the YAML data
- * @returns {String} the YAML data with header
+ * Dump data as YAML string, prepending YAML header (--- document separator)
+ * if missing.
+ *
+ * @private
+ * @param {Object} data - the data to dump
+ * @return {String} the YAML string with header
  */
 function _yamlDumpWithHeader(data) {
   const _data = jsYaml.dump(data, { indent: 2 });
-  return _data.startsWith(&#039;---\n&#039;) ? _data : `---\n${_data}`;
+  return _data.startsWith(&quot;---\n&quot;) ? _data : `---\n${_data}`;
 }
 
 /**
- * Get version value from the YAML resource&#039;s property (defined in dot-notation).
+ * Get version value from the YAML resource&#039;s property (defined in
+ * dot-notation).
  *
- * @param {Object} resource: resource configuration which contains type, path, and params
- * @param {Function} cb: standard cb(err, result) callback
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the YAML file
+ * @param {String} resource.params.property - property in dot-notation
+ * @param {Function} cb - standard cb(err, result) callback, result is the
+ *   version value
  */
 function getVersion(resource, cb) {
   const property = resource.params.property;
@@ -141,18 +153,16 @@ function getVersion(resource, cb) {
     }
     cb(err, version);
   }
-  fs.readFile(resource.path, &#039;UTF-8&#039;, readCb);
+  fs.readFile(resource.path, &quot;UTF-8&quot;, readCb);
 }
 
 const exports = {
   setReleaseVersion: setVersion,
   setPostReleaseVersion: setVersion,
-  getVersion: getVersion
+  getVersion: getVersion,
 };
 
-export {
-  exports as default
-};</textarea>
+export { exports as default };</textarea>
   </div>
 </div>
 

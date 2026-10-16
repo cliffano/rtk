@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">131</p>
+      <p class="stat">155</p>
     </div>
   </div>
   <div class="row historical">
@@ -90,25 +90,37 @@
 <div class="container">
   <div class="row">
     <textarea id="file-source" class="col-md-12">&quot;use strict&quot;;
-import { parser, Release } from &#039;keep-a-changelog&#039;;
-import fs from &#039;fs&#039;;
-import stringFormat from &#039;string-format&#039;;
+/**
+ * Changelog resource following {@link https://keepachangelog.com|Keep a
+ * Changelog} format.
+ *
+ * @module resource-types/keep-a-changelog
+ */
+import { parser, Release } from &quot;keep-a-changelog&quot;;
+import fs from &quot;fs&quot;;
+import stringFormat from &quot;string-format&quot;;
 
 /**
- * Set a release version number to the latest release within the changelog, with date set to current date.
- * The changelog follows keep a changelog format https://keepachangelog.com .
+ * Set release version on the latest release within the changelog, with date
+ * set to current date.
  *
- * @param {String} version: version value to set
- * @param {Object} resource: resource configuration which contains type, path, and params
- * @param {Object} opts: optional settings
- *   - dryRun: when true, changelog file won&#039;t be modified
- * @param {Function} cb: standard cb(err, result) callback
+ * @param {String} version - version value to set
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the changelog file
+ * @param {Object} opts - optional settings
+ * @param {Boolean} [opts.dryRun] - when true, changelog file won&#039;t be
+ *   modified
+ * @param {String} opts.tagFormat - SCM tag format used in release links,
+ *   e.g. v{version}
+ * @param {Function} cb - standard cb(err, result) callback
  */
 function setReleaseVersion(version, resource, opts, cb) {
-  const changelog = parser(fs.readFileSync(resource.path, &#039;UTF-8&#039;));
+  const changelog = parser(fs.readFileSync(resource.path, &quot;UTF-8&quot;));
   changelog.tagNameBuilder = function (release) {
     // Use tagFormat option to format the version to be used as SCM tag
-    const formattedVersion = stringFormat(opts.tagFormat, { version: release.version });
+    const formattedVersion = stringFormat(opts.tagFormat, {
+      version: release.version,
+    });
     return formattedVersion;
   };
   const latestRelease = changelog.releases[0];
@@ -122,20 +134,28 @@ function setReleaseVersion(version, resource, opts, cb) {
 }
 
 /**
- * Add a new release to the changelog having the post-release version and an unreleased date.
- * The changelog follows keep a changelog format https://keepachangelog.com .
+ * Add a new Unreleased section to the top of the changelog.
  *
- * @param {String} version: version value to set
- * @param {Object} resource: resource configuration which contains type, path, and params
- * @param {Object} opts: optional settings
- *   - dryRun: when true, changelog file won&#039;t be modified
- * @param {Function} cb: standard cb(err, result) callback
+ * The version value is not written to the changelog, Unreleased section
+ * represents the next pre-release version instead.
+ *
+ * @param {String} version - post-release version value, unused
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the changelog file
+ * @param {Object} opts - optional settings
+ * @param {Boolean} [opts.dryRun] - when true, changelog file won&#039;t be
+ *   modified
+ * @param {String} opts.tagFormat - SCM tag format used in release links,
+ *   e.g. v{version}
+ * @param {Function} cb - standard cb(err, result) callback
  */
 function setPostReleaseVersion(version, resource, opts, cb) {
-  const changelog = parser(fs.readFileSync(resource.path, &#039;UTF-8&#039;));
+  const changelog = parser(fs.readFileSync(resource.path, &quot;UTF-8&quot;));
   changelog.tagNameBuilder = function (release) {
     // Use tagFormat option to format the version to be used as SCM tag
-    const formattedVersion = stringFormat(opts.tagFormat, { version: release.version });
+    const formattedVersion = stringFormat(opts.tagFormat, {
+      version: release.version,
+    });
     return formattedVersion;
   };
   const postRelease = new Release();
@@ -149,16 +169,19 @@ function setPostReleaseVersion(version, resource, opts, cb) {
 
 /**
  * Get version value from the changelog&#039;s latest release.
- * The changelog follows keep a changelog format https://keepachangelog.com .
- * It&#039;s common for the latest positioned version value for keep a changelog to be set to &#039;Unreleased&#039;
- * in order to indicate that it&#039;s the one that&#039;s currently in progress.
- * Hence we need to handle two scenarios here:
- * - when latest release has a version number, then use that as the current version
- * - when latest release is &#039;Unreleased&#039; (version is undefined after parsing), then use the previous release
- * - otherwise defaults to &#039;0.0.0&#039;
  *
- * @param {Object} resource: resource configuration which contains type, path, and params
- * @param {Function} cb: standard cb(err, result) callback
+ * It&#039;s common for the latest release of a changelog to be &#039;Unreleased&#039;, in
+ * order to indicate that it&#039;s the one currently in progress. Hence the
+ * version is resolved in this order:
+ * 1. when latest release has a version number, use that version
+ * 2. when latest release is &#039;Unreleased&#039; (version is undefined after
+ *    parsing), use the previous release&#039;s version
+ * 3. otherwise default to &#039;0.0.0&#039;
+ *
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the changelog file
+ * @param {Function} cb - standard cb(err, result) callback, result is the
+ *   version value
  */
 function getVersion(resource, cb) {
   function parseCb(err, changelog) {
@@ -171,8 +194,8 @@ function getVersion(resource, cb) {
       } else if (latestReleaseMinusOne &amp;&amp; latestReleaseMinusOne.version) {
         version = latestReleaseMinusOne.version;
       } else {
-        version = &#039;0.0.0&#039;;
-      }          
+        version = &quot;0.0.0&quot;;
+      }
     }
     cb(err, version);
   }
@@ -183,22 +206,25 @@ function getVersion(resource, cb) {
       _parseWithValidation(result, parseCb);
     }
   }
-  fs.readFile(resource.path, &#039;UTF-8&#039;, readCb);
+  fs.readFile(resource.path, &quot;UTF-8&quot;, readCb);
 }
 
 /**
  * Parse changelog content using keep-a-changelog parser.
  * This function also serves as a validator, where an error will be thrown.
- * 
+ *
  * Due to the way keep-a-changelog parser works, it throws error directly
  * instead of passing it to callback, hence we rethrow the error with a more
  * descriptive message.
- * 
+ *
  * Even though the current implementation wouldn&#039;t pass an error to callback,
  * we still keep the cb parameter for consistency and future-proofing.
- * 
- * @param {String} content: changelog content
- * @param {Function} cb: standard cb(err, result) callback
+ *
+ * @private
+ * @param {String} content - changelog content
+ * @param {Function} cb - standard cb(err, result) callback, result is the
+ *   parsed changelog
+ * @throws {Error} when changelog content can&#039;t be parsed
  */
 function _parseWithValidation(content, cb) {
   try {
@@ -207,19 +233,17 @@ function _parseWithValidation(content, cb) {
     cb(null, changelog);
   } catch (err) {
     const message = `Failed to parse changelog. Please fix the changelog following the keep a changelog format https://keepachangelog.com . Error: ${err.message}`;
-    throw (new Error(message));
+    throw new Error(message);
   }
 }
 
 const exports = {
   setReleaseVersion: setReleaseVersion,
   setPostReleaseVersion: setPostReleaseVersion,
-  getVersion: getVersion
+  getVersion: getVersion,
 };
 
-export {
-  exports as default
-};</textarea>
+export { exports as default };</textarea>
   </div>
 </div>
 

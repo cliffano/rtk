@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>45/45</span>
+                <span class='fraction'>60/60</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.85% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>45/45</span>
+                <span class='fraction'>60/60</span>
             </div>
         
             
@@ -107,12 +107,23 @@
 <a name='L42'></a><a href='#L42'>42</a>
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
-<a name='L45'></a><a href='#L45'>45</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -144,65 +155,102 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
-import bag from 'bagofcli';
-import p from 'path';
-import RTK from './rtk.js';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+/**
+ * @module cli
+ */
+import bag from "bagofcli";
+import p from "path";
+import RTK from "./rtk.js";
 &nbsp;
-const DIRNAME = p.dirname(import.meta.url).replace('file://', '');
+const DIRNAME = p.dirname(import.meta.url).replace("file://", "");
 &nbsp;
+/**
+ * Handle release command by loading RTK configuration file and running a
+ * release using the resources and schemes defined in that configuration.
+ *
+ * @private
+ * @param {Object} args - command options passed by bagofcli
+ * @param {String} [args.configFile=.rtk.json] - RTK configuration file
+ * @param {Boolean} [args.dryRun] - when true, no change will be made
+ * @param {String} [args.releaseIncrementType=minor] - major, minor, or patch
+ * @param {String} [args.postReleaseIncrementType=patch] - major, minor, or
+ *   patch
+ */
 function _release(args) {
-&nbsp;
   const opts = {};
 &nbsp;
-  const configFile = args &amp;&amp; args.parent &amp;&amp; args.parent.configFile ? args.parent.configFile <span class="branch-0 cbranch-no" title="branch not covered" >: '.rtk.json';</span>
+  const configFile = args.configFile || ".rtk.json";
   const config = JSON.parse(bag.lookupFile(configFile));
-  opts.dryRun = args.parent.dryRun;
+  opts.dryRun = args.dryRun;
 &nbsp;
-  opts.releaseIncrementType = args.releaseIncrementType <span class="branch-0 cbranch-no" title="branch not covered" >|| 'minor';</span>
-  opts.postReleaseIncrementType = args.postReleaseIncrementType <span class="branch-0 cbranch-no" title="branch not covered" >|| 'patch';</span>
-  opts.tagFormat = config.tagFormat <span class="branch-0 cbranch-no" title="branch not covered" >|| '{version}';</span>
+  opts.releaseIncrementType = args.releaseIncrementType || "minor";
+  opts.postReleaseIncrementType = args.postReleaseIncrementType || "patch";
+  opts.tagFormat = config.tagFormat || "{version}";
 &nbsp;
   const rtk = new RTK(config.resources, opts);
-  rtk.release(config.releaseScheme, config.versionScheme, config.scmScheme, bag.exit);
-&nbsp;
+  rtk.release(
+    config.releaseScheme,
+    config.versionScheme,
+    config.scmScheme,
+    bag.exit,
+  );
 }
 &nbsp;
 /**
  * Execute RTK CLI.
  */
 function exec() {
-&nbsp;
   const actions = {
     commands: {
-      release : { action: _release }
-    }
+      release: { action: _release },
+    },
   };
 &nbsp;
   bag.command(DIRNAME, actions);
 }
 &nbsp;
 const exports = {
-  exec: exec
+  exec: exec,
 };
 &nbsp;
-export {
-  exports as default
-};</pre></td></tr></table></pre>
+export { exports as default };
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-28T22:23:42.990Z
+                at 2026-10-16T11:38:57.580Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">89</p>
+      <p class="stat">100</p>
     </div>
   </div>
   <div class="row historical">
@@ -90,33 +90,39 @@
 <div class="container">
   <div class="row">
     <textarea id="file-source" class="col-md-12">&quot;use strict&quot;;
-import async from &#039;async&#039;;
-import rtkReleaseScheme from &#039;./release-schemes/rtk.js&#039;;
-import hclResourceType from &#039;./resource-types/hcl.js&#039;;
-import jsonResourceType from &#039;./resource-types/json.js&#039;;
-import keepAChangelogResourceType from &#039;./resource-types/keep-a-changelog.js&#039;;
-import makefileResourceType from &#039;./resource-types/makefile.js&#039;;
-import textResourceType from &#039;./resource-types/text.js&#039;;
-import tomlResourceType from &#039;./resource-types/toml.js&#039;;
-import yamlResourceType from &#039;./resource-types/yaml.js&#039;;
+/**
+ * @module rtk
+ */
+import async from &quot;async&quot;;
+import rtkReleaseScheme from &quot;./release-schemes/rtk.js&quot;;
+import hclResourceType from &quot;./resource-types/hcl.js&quot;;
+import jsonResourceType from &quot;./resource-types/json.js&quot;;
+import keepAChangelogResourceType from &quot;./resource-types/keep-a-changelog.js&quot;;
+import makefileResourceType from &quot;./resource-types/makefile.js&quot;;
+import textResourceType from &quot;./resource-types/text.js&quot;;
+import tomlResourceType from &quot;./resource-types/toml.js&quot;;
+import yamlResourceType from &quot;./resource-types/yaml.js&quot;;
 
 /**
  * RTK is the enchilada, Release The Kraken!
  */
 class RTK {
-
   /**
    * Construct RTK object which will manage a set of resources.
    *
-   * @param {Array} resources: an array of resources which contain version value
-   * @param {Object} opts: optional settings
-   *   - dryRun: when true, no change will be made
+   * @param {Array&lt;Object&gt;} resources - resources which contain version value,
+   *   the first resource is used as the source of truth of current version
+   * @param {Object} [opts] - optional settings
+   * @param {Boolean} [opts.dryRun] - when true, no change will be made
+   * @param {String} [opts.releaseIncrementType] - major, minor, or patch
+   * @param {String} [opts.postReleaseIncrementType] - major, minor, or patch
+   * @param {String} [opts.tagFormat] - SCM tag format, e.g. v{version}
    */
   constructor(resources, opts) {
     this.resources = resources || {};
     this.opts = opts || {};
     this.releaseSchemes = {
-      rtk: rtkReleaseScheme
+      rtk: rtkReleaseScheme,
     };
     this.resourceTypes = {
       hcl: hclResourceType,
@@ -124,25 +130,28 @@ class RTK {
       makefile: makefileResourceType,
       text: textResourceType,
       toml: tomlResourceType,
-      yaml: yamlResourceType
+      yaml: yamlResourceType,
     };
-    this.resourceTypes[&#039;keep-a-changelog&#039;] = keepAChangelogResourceType;
+    this.resourceTypes[&quot;keep-a-changelog&quot;] = keepAChangelogResourceType;
   }
 
   /**
    * Execute release steps for the specified release scheme.
    *
-   * @param {String} releaseSchemeName: release scheme name that defines the steps involved in a release step
-   * @param {String} versionSchemeName: version scheme name that defines the release and pre-release version value
-   * @param {String} scmSchemeName: name of SCM used by the repository to be released
-   * @param {Function} cb: standard cb(err, result) callback
+   * @param {String} [releaseSchemeName=rtk] - release scheme name that
+   *   defines the steps involved in a release
+   * @param {String} [versionSchemeName=semver] - version scheme name that
+   *   defines the release and post-release version values
+   * @param {String} [scmSchemeName=git] - name of SCM used by the repository
+   *   to be released
+   * @param {Function} cb - standard cb(err, result) callback
    */
   release(releaseSchemeName, versionSchemeName, scmSchemeName, cb) {
     const self = this;
 
-    releaseSchemeName = releaseSchemeName || &#039;rtk&#039;;
-    versionSchemeName = versionSchemeName || &#039;semver&#039;;
-    scmSchemeName = scmSchemeName || &#039;git&#039;;
+    releaseSchemeName = releaseSchemeName || &quot;rtk&quot;;
+    versionSchemeName = versionSchemeName || &quot;semver&quot;;
+    scmSchemeName = scmSchemeName || &quot;git&quot;;
 
     let releaseScheme;
 
@@ -153,7 +162,12 @@ class RTK {
       function versionCb(err, result) {
         if (!err) {
           const ReleaseSchemeClass = self.releaseSchemes[releaseSchemeName];
-          releaseScheme = new ReleaseSchemeClass(versionSchemeName, scmSchemeName, result, self.opts);
+          releaseScheme = new ReleaseSchemeClass(
+            versionSchemeName,
+            scmSchemeName,
+            result,
+            self.opts,
+          );
         }
         cb(err, result);
       }
@@ -172,12 +186,9 @@ class RTK {
 
     async.series([versionTask, preTask, releaseTask, postTask], cb);
   }
-
 }
 
-export {
-  RTK as default
-};</textarea>
+export { RTK as default };</textarea>
   </div>
 </div>
 

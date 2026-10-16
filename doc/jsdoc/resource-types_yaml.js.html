@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>resource-types/yaml.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-release-schemes_rtk-Rtk.html">Rtk</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-release-schemes_rtk-Rtk.html#post">post</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-release-schemes_rtk-Rtk.html#pre">pre</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-release-schemes_rtk-Rtk.html#release">release</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-rtk-RTK.html">RTK</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-rtk-RTK.html#release">release</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-version-schemes_semver-Semver.html">Semver</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-version-schemes_semver-Semver.html#getPostReleaseVersion">getPostReleaseVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-version-schemes_semver-Semver.html#getReleaseVersion">getReleaseVersion</a></span></li><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-cli.html">cli</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-cli.html#~exec">exec</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-release-schemes_rtk.html">release-schemes/rtk</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_hcl.html">resource-types/hcl</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_hcl.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_hcl.html#~setVersion">setVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_json.html">resource-types/json</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_json.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_json.html#~setVersion">setVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_keep-a-changelog.html">resource-types/keep-a-changelog</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_keep-a-changelog.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_keep-a-changelog.html#~setPostReleaseVersion">setPostReleaseVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_keep-a-changelog.html#~setReleaseVersion">setReleaseVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_makefile.html">resource-types/makefile</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_makefile.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_makefile.html#~setVersion">setVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_text.html">resource-types/text</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_text.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_text.html#~setVersion">setVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_toml.html">resource-types/toml</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_toml.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_toml.html#~setVersion">setVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-resource-types_yaml.html">resource-types/yaml</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_yaml.html#~getVersion">getVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-resource-types_yaml.html#~setVersion">setVersion</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-rtk.html">rtk</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-scm-schemes_git.html">scm-schemes/git</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-scm-schemes_git.html#~addVersion">addVersion</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-scm-schemes_git.html#~saveChanges">saveChanges</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-version-schemes_semver.html">version-schemes/semver</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">resource-types/yaml.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict";
+/**
+ * @module resource-types/yaml
+ */
+import { getProperty, setProperty } from "dot-prop";
+import fs from "fs";
+import * as jsYaml from "js-yaml";
+
+/**
+ * Set version value in the YAML resource's property (defined in dot-notation).
+ *
+ * @param {String} version - version value to set
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the YAML file
+ * @param {String} resource.params.property - property in dot-notation
+ * @param {Object} opts - optional settings
+ * @param {Boolean} [opts.dryRun] - when true, YAML file won't be modified
+ * @param {Function} cb - standard cb(err, result) callback
+ */
+function setVersion(version, resource, opts, cb) {
+  const property = resource.params.property;
+  const data = jsYaml.load(fs.readFileSync(resource.path, "UTF-8"));
+  setProperty(data, property, version);
+  if (!opts.dryRun) {
+    fs.writeFile(resource.path, _yamlDumpWithHeader(data), cb);
+  } else {
+    cb();
+  }
+}
+
+/**
+ * Dump data as YAML string, prepending YAML header (--- document separator)
+ * if missing.
+ *
+ * @private
+ * @param {Object} data - the data to dump
+ * @return {String} the YAML string with header
+ */
+function _yamlDumpWithHeader(data) {
+  const _data = jsYaml.dump(data, { indent: 2 });
+  return _data.startsWith("---\n") ? _data : `---\n${_data}`;
+}
+
+/**
+ * Get version value from the YAML resource's property (defined in
+ * dot-notation).
+ *
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the YAML file
+ * @param {String} resource.params.property - property in dot-notation
+ * @param {Function} cb - standard cb(err, result) callback, result is the
+ *   version value
+ */
+function getVersion(resource, cb) {
+  const property = resource.params.property;
+
+  function readCb(err, result) {
+    let version;
+    if (!err) {
+      const data = jsYaml.load(result);
+      version = getProperty(data, property);
+    }
+    cb(err, version);
+  }
+  fs.readFile(resource.path, "UTF-8", readCb);
+}
+
+const exports = {
+  setReleaseVersion: setVersion,
+  setPostReleaseVersion: setVersion,
+  getVersion: getVersion,
+};
+
+export { exports as default };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Fri Oct 16 2026 11:38:59 GMT+0000 (Coordinated Universal Time) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

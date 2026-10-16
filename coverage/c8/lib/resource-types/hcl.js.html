@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>60/60</span>
+                <span class='fraction'>71/71</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>60/60</span>
+                <span class='fraction'>71/71</span>
             </div>
         
             
@@ -123,7 +123,24 @@
 <a name='L58'></a><a href='#L58'>58</a>
 <a name='L59'></a><a href='#L59'>59</a>
 <a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -149,6 +166,10 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -160,21 +181,22 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -184,31 +206,41 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
-import bag from 'bagofcli';
-import {getProperty} from 'dot-prop';
-import fs from 'fs';
-import hcl from 'hcl2-parser';
+/**
+ * @module resource-types/hcl
+ */
+import bag from "bagofcli";
+import { getProperty } from "dot-prop";
+import fs from "fs";
+import hcl from "hcl2-parser";
 &nbsp;
 /**
  * Set version value in the HCL resource's property (defined in dot-notation).
- * This uses hcledit CLI tool (https://github.com/minamijoyo/hcledit) to
+ * This uses {@link https://github.com/minamijoyo/hcledit|hcledit} CLI tool to
  * modify the HCL file because there is no node.js library that can write HCL
- * files in a safe way while preserving original formatting. NOTE: hcledit
- * must be installed and available in the PATH for this to work.
+ * files in a safe way while preserving original formatting.
  *
- * @param {String} version: version value to set
- * @param {Object} resource: resource configuration which contains type, path, and params
- * @param {Object} opts: optional settings
- *   - dryRun: when true, HCL file won't be modified
- * @param {Function} cb: standard cb(err, result) callback
+ * NOTE: hcledit must be installed and available in the PATH for this to work.
+ *
+ * @param {String} version - version value to set
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the HCL file
+ * @param {String} resource.params.property - property in dot-notation
+ * @param {Object} opts - optional settings
+ * @param {Boolean} [opts.dryRun] - when true, HCL file won't be modified
+ * @param {Function} cb - standard cb(err, result) callback
  */
 function setVersion(version, resource, opts, cb) {
   if (!opts.dryRun) {
     const property = resource.params.property;
     function execCb(err, stdOutOuput, stdErrOuput, result) {
       cb(err);
-    };
-    bag.exec(`hcledit attribute set ${property} ${version} -f ${resource.path} -u`, false, execCb);
+    }
+    bag.exec(
+      `hcledit attribute set ${property} ${version} -f ${resource.path} -u`,
+      false,
+      execCb,
+    );
   } else {
     cb();
   }
@@ -217,8 +249,11 @@ function setVersion(version, resource, opts, cb) {
 /**
  * Get version value from the HCL resource's property (defined in dot-notation).
  *
- * @param {Object} resource: resource configuration which contains type, path, and params
- * @param {Function} cb: standard cb(err, result) callback
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the HCL file
+ * @param {String} resource.params.property - property in dot-notation
+ * @param {Function} cb - standard cb(err, result) callback, result is the
+ *   version value
  */
 function getVersion(resource, cb) {
   const property = resource.params.property;
@@ -231,18 +266,16 @@ function getVersion(resource, cb) {
     }
     cb(err, version);
   }
-  fs.readFile(resource.path, 'UTF-8', readCb);
+  fs.readFile(resource.path, "UTF-8", readCb);
 }
 &nbsp;
 const exports = {
   setReleaseVersion: setVersion,
   setPostReleaseVersion: setVersion,
-  getVersion: getVersion
+  getVersion: getVersion,
 };
 &nbsp;
-export {
-  exports as default
-};
+export { exports as default };
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -250,7 +283,7 @@ export {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-28T22:23:42.990Z
+                at 2026-10-16T11:38:57.580Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

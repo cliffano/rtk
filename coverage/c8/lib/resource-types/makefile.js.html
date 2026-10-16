@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>66/66</span>
+                <span class='fraction'>79/79</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>66/66</span>
+                <span class='fraction'>79/79</span>
             </div>
         
             
@@ -129,7 +129,26 @@
 <a name='L64'></a><a href='#L64'>64</a>
 <a name='L65'></a><a href='#L65'>65</a>
 <a name='L66'></a><a href='#L66'>66</a>
-<a name='L67'></a><a href='#L67'>67</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -156,11 +175,18 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -196,28 +222,39 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
-import fs from 'fs';
-import makefileParser from '@kba/makefile-parser';
+/**
+ * @module resource-types/makefile
+ */
+import fs from "fs";
+import makefileParser from "@kba/makefile-parser";
 &nbsp;
 /**
- * Set version value in the Makefile resource's variable (variable defines the variable name that contains the version).
+ * Set version value in the Makefile resource's variable.
  *
- * @param {String} version: version value to set
- * @param {Object} resource: resource configuration which contains type, path, and params
- * @param {Object} opts: optional settings
- *   - dryRun: when true, Makefile won't be modified
- * @param {Function} cb: standard cb(err, result) callback
+ * @param {String} version - version value to set
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the Makefile
+ * @param {String} resource.params.variable - name of the variable which
+ *   contains the version
+ * @param {Object} opts - optional settings
+ * @param {Boolean} [opts.dryRun] - when true, Makefile won't be modified
+ * @param {Function} cb - standard cb(err, result) callback
  */
 function setVersion(version, resource, opts, cb) {
   const variable = resource.params.variable;
-  let content = fs.readFileSync(resource.path, 'UTF-8');
+  let content = fs.readFileSync(resource.path, "UTF-8");
   const data = makefileParser(content);
 &nbsp;
   data.ast.forEach((elem) =&gt; {
     if (elem.variable &amp;&amp; elem.variable === variable) {
-      const matches = content.match(new RegExp(elem.variable + '.*' + elem.value));
+      const matches = content.match(
+        new RegExp(elem.variable + ".*" + elem.value),
+      );
       if (matches &amp;&amp; matches.length === 1) {
-        content = content.replace(matches[0], matches[0].replace(elem.value, version));
+        content = content.replace(
+          matches[0],
+          matches[0].replace(elem.value, version),
+        );
       }
     }
   });
@@ -229,10 +266,14 @@ function setVersion(version, resource, opts, cb) {
 }
 &nbsp;
 /**
- * Get version value from the Makefile resource's variable (variable defines the variable name that contains the version).
+ * Get version value from the Makefile resource's variable.
  *
- * @param {Object} resource: resource configuration which contains type, path, and params
- * @param {Function} cb: standard cb(err, result) callback
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the Makefile
+ * @param {String} resource.params.variable - name of the variable which
+ *   contains the version
+ * @param {Function} cb - standard cb(err, result) callback, result is the
+ *   version value
  */
 function getVersion(resource, cb) {
   const variable = resource.params.variable;
@@ -249,18 +290,16 @@ function getVersion(resource, cb) {
     }
     cb(err, version);
   }
-  fs.readFile(resource.path, 'UTF-8', readCb);
+  fs.readFile(resource.path, "UTF-8", readCb);
 }
 &nbsp;
 const exports = {
   setReleaseVersion: setVersion,
   setPostReleaseVersion: setVersion,
-  getVersion: getVersion
+  getVersion: getVersion,
 };
 &nbsp;
-export {
-  exports as default
-};
+export { exports as default };
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -268,7 +307,7 @@ export {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-28T22:23:42.990Z
+                at 2026-10-16T11:38:57.580Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

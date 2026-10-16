@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">66</p>
+      <p class="stat">79</p>
     </div>
   </div>
   <div class="row historical">
@@ -90,28 +90,39 @@
 <div class="container">
   <div class="row">
     <textarea id="file-source" class="col-md-12">&quot;use strict&quot;;
-import fs from &#039;fs&#039;;
-import makefileParser from &#039;@kba/makefile-parser&#039;;
+/**
+ * @module resource-types/makefile
+ */
+import fs from &quot;fs&quot;;
+import makefileParser from &quot;@kba/makefile-parser&quot;;
 
 /**
- * Set version value in the Makefile resource&#039;s variable (variable defines the variable name that contains the version).
+ * Set version value in the Makefile resource&#039;s variable.
  *
- * @param {String} version: version value to set
- * @param {Object} resource: resource configuration which contains type, path, and params
- * @param {Object} opts: optional settings
- *   - dryRun: when true, Makefile won&#039;t be modified
- * @param {Function} cb: standard cb(err, result) callback
+ * @param {String} version - version value to set
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the Makefile
+ * @param {String} resource.params.variable - name of the variable which
+ *   contains the version
+ * @param {Object} opts - optional settings
+ * @param {Boolean} [opts.dryRun] - when true, Makefile won&#039;t be modified
+ * @param {Function} cb - standard cb(err, result) callback
  */
 function setVersion(version, resource, opts, cb) {
   const variable = resource.params.variable;
-  let content = fs.readFileSync(resource.path, &#039;UTF-8&#039;);
+  let content = fs.readFileSync(resource.path, &quot;UTF-8&quot;);
   const data = makefileParser(content);
 
   data.ast.forEach((elem) =&gt; {
     if (elem.variable &amp;&amp; elem.variable === variable) {
-      const matches = content.match(new RegExp(elem.variable + &#039;.*&#039; + elem.value));
+      const matches = content.match(
+        new RegExp(elem.variable + &quot;.*&quot; + elem.value),
+      );
       if (matches &amp;&amp; matches.length === 1) {
-        content = content.replace(matches[0], matches[0].replace(elem.value, version));
+        content = content.replace(
+          matches[0],
+          matches[0].replace(elem.value, version),
+        );
       }
     }
   });
@@ -123,10 +134,14 @@ function setVersion(version, resource, opts, cb) {
 }
 
 /**
- * Get version value from the Makefile resource&#039;s variable (variable defines the variable name that contains the version).
+ * Get version value from the Makefile resource&#039;s variable.
  *
- * @param {Object} resource: resource configuration which contains type, path, and params
- * @param {Function} cb: standard cb(err, result) callback
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the Makefile
+ * @param {String} resource.params.variable - name of the variable which
+ *   contains the version
+ * @param {Function} cb - standard cb(err, result) callback, result is the
+ *   version value
  */
 function getVersion(resource, cb) {
   const variable = resource.params.variable;
@@ -143,18 +158,16 @@ function getVersion(resource, cb) {
     }
     cb(err, version);
   }
-  fs.readFile(resource.path, &#039;UTF-8&#039;, readCb);
+  fs.readFile(resource.path, &quot;UTF-8&quot;, readCb);
 }
 
 const exports = {
   setReleaseVersion: setVersion,
   setPostReleaseVersion: setVersion,
-  getVersion: getVersion
+  getVersion: getVersion,
 };
 
-export {
-  exports as default
-};</textarea>
+export { exports as default };</textarea>
   </div>
 </div>
 

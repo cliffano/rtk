@@ -48,7 +48,7 @@
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">45</p>
+      <p class="stat">82</p>
     </div>
   </div>
   <div class="row historical">
@@ -90,50 +90,87 @@
 <div class="container">
   <div class="row">
     <textarea id="file-source" class="col-md-12">&quot;use strict&quot;;
-import semver from &#039;semver&#039;;
-import util from &#039;util&#039;;
+/**
+ * @module version-schemes/semver
+ */
+import semver from &quot;semver&quot;;
+import util from &quot;util&quot;;
 
 /**
- * This class defines versioning scheme following semantic versioning standard https://semver.org/ .
+ * Versioning scheme following semantic versioning standard
+ * {@link https://semver.org/}.
  */
 class Semver {
-
-  constructor(preReleaseVersion, releaseIncrementType, postReleaseIncrementType) {
-    releaseIncrementType = releaseIncrementType || &#039;minor&#039;;
-    postReleaseIncrementType = postReleaseIncrementType || &#039;patch&#039;;
+  /**
+   * Calculate release and post-release versions from the current
+   * pre-release version.
+   *
+   * @param {String} preReleaseVersion - current pre-release version,
+   *   e.g. 1.2.3-pre.0
+   * @param {String} [releaseIncrementType=minor] - major, minor, or patch,
+   *   where patch releases the current version without incrementing it
+   * @param {String} [postReleaseIncrementType=patch] - major, minor, or
+   *   patch increment applied to the release version to get the next
+   *   pre-release version
+   */
+  constructor(
+    preReleaseVersion,
+    releaseIncrementType,
+    postReleaseIncrementType,
+  ) {
+    releaseIncrementType = releaseIncrementType || &quot;minor&quot;;
+    postReleaseIncrementType = postReleaseIncrementType || &quot;patch&quot;;
 
     this.preReleaseVersion = preReleaseVersion;
 
-    this.preReleaseComponent = semver.prerelease(preReleaseVersion) ? semver.prerelease(preReleaseVersion)[0] : &#039;pre&#039;;
+    this.preReleaseComponent = semver.prerelease(preReleaseVersion)
+      ? semver.prerelease(preReleaseVersion)[0]
+      : &quot;pre&quot;;
 
     // has to rely on util format due to semver#coerce being no longer available in newer version of semver library
-    this.preReleaseVersionWithoutPreReleaseComponent = util.format(&#039;%d.%d.%d&#039;,
+    this.preReleaseVersionWithoutPreReleaseComponent = util.format(
+      &quot;%d.%d.%d&quot;,
       semver.major(this.preReleaseVersion),
       semver.minor(this.preReleaseVersion),
-      semver.patch(this.preReleaseVersion));
+      semver.patch(this.preReleaseVersion),
+    );
 
-    if ([&#039;minor&#039;, &#039;major&#039;].includes(releaseIncrementType)) {
-      this.releaseVersion = semver.inc(this.preReleaseVersionWithoutPreReleaseComponent, releaseIncrementType);
+    if ([&quot;minor&quot;, &quot;major&quot;].includes(releaseIncrementType)) {
+      this.releaseVersion = semver.inc(
+        this.preReleaseVersionWithoutPreReleaseComponent,
+        releaseIncrementType,
+      );
     } else {
       this.releaseVersion = this.preReleaseVersionWithoutPreReleaseComponent;
     }
 
-    this.postReleaseVersion = semver.inc(this.releaseVersion, &#039;pre&#039; + postReleaseIncrementType, this.preReleaseComponent);
+    this.postReleaseVersion = semver.inc(
+      this.releaseVersion,
+      &quot;pre&quot; + postReleaseIncrementType,
+      this.preReleaseComponent,
+    );
   }
 
+  /**
+   * Get release version.
+   *
+   * @return {String} release version, e.g. 1.3.0
+   */
   getReleaseVersion() {
     return this.releaseVersion;
   }
 
+  /**
+   * Get post-release version, i.e. the next pre-release version.
+   *
+   * @return {String} post-release version, e.g. 1.3.1-pre.0
+   */
   getPostReleaseVersion() {
     return this.postReleaseVersion;
   }
-
 }
 
-export {
-  Semver as default
-};</textarea>
+export { Semver as default };</textarea>
   </div>
 </div>
 

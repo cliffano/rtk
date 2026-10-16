@@ -5,6 +5,7 @@
 
 [0m  cli - release[0m
   [32m  [32m✔[39m[0m[90m should contain release command and delegate to rtk release when exec is called[0m
+  [32m  [32m✔[39m[0m[90m should default to .rtk.json config file when config file option is not specified[0m
 
 [0m  rtk[0m
 [0m    default rtk release scheme[0m
@@ -16,6 +17,24 @@
     [32m  [32m✔[39m[0m[90m should not have label[0m
 [0m    default rtk release scheme[0m
     [32m  [32m✔[39m[0m[90m should not have label[0m
+[0m    rtk release scheme with unspecified schemes[0m
+    [32m  [32m✔[39m[0m[90m should default to semver version scheme and git scm scheme[0m
+
+[0m  release-schemes/rtk - pre[0m
+  [32m  [32m✔[39m[0m[90m should set release version on all resources and commit the changes when dry run is disabled[0m
+  [32m  [32m✔[39m[0m[90m should set release version but not commit the changes when dry run is enabled[0m
+  [32m  [32m✔[39m[0m[90m should use resource release value and format when they are specified[0m
+  [32m  [32m✔[39m[0m[90m should pass error to callback when commit fails[0m
+
+[0m  release-schemes/rtk - release[0m
+  [32m  [32m✔[39m[0m[90m should add formatted release version tag when dry run is disabled[0m
+  [32m  [32m✔[39m[0m[90m should not add release version tag when dry run is enabled[0m
+
+[0m  release-schemes/rtk - post[0m
+  [32m  [32m✔[39m[0m[90m should set post-release version on all resources and commit the changes when dry run is disabled[0m
+  [32m  [32m✔[39m[0m[90m should set post-release version but not commit the changes when dry run is enabled[0m
+  [32m  [32m✔[39m[0m[90m should use resource post-release value when it is specified[0m
+  [32m  [32m✔[39m[0m[90m should pass error to callback when commit fails[0m
 
 [0m  hcl[0m
 [0m    setVersion[0m
@@ -40,9 +59,11 @@
 [0m    setReleaseVersion[0m
     [32m  [32m✔[39m[0m[90m should only set version but not modify changelog file when dry run is enabled[0m
     [32m  [32m✔[39m[0m[90m should set version and modify changelog file when dry run is disabled[0m
+    [32m  [32m✔[39m[0m[90m should format compare link tags using tag format when changelog has compare links[0m
 [0m    setPostReleaseVersion[0m
     [32m  [32m✔[39m[0m[90m should only add new release but not modify changelog file when dry run is enabled[0m
     [32m  [32m✔[39m[0m[90m should add new release and modify changelog file when dry run is disabled[0m
+    [32m  [32m✔[39m[0m[90m should format compare link tags using tag format when changelog has compare links[0m
 [0m    getVersion[0m
 <ref *1> Changelog {
   flag: '',
@@ -54,7 +75,7 @@
   releases: [
     Release {
       changelog: [Circular *1],
-      parsedVersion: [Object],
+      parsedVersion: [SemVer],
       date: 2023-06-15T00:00:00.000Z,
       yanked: false,
       description: '',
@@ -62,7 +83,7 @@
     },
     Release {
       changelog: [Circular *1],
-      parsedVersion: [Object],
+      parsedVersion: [SemVer],
       date: 2023-01-01T00:00:00.000Z,
       yanked: false,
       description: '',
@@ -95,7 +116,7 @@
     },
     Release {
       changelog: [Circular *1],
-      parsedVersion: [Object],
+      parsedVersion: [SemVer],
       date: 2023-06-15T00:00:00.000Z,
       yanked: false,
       description: '',
@@ -103,7 +124,7 @@
     },
     Release {
       changelog: [Circular *1],
-      parsedVersion: [Object],
+      parsedVersion: [SemVer],
       date: 2023-01-01T00:00:00.000Z,
       yanked: false,
       description: '',
@@ -179,13 +200,24 @@
     [32m  [32m✔[39m[0m[90m should set version and modify yaml file when dry run is disabled[0m
     [32m  [32m✔[39m[0m[90m should set property under array sub-property[0m
     [32m  [32m✔[39m[0m[90m should not double up document separator YAML header when it already exists[0m
+    [32m  [32m✔[39m[0m[90m should not prepend document separator YAML header when dumped YAML already has it[0m
 [0m    getVersion[0m
     [32m  [32m✔[39m[0m[90m should get version from resource property[0m
     [32m  [32m✔[39m[0m[90m should get property under an array array sub-property[0m
 
+[0m  rtk - constructor[0m
+  [32m  [32m✔[39m[0m[90m should set resources and opts when they are specified[0m
+  [32m  [32m✔[39m[0m[90m should default resources and opts when they are not specified[0m
+  [32m  [32m✔[39m[0m[90m should initialise release schemes and resource types[0m
+
+[0m  rtk - release[0m
+  [32m  [32m✔[39m[0m[90m should get version from first resource then execute pre, release, and post steps when schemes are not specified[0m
+  [32m  [32m✔[39m[0m[90m should pass specified scheme names to release scheme[0m
+  [32m  [32m✔[39m[0m[90m should pass error to callback and skip release steps when version cannot be retrieved[0m
+
 [0m  git[0m
 [0m    addVersion[0m
-    [32m  [32m✔[39m[0m[90m should call simpleGit addTag[0m[33m (50ms)[0m
+    [32m  [32m✔[39m[0m[90m should call simpleGit addTag[0m
 [0m    saveChanges[0m
     [32m  [32m✔[39m[0m[90m should call simpleGit commit[0m
 
@@ -216,5 +248,5 @@
     [32m  [32m✔[39m[0m[90m should increment patch version for post release version[0m
 
 
-[92m [0m[32m 67 passing[0m[90m (160ms)[0m
+[92m [0m[32m 88 passing[0m[90m (172ms)[0m
 
