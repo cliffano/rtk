@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Start using Suntory as build Makefile
 
+### Fixed
+- Fix Windows CLI file URL path handling (@peter7896) #25
+
 ## 4.2.0 - 2025-11-28
 ### Added
 - Add keep-a-changelog validation check when retrieving version [#17]
