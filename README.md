@@ -317,7 +317,6 @@ Build reports:
 
 <!-- END:BUILD_REPORTS -->
 
-
 Related projects:
 
 * [Packer RTK](https://github.com/cliffano/packer-rtk) - Packer builder of machine image for running RTK code release tool
