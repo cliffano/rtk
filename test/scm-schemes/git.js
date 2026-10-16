@@ -14,7 +14,7 @@ describe("git", function () {
         },
       });
       const gitScheme = await esmock("../../lib/scm-schemes/git.js", {
-        "simple-git": simpleGitStub,
+        "simple-git": { simpleGit: simpleGitStub },
       });
       await gitScheme.addVersion(version, function (err) {
         assert.equal(err, null);
@@ -34,7 +34,7 @@ describe("git", function () {
         },
       });
       const gitScheme = await esmock("../../lib/scm-schemes/git.js", {
-        "simple-git": simpleGitStub,
+        "simple-git": { simpleGit: simpleGitStub },
       });
       await gitScheme.saveChanges(message, paths, function (err) {
         assert.equal(err, null);
