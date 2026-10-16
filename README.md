@@ -1,4 +1,6 @@
-<img align="right" src="https://raw.github.com/cliffano/rtk/main/avatar.jpg" alt="Avatar"/>
+<!-- BEGIN:AVATAR -->
+![Avatar](avatar.jpg)
+<!-- END:AVATAR -->
 
 <!-- BEGIN:BADGES -->
 [![Build Status](https://github.com/cliffano/rtk/workflows/CI/badge.svg)](https://github.com/cliffano/rtk/actions?query=workflow%3ACI)
@@ -8,10 +10,8 @@
 [![Security Status](https://snyk.io/test/github/cliffano/rtk/badge.svg)](https://snyk.io/test/github/cliffano/rtk)
 [![Published Version](https://img.shields.io/npm/v/rtk.svg)](https://www.npmjs.com/package/rtk)
 <!-- END:BADGES -->
-<br/>
 
-RTK
----
+# RTK
 
 RTK is a code release tool for managing version number on a variety of file types such as keep-a-changelog, JSON, Makefile, text, TOML, YAML files, and also for tagging Git repo.
 
@@ -29,15 +29,13 @@ RTK comes with a default set of steps, but it's also open for extension by imple
 
 Other than that, RTK also helps with managing version number (by default, using [semantic versioning](https://semver.org) scheme) across multiple files in a single repo.
 
-Installation
-------------
+## Installation
 
 ```shell
 npm install -g rtk
 ```
 
-Usage
------
+## Usage
 
 Cut off a release using default RTK release scheme:
 
@@ -69,8 +67,7 @@ Cut off a release with major release and minor post-release increment types:
 rtk release --release-increment-type major --post-release-increment-type minor
 ```
 
-Configuration
--------------
+## Configuration
 
 Resources can be configured in a `.rtk.json` file. This configuration file defines which other files to manage when cutting off a release.
 
@@ -282,8 +279,7 @@ If you want to format the resource's release value, you can configure `format` p
 }
 ```
 
-Upgrade
--------
+## Upgrade
 
 From 0.x, 1.x, 2.x to 3.x:
 
@@ -304,8 +300,7 @@ Error: Cannot use string index
     at assertNotStringIndex (file:///path/to/lib/node_modules/rtk/node_modules/dot-prop/index.js:176:9)
 ```
 
-Colophon
---------
+## Colophon
 
 <!-- BEGIN:DEVELOPERS_GUIDE -->
 [Developer's Guide](https://cliffano.github.io/developers_guide.html#nodejs)
