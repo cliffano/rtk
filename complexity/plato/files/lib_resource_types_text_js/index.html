@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">70.87</p>
+      <p class="stat">66.45</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">61</p>
+      <p class="stat">112</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">19.20</p>
+      <p class="stat">31.11</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.23</p>
+      <p class="stat">0.48</p>
     </div>
   </div>
 </div>
@@ -143,10 +143,61 @@ function getVersion(resource, cb) {
   fs.readFile(resource.path, &quot;UTF-8&quot;, readCb);
 }
 
+/**
+ * Check that the text resource is ready for release, i.e. the regex is valid
+ * and it matches a non-empty version value.
+ *
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the text file
+ * @param {String} resource.params.regex - regular expression which matches
+ *   the version value
+ * @param {Function} cb - standard cb(err, result) callback, result is true
+ *   when the resource is ready for release, an error is passed when the regex
+ *   is not configured, is invalid, or doesn&#039;t match a non-empty version
+ */
+function isReadyForRelease(resource, cb) {
+  const regex = resource.params &amp;&amp; resource.params.regex;
+
+  function readCb(err, result) {
+    let ready;
+    if (!err) {
+      try {
+        const match = result.match(new RegExp(regex));
+        if (!match) {
+          err = new Error(
+            `Regex ${regex} does not match any version in text resource ${resource.path}`,
+          );
+        } else if (match[0] === &quot;&quot;) {
+          err = new Error(
+            `Regex ${regex} matches an empty version in text resource ${resource.path}`,
+          );
+        } else {
+          ready = true;
+        }
+      } catch (regexErr) {
+        err = new Error(
+          `Invalid regex ${regex} for text resource ${resource.path}. Error: ${regexErr.message}`,
+        );
+      }
+    }
+    cb(err, ready);
+  }
+  if (!regex) {
+    cb(
+      new Error(
+        `text resource ${resource.path} has no params.regex configured`,
+      ),
+    );
+  } else {
+    fs.readFile(resource.path, &quot;UTF-8&quot;, readCb);
+  }
+}
+
 const exports = {
   setReleaseVersion: setVersion,
   setPostReleaseVersion: setVersion,
   getVersion: getVersion,
+  isReadyForRelease: isReadyForRelease,
 };
 
 export { exports as default };</textarea>

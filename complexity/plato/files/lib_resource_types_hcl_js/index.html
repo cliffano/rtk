@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">75.06</p>
+      <p class="stat">68.48</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">71</p>
+      <p class="stat">122</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">15.00</p>
+      <p class="stat">27.09</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.26</p>
+      <p class="stat">0.52</p>
     </div>
   </div>
 </div>
@@ -153,10 +153,61 @@ function getVersion(resource, cb) {
   fs.readFile(resource.path, &quot;UTF-8&quot;, readCb);
 }
 
+/**
+ * Check that the HCL resource is ready for release, i.e. the file can be
+ * parsed and the property exists with a value.
+ *
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the HCL file
+ * @param {String} resource.params.property - property in dot-notation
+ * @param {Function} cb - standard cb(err, result) callback, result is true
+ *   when the resource is ready for release, an error is passed when the file
+ *   is not configured, the file can&#039;t be parsed, or the property doesn&#039;t exist or has no value
+ */
+function isReadyForRelease(resource, cb) {
+  const property = resource.params &amp;&amp; resource.params.property;
+
+  function readCb(err, result) {
+    let ready;
+    if (!err) {
+      // hcl2-parser returns the parse error (without a message) instead of
+      // throwing it
+      const [data, parseErr] = hcl.parseToObject(result);
+      if (parseErr) {
+        err = new Error(`Failed to parse HCL resource ${resource.path}`);
+      } else {
+        const value = getProperty(data, property);
+        if (value === undefined) {
+          err = new Error(
+            `Property ${property} does not exist in HCL resource ${resource.path}`,
+          );
+        } else if (value === null || value === &quot;&quot;) {
+          err = new Error(
+            `Property ${property} has no value in HCL resource ${resource.path}`,
+          );
+        } else {
+          ready = true;
+        }
+      }
+    }
+    cb(err, ready);
+  }
+  if (!property) {
+    cb(
+      new Error(
+        `HCL resource ${resource.path} has no params.property configured`,
+      ),
+    );
+  } else {
+    fs.readFile(resource.path, &quot;UTF-8&quot;, readCb);
+  }
+}
+
 const exports = {
   setReleaseVersion: setVersion,
   setPostReleaseVersion: setVersion,
   getVersion: getVersion,
+  isReadyForRelease: isReadyForRelease,
 };
 
 export { exports as default };</textarea>

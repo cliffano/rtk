@@ -44,11 +44,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
-      <p class="stat">72.86</p>
+      <p class="stat">73.02</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
-      <p class="stat">100</p>
+      <p class="stat">157</p>
     </div>
   </div>
   <div class="row historical">
@@ -62,11 +62,11 @@
   <div class="row">
     <div class="col-md-6">
       <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
-      <p class="stat">20.21</p>
+      <p class="stat">25.82</p>
     </div>
     <div class="col-md-6">
       <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
-      <p class="stat">0.49</p>
+      <p class="stat">0.88</p>
     </div>
   </div>
 </div>
@@ -94,6 +94,8 @@
  * @module rtk
  */
 import async from &quot;async&quot;;
+import bag from &quot;bagofcli&quot;;
+import util from &quot;util&quot;;
 import rtkReleaseScheme from &quot;./release-schemes/rtk.js&quot;;
 import hclResourceType from &quot;./resource-types/hcl.js&quot;;
 import jsonResourceType from &quot;./resource-types/json.js&quot;;
@@ -101,6 +103,7 @@ import keepAChangelogResourceType from &quot;./resource-types/keep-a-changelog.j
 import makefileResourceType from &quot;./resource-types/makefile.js&quot;;
 import textResourceType from &quot;./resource-types/text.js&quot;;
 import tomlResourceType from &quot;./resource-types/toml.js&quot;;
+import xmlResourceType from &quot;./resource-types/xml.js&quot;;
 import yamlResourceType from &quot;./resource-types/yaml.js&quot;;
 
 /**
@@ -130,13 +133,17 @@ class RTK {
       makefile: makefileResourceType,
       text: textResourceType,
       toml: tomlResourceType,
+      xml: xmlResourceType,
       yaml: yamlResourceType,
     };
     this.resourceTypes[&quot;keep-a-changelog&quot;] = keepAChangelogResourceType;
   }
 
   /**
-   * Execute release steps for the specified release scheme.
+   * Execute release steps for the specified release scheme, when all
+   * resources are ready for release. When a resource is not ready for
+   * release, e.g. a changelog without unreleased changes, the release fails
+   * with an error before any change is made.
    *
    * @param {String} [releaseSchemeName=rtk] - release scheme name that
    *   defines the steps involved in a release
@@ -154,6 +161,42 @@ class RTK {
     scmSchemeName = scmSchemeName || &quot;git&quot;;
 
     let releaseScheme;
+
+    const logOpts = {};
+    if (self.opts.dryRun) {
+      logOpts[&quot;labels&quot;] = [&quot;dry run&quot;];
+    }
+
+    function readyTask(cb) {
+      bag.logStepHeading(
+        &quot;Checking resources are ready for release...&quot;,
+        logOpts,
+      );
+
+      function resourceTask(resource, cb) {
+        function readyCb(err, ready) {
+          if (!err) {
+            const message = util.format(
+              &quot;%s resource located at %s is %s for release&quot;,
+              resource.type,
+              resource.path,
+              ready ? &quot;ready&quot; : &quot;not ready&quot;,
+            );
+            if (ready) {
+              bag.logStepItemSuccess(message, logOpts);
+            } else {
+              bag.logStepItemWarning(message, logOpts);
+            }
+          }
+          cb(err, ready);
+        }
+        self.resourceTypes[resource.type].isReadyForRelease(resource, readyCb);
+      }
+      function resourcesCb(err, results) {
+        cb(err, !err &amp;&amp; results.every((ready) =&gt; ready));
+      }
+      async.mapSeries(self.resources, resourceTask, resourcesCb);
+    }
 
     function versionTask(cb) {
       // uses first resource as the source of truth and the correct pre-release version
@@ -184,7 +227,21 @@ class RTK {
       releaseScheme.post(self.resources, self.opts, cb);
     }
 
-    async.series([versionTask, preTask, releaseTask, postTask], cb);
+    function readyTaskCb(err, ready) {
+      if (err) {
+        cb(err);
+      } else if (!ready) {
+        // fail instead of skip, so release pipelines don&#039;t pass silently when there&#039;s nothing to release
+        cb(
+          new Error(
+            &quot;Release failed because not all resources are ready for release&quot;,
+          ),
+        );
+      } else {
+        async.series([versionTask, preTask, releaseTask, postTask], cb);
+      }
+    }
+    readyTask(readyTaskCb);
   }
 }
 

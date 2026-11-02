@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - lib/resource-types/xml.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>lib/resource-types/xml.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">65.51</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">179</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">41.31</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">0.92</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">&quot;use strict&quot;;
+/**
+ * @module resource-types/xml
+ */
+import fs from &quot;fs&quot;;
+import sax from &quot;sax&quot;;
+
+/**
+ * Set version value in the XML resource&#039;s element (defined in dot-notation
+ * of element names, e.g. project.version in a Maven pom.xml).
+ * Only the element&#039;s text is replaced, the rest of the file including its
+ * formatting and comments is kept as-is.
+ *
+ * @param {String} version - version value to set
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the XML file
+ * @param {String} resource.params.property - element names in dot-notation
+ * @param {Object} opts - optional settings
+ * @param {Boolean} [opts.dryRun] - when true, XML file won&#039;t be modified
+ * @param {Function} cb - standard cb(err, result) callback
+ */
+function setVersion(version, resource, opts, cb) {
+  const property = resource.params.property;
+  const data = fs.readFileSync(resource.path, &quot;UTF-8&quot;);
+  const element = _findElement(data, property);
+  if (!element) {
+    cb(
+      new Error(
+        `Property ${property} does not exist in XML resource ${resource.path}`,
+      ),
+    );
+  } else if (!opts.dryRun) {
+    fs.writeFile(
+      resource.path,
+      data.slice(0, element.start) + version + data.slice(element.end),
+      cb,
+    );
+  } else {
+    cb();
+  }
+}
+
+/**
+ * Get version value from the XML resource&#039;s element (defined in
+ * dot-notation of element names).
+ *
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the XML file
+ * @param {String} resource.params.property - element names in dot-notation
+ * @param {Function} cb - standard cb(err, result) callback, result is the
+ *   version value
+ */
+function getVersion(resource, cb) {
+  const property = resource.params.property;
+
+  function readCb(err, result) {
+    let version;
+    if (!err) {
+      const element = _findElement(result, property);
+      version = element ? element.value : undefined;
+    }
+    cb(err, version);
+  }
+  fs.readFile(resource.path, &quot;UTF-8&quot;, readCb);
+}
+
+/**
+ * Check that the XML resource is ready for release, i.e. the file can be
+ * parsed and the element exists with a value.
+ *
+ * @param {Object} resource - resource configuration
+ * @param {String} resource.path - path to the XML file
+ * @param {String} resource.params.property - element names in dot-notation
+ * @param {Function} cb - standard cb(err, result) callback, result is true
+ *   when the resource is ready for release, an error is passed when the file
+ *   is not configured, the file can&#039;t be parsed, or the element doesn&#039;t exist or has no value
+ */
+function isReadyForRelease(resource, cb) {
+  const property = resource.params &amp;&amp; resource.params.property;
+
+  function readCb(err, result) {
+    let ready;
+    if (!err) {
+      try {
+        const element = _findElement(result, property);
+        if (!element) {
+          err = new Error(
+            `Property ${property} does not exist in XML resource ${resource.path}`,
+          );
+        } else if (element.value === &quot;&quot;) {
+          err = new Error(
+            `Property ${property} has no value in XML resource ${resource.path}`,
+          );
+        } else {
+          ready = true;
+        }
+      } catch (parseErr) {
+        err = new Error(
+          `Failed to parse XML resource ${resource.path}. Error: ${parseErr.message}`,
+        );
+      }
+    }
+    cb(err, ready);
+  }
+  if (!property) {
+    cb(
+      new Error(
+        `XML resource ${resource.path} has no params.property configured`,
+      ),
+    );
+  } else {
+    fs.readFile(resource.path, &quot;UTF-8&quot;, readCb);
+  }
+}
+
+/**
+ * Find the first element matching the element names in dot-notation, which
+ * only contains text.
+ *
+ * The XML is parsed with a SAX parser in order to get the position of the
+ * element&#039;s text, so that it can be replaced without re-serialising (and
+ * reformatting) the whole file.
+ *
+ * @private
+ * @param {String} data - XML content
+ * @param {String} property - element names in dot-notation
+ * @return {Object} the element&#039;s trimmed text value along with its start
+ *   and end positions within the content, undefined when there is no match
+ * @throws {Error} when XML content can&#039;t be parsed
+ */
+function _findElement(data, property) {
+  const parser = sax.parser(true);
+  const names = [];
+  let textStart;
+  let element;
+
+  parser.onopentag = function (node) {
+    names.push(node.name);
+    if (
+      element === undefined &amp;&amp;
+      textStart === undefined &amp;&amp;
+      !node.isSelfClosing &amp;&amp;
+      names.join(&quot;.&quot;) === property
+    ) {
+      // position is right after the opening tag&#039;s &#039;&gt;&#039;
+      textStart = parser.position;
+    }
+  };
+  parser.onclosetag = function () {
+    if (
+      element === undefined &amp;&amp;
+      textStart !== undefined &amp;&amp;
+      names.join(&quot;.&quot;) === property
+    ) {
+      // startTagPosition is right after the closing tag&#039;s &#039;&lt;&#039;
+      const text = data.slice(textStart, parser.startTagPosition - 1);
+      // skip element with child elements, comments, or CDATA
+      if (!text.includes(&quot;&lt;&quot;)) {
+        const value = text.trim();
+        const start = textStart + text.indexOf(value);
+        element = { value: value, start: start, end: start + value.length };
+      }
+      textStart = undefined;
+    }
+    names.pop();
+  };
+  parser.write(data).close();
+
+  return element;
+}
+
+const exports = {
+  setReleaseVersion: setVersion,
+  setPostReleaseVersion: setVersion,
+  getVersion: getVersion,
+  isReadyForRelease: isReadyForRelease,
+};
+
+export { exports as default };</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
