@@ -141,4 +141,120 @@ describe("toml", function () {
       resourceType.getVersion(resource, cb);
     });
   });
+
+  describe("isReadyForRelease", function () {
+    it("should pass error without reading the file when params.property is not configured", function (done) {
+      const resource = { path: "somepackage.toml", type: "toml" };
+      this.mockFs.expects("readFile").never();
+      function cb(err, result) {
+        assert.equal(
+          err.message,
+          "TOML resource somepackage.toml has no params.property configured",
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when property has no value", function (done) {
+      const resource = {
+        path: "somepackage.toml",
+        type: "toml",
+        params: { property: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("somepackage.toml", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, 'version = ""');
+      function cb(err, result) {
+        assert.equal(
+          err.message,
+          "Property version has no value in TOML resource somepackage.toml",
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should be ready for release when property exists", function (done) {
+      const resource = {
+        path: "somepackage.toml",
+        type: "toml",
+        params: { property: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("somepackage.toml", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, 'version = "0.0.0"');
+      function cb(err, result) {
+        assert.equal(err, null);
+        assert.equal(result, true);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when property does not exist", function (done) {
+      const resource = {
+        path: "somepackage.toml",
+        type: "toml",
+        params: { property: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("somepackage.toml", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, 'name = "somepackage"');
+      function cb(err, result) {
+        assert.equal(
+          err.message,
+          "Property version does not exist in TOML resource somepackage.toml",
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when toml file cannot be parsed", function (done) {
+      const resource = {
+        path: "somepackage.toml",
+        type: "toml",
+        params: { property: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("somepackage.toml", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, "version = ");
+      function cb(err, result) {
+        assert.ok(
+          err.message.startsWith(
+            "Failed to parse TOML resource somepackage.toml. Error: ",
+          ),
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when file cannot be read", function (done) {
+      const resource = {
+        path: "somepackage.toml",
+        type: "toml",
+        params: { property: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("somepackage.toml", "UTF-8", sinon.match.func)
+        .callsArgWith(2, new Error("someerror"));
+      function cb(err, result) {
+        assert.equal(err.message, "someerror");
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+  });
 });

@@ -51,6 +51,7 @@ describe("rtk", function () {
         "makefile",
         "text",
         "toml",
+        "xml",
         "yaml",
         "keep-a-changelog",
       ]);

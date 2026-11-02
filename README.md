@@ -13,7 +13,7 @@
 
 # RTK
 
-RTK is a code release tool for managing version number on a variety of file types such as keep-a-changelog, JSON, Makefile, text, TOML, YAML files, and also for tagging Git repo.
+RTK is a code release tool for managing version number on a variety of file types such as keep-a-changelog, JSON, Makefile, text, TOML, XML, YAML files, and also for tagging Git repo.
 
 By using RTK, it automates the following steps:
 
@@ -66,6 +66,15 @@ Cut off a release with major release and minor post-release increment types:
 ```shell
 rtk release --release-increment-type major --post-release-increment-type minor
 ```
+
+Before cutting off a release, RTK checks that every resource is ready for release:
+
+* `keep-a-changelog` resource is ready when its latest release is an Unreleased section (`## Unreleased` or `## [Unreleased]`) with at least one change, otherwise there is nothing to release
+* `json`, `yaml`, `toml`, `xml`, and `hcl` resources must have `params.property` configured, be parseable, and have the property with a non-empty value
+* `makefile` resource must have `params.variable` configured, and have the variable with a non-empty value
+* `text` resource must have a valid `params.regex` configured, which matches a non-empty version value
+
+A resource which fails any of these checks fails the release with an error.
 
 ## Configuration
 
@@ -171,6 +180,42 @@ Example `toml` resource configuration:
   ]
 }
 ```
+
+### Managing version on XML file
+
+Example `xml` resource configuration for a Maven `pom.xml`, the property is the element names in dot-notation:
+
+```json
+{
+  "resources": [
+    {
+      "path": "pom.xml",
+      "type": "xml",
+      "params": {
+        "property": "project.version"
+      }
+    }
+  ]
+}
+```
+
+Example `xml` resource configuration for a Maven sub-module `pom.xml` which inherits its version from the parent:
+
+```json
+{
+  "resources": [
+    {
+      "path": "bundle/pom.xml",
+      "type": "xml",
+      "params": {
+        "property": "project.parent.version"
+      }
+    }
+  ]
+}
+```
+
+Only the text of the first matching element is replaced, the rest of the file including its formatting and comments is kept as-is.
 
 ### Managing version on HCL file
 

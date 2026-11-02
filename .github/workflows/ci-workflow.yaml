@@ -24,6 +24,8 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: .bob/coverage/c8/lcov.info
       - uses: peaceiris/actions-gh-pages@v4
+        # secrets aren't available to pull_request events from forks
+        if: github.event_name != 'pull_request'
         with:
           github_token: ${{ secrets.STUDIO_GITHUB_TOKEN }}
           publish_dir: .bob

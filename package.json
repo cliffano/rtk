@@ -1,7 +1,7 @@
 {
   "name": "rtk",
   "type": "module",
-  "description": "Agnostic software release tool for managing versions on changelog (keep-a-changelog), multi-format files (JSON, Makefile, text, TOML, YAML), and also for tagging source code of a Git repo",
+  "description": "Agnostic software release tool for managing versions on changelog (keep-a-changelog), multi-format files (JSON, Makefile, text, TOML, XML, YAML), and also for tagging source code of a Git repo",
   "keywords": [
     "release",
     "versioning",
@@ -10,6 +10,7 @@
     "makefile",
     "text",
     "toml",
+    "xml",
     "yaml",
     "changelog",
     "keep-a-changelog",
@@ -50,6 +51,7 @@
     "keep-a-changelog": "^3.2.0",
     "lodash": "^4.18.1",
     "@kba/makefile-parser": "^0.0.6",
+    "sax": "^1.6.1",
     "semver": "^7.8.5",
     "simple-git": "^4.0.2",
     "string-format": "^2.0.0",

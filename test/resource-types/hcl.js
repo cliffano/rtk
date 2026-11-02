@@ -158,4 +158,116 @@ describe("hcl", function () {
       resourceType.getVersion(resource, cb);
     });
   });
+
+  describe("isReadyForRelease", function () {
+    it("should pass error without reading the file when params.property is not configured", function (done) {
+      const resource = { path: "variables.tf", type: "hcl" };
+      this.mockFs.expects("readFile").never();
+      function cb(err, result) {
+        assert.equal(
+          err.message,
+          "HCL resource variables.tf has no params.property configured",
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when property has no value", function (done) {
+      const resource = {
+        path: "variables.tf",
+        type: "hcl",
+        params: { property: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("variables.tf", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, 'version = ""');
+      function cb(err, result) {
+        assert.equal(
+          err.message,
+          "Property version has no value in HCL resource variables.tf",
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should be ready for release when property exists", function (done) {
+      const resource = {
+        path: "variables.tf",
+        type: "hcl",
+        params: { property: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("variables.tf", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, 'version = "0.0.0"');
+      function cb(err, result) {
+        assert.equal(err, null);
+        assert.equal(result, true);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when property does not exist", function (done) {
+      const resource = {
+        path: "variables.tf",
+        type: "hcl",
+        params: { property: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("variables.tf", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, 'name = "somemodule"');
+      function cb(err, result) {
+        assert.equal(
+          err.message,
+          "Property version does not exist in HCL resource variables.tf",
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when hcl file cannot be parsed", function (done) {
+      const resource = {
+        path: "variables.tf",
+        type: "hcl",
+        params: { property: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("variables.tf", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, "version = = {{");
+      function cb(err, result) {
+        assert.equal(err.message, "Failed to parse HCL resource variables.tf");
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when file cannot be read", function (done) {
+      const resource = {
+        path: "variables.tf",
+        type: "hcl",
+        params: { property: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("variables.tf", "UTF-8", sinon.match.func)
+        .callsArgWith(2, new Error("someerror"));
+      function cb(err, result) {
+        assert.equal(err.message, "someerror");
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+  });
 });

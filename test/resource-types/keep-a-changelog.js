@@ -445,4 +445,180 @@ This is not a valid keep-a-changelog format.
       resourceType.getVersion(resource, cb);
     });
   });
+
+  describe("isReadyForRelease", function () {
+    it("should be ready for release when Unreleased section has changes", function (done) {
+      const resource = { path: "SOMECHANGELOG.md", type: "keep-a-changelog" };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("SOMECHANGELOG.md", "UTF-8", sinon.match.func)
+        .callsArgWith(
+          2,
+          null,
+          `# Changelog
+
+## Unreleased
+### Added
+- Some new feature
+
+## 1.2.3 - 2023-06-15
+### Added
+- Previous feature
+`,
+        );
+      function cb(err, result) {
+        assert.equal(err, null);
+        assert.equal(result, true);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should be ready for release when bracketed Unreleased section has changes", function (done) {
+      const resource = { path: "SOMECHANGELOG.md", type: "keep-a-changelog" };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("SOMECHANGELOG.md", "UTF-8", sinon.match.func)
+        .callsArgWith(
+          2,
+          null,
+          `# Changelog
+
+## [Unreleased]
+### Added
+- Some new feature
+
+## [1.2.3] - 2023-06-15
+### Added
+- Previous feature
+
+[Unreleased]: https://github.com/someorg/somerepo/compare/v1.2.3...HEAD
+[1.2.3]: https://github.com/someorg/somerepo/releases/tag/v1.2.3
+`,
+        );
+      function cb(err, result) {
+        assert.equal(err, null);
+        assert.equal(result, true);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when Unreleased section is empty", function (done) {
+      const resource = { path: "SOMECHANGELOG.md", type: "keep-a-changelog" };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("SOMECHANGELOG.md", "UTF-8", sinon.match.func)
+        .callsArgWith(
+          2,
+          null,
+          `# Changelog
+
+## Unreleased
+
+## 1.2.3 - 2023-06-15
+### Added
+- Previous feature
+`,
+        );
+      function cb(err, result) {
+        assert.equal(
+          err.message,
+          "Unreleased section in keep-a-changelog resource SOMECHANGELOG.md has no changes",
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when changelog has no Unreleased section", function (done) {
+      const resource = { path: "SOMECHANGELOG.md", type: "keep-a-changelog" };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("SOMECHANGELOG.md", "UTF-8", sinon.match.func)
+        .callsArgWith(
+          2,
+          null,
+          `# Changelog
+
+## 1.2.3 - 2023-06-15
+### Added
+- Previous feature
+`,
+        );
+      function cb(err, result) {
+        assert.equal(
+          err.message,
+          "keep-a-changelog resource SOMECHANGELOG.md has no Unreleased section",
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when changelog has no release", function (done) {
+      const resource = { path: "SOMECHANGELOG.md", type: "keep-a-changelog" };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("SOMECHANGELOG.md", "UTF-8", sinon.match.func)
+        .callsArgWith(
+          2,
+          null,
+          `# Changelog
+
+`,
+        );
+      function cb(err, result) {
+        assert.equal(
+          err.message,
+          "keep-a-changelog resource SOMECHANGELOG.md has no Unreleased section",
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when changelog cannot be parsed", function (done) {
+      const resource = { path: "SOMECHANGELOG.md", type: "keep-a-changelog" };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("SOMECHANGELOG.md", "UTF-8", sinon.match.func)
+        .callsArgWith(
+          2,
+          null,
+          `# Changelog
+
+## Some invalid release title
+`,
+        );
+      function cb(err, result) {
+        assert.ok(
+          err.message.startsWith(
+            "Failed to parse changelog. Please fix the changelog following the keep a changelog format https://keepachangelog.com . Error: ",
+          ),
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when file cannot be read", function (done) {
+      const resource = { path: "SOMECHANGELOG.md", type: "keep-a-changelog" };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("SOMECHANGELOG.md", "UTF-8", sinon.match.func)
+        .callsArgWith(2, new Error("someerror"));
+      function cb(err, result) {
+        assert.equal(err.message, "someerror");
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+  });
 });

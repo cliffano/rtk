@@ -1,0 +1,12 @@
+{
+    "resources": [
+      {
+        "path": "../../../../../test-integration/fixtures/data/data.xml",
+        "type": "xml",
+        "params": {
+          "property": "project.version",
+          "release_format": "version-{version}"
+        }
+      }
+    ]
+  }

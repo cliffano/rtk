@@ -85,4 +85,98 @@ describe("makefile", function () {
       resourceType.getVersion(resource, cb);
     });
   });
+
+  describe("isReadyForRelease", function () {
+    it("should pass error without reading the file when params.variable is not configured", function (done) {
+      const resource = { path: "somemakefile", type: "makefile" };
+      this.mockFs.expects("readFile").never();
+      function cb(err, result) {
+        assert.equal(
+          err.message,
+          "Makefile resource somemakefile has no params.variable configured",
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when variable has no value", function (done) {
+      const resource = {
+        path: "somemakefile",
+        type: "makefile",
+        params: { variable: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("somemakefile", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, "version ?=");
+      function cb(err, result) {
+        assert.equal(
+          err.message,
+          "Variable version has no value in Makefile resource somemakefile",
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should be ready for release when variable exists", function (done) {
+      const resource = {
+        path: "somemakefile",
+        type: "makefile",
+        params: { variable: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("somemakefile", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, "version ?= 0.0.0");
+      function cb(err, result) {
+        assert.equal(err, null);
+        assert.equal(result, true);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when variable does not exist", function (done) {
+      const resource = {
+        path: "somemakefile",
+        type: "makefile",
+        params: { variable: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("somemakefile", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, "name ?= somemakefile");
+      function cb(err, result) {
+        assert.equal(
+          err.message,
+          "Variable version does not exist in Makefile resource somemakefile",
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when file cannot be read", function (done) {
+      const resource = {
+        path: "somemakefile",
+        type: "makefile",
+        params: { variable: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("somemakefile", "UTF-8", sinon.match.func)
+        .callsArgWith(2, new Error("someerror"));
+      function cb(err, result) {
+        assert.equal(err.message, "someerror");
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+  });
 });

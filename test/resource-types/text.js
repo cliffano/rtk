@@ -160,4 +160,129 @@ describe("text", function () {
       resourceType.getVersion(resource, cb);
     });
   });
+
+  describe("isReadyForRelease", function () {
+    it("should pass error without reading the file when params.regex is not configured", function (done) {
+      const resource = { path: "somefile.txt", type: "text" };
+      this.mockFs.expects("readFile").never();
+      function cb(err, result) {
+        assert.equal(
+          err.message,
+          "text resource somefile.txt has no params.regex configured",
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when regex matches an empty version", function (done) {
+      const resource = {
+        path: "somefile.txt",
+        type: "text",
+        params: { regex: "\\d*" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("somefile.txt", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, ' version = "main" ');
+      function cb(err, result) {
+        assert.equal(
+          err.message,
+          "Regex \\d* matches an empty version in text resource somefile.txt",
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when regex is invalid", function (done) {
+      const resource = {
+        path: "somefile.txt",
+        type: "text",
+        params: { regex: "(\\d+" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("somefile.txt", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, ' version = "0.0.0" ');
+      function cb(err, result) {
+        assert.ok(
+          err.message.startsWith(
+            "Invalid regex (\\d+ for text resource somefile.txt. Error: Invalid regular expression",
+          ),
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should be ready for release when regex matches", function (done) {
+      const resource = {
+        path: "somefile.txt",
+        type: "text",
+        params: {
+          regex:
+            "(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:.[0-9A-Za-z-]+)*))?",
+        },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("somefile.txt", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, ' version = "0.0.0" ');
+      function cb(err, result) {
+        assert.equal(err, null);
+        assert.equal(result, true);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when regex does not match", function (done) {
+      const resource = {
+        path: "somefile.txt",
+        type: "text",
+        params: {
+          regex:
+            "(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:.[0-9A-Za-z-]+)*))?",
+        },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("somefile.txt", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, ' version = "main" ');
+      function cb(err, result) {
+        assert.equal(
+          err.message,
+          "Regex (\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:.[0-9A-Za-z-]+)*))? does not match any version in text resource somefile.txt",
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when file cannot be read", function (done) {
+      const resource = {
+        path: "somefile.txt",
+        type: "text",
+        params: {
+          regex:
+            "(\\d+)\\.(\\d+)\\.(\\d+)(?:-([0-9A-Za-z-]+(?:.[0-9A-Za-z-]+)*))?",
+        },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("somefile.txt", "UTF-8", sinon.match.func)
+        .callsArgWith(2, new Error("someerror"));
+      function cb(err, result) {
+        assert.equal(err.message, "someerror");
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+  });
 });

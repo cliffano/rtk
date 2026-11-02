@@ -214,4 +214,120 @@ describe("yaml", function () {
       resourceType.getVersion(resource, cb);
     });
   });
+
+  describe("isReadyForRelease", function () {
+    it("should pass error without reading the file when params.property is not configured", function (done) {
+      const resource = { path: "someplaybook.yaml", type: "yaml" };
+      this.mockFs.expects("readFile").never();
+      function cb(err, result) {
+        assert.equal(
+          err.message,
+          "YAML resource someplaybook.yaml has no params.property configured",
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when property has no value", function (done) {
+      const resource = {
+        path: "someplaybook.yaml",
+        type: "yaml",
+        params: { property: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("someplaybook.yaml", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, "version:");
+      function cb(err, result) {
+        assert.equal(
+          err.message,
+          "Property version has no value in YAML resource someplaybook.yaml",
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should be ready for release when property exists", function (done) {
+      const resource = {
+        path: "someplaybook.yaml",
+        type: "yaml",
+        params: { property: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("someplaybook.yaml", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, 'version: "0.0.0"');
+      function cb(err, result) {
+        assert.equal(err, null);
+        assert.equal(result, true);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when property does not exist", function (done) {
+      const resource = {
+        path: "someplaybook.yaml",
+        type: "yaml",
+        params: { property: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("someplaybook.yaml", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, "name: someplaybook");
+      function cb(err, result) {
+        assert.equal(
+          err.message,
+          "Property version does not exist in YAML resource someplaybook.yaml",
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when yaml file cannot be parsed", function (done) {
+      const resource = {
+        path: "someplaybook.yaml",
+        type: "yaml",
+        params: { property: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("someplaybook.yaml", "UTF-8", sinon.match.func)
+        .callsArgWith(2, null, "version: [0.0.0");
+      function cb(err, result) {
+        assert.ok(
+          err.message.startsWith(
+            "Failed to parse YAML resource someplaybook.yaml. Error: ",
+          ),
+        );
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+    it("should pass error when file cannot be read", function (done) {
+      const resource = {
+        path: "someplaybook.yaml",
+        type: "yaml",
+        params: { property: "version" },
+      };
+      this.mockFs
+        .expects("readFile")
+        .once()
+        .withExactArgs("someplaybook.yaml", "UTF-8", sinon.match.func)
+        .callsArgWith(2, new Error("someerror"));
+      function cb(err, result) {
+        assert.equal(err.message, "someerror");
+        assert.equal(result, undefined);
+        done();
+      }
+      resourceType.isReadyForRelease(resource, cb);
+    });
+  });
 });

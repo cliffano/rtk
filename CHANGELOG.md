@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+### Added
+- Add isReadyForRelease check to all resource types, run before cutting off a release
+- Fail release when keep-a-changelog resource has no Unreleased changes
+- Add xml resource type, e.g. for managing version in Maven pom.xml
+
+### Fixed
+- Remove debug output of the parsed changelog
 
 ## 4.3.0 - 2026-10-16
 ### Added
